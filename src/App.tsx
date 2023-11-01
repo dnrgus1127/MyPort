@@ -1,24 +1,23 @@
-import React from 'react';
-import logo from './logo.svg';
+import Header from 'components/Header/Header';
 import './App.css';
+import { GlobalStyles } from 'styles/GlobalStyles';
+import { ThemeProvider } from 'styled-components';
+import { dailyTheme, darkTheme, ligthTheme } from 'styles/theme';
+import ProjectsContainer from 'components/Projects/ProjectsContainer';
+import { QueryClient,QueryClientProvider  } from '@tanstack/react-query';
 
 function App() {
+  const queryClient = new QueryClient();
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <QueryClientProvider client={queryClient} >
+        <ThemeProvider theme={dailyTheme}>
+          <GlobalStyles/>
+          <Header />
+          <ProjectsContainer/>
+          
+        </ThemeProvider>
+    </QueryClientProvider>
     </div>
   );
 }
