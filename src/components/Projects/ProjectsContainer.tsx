@@ -1,17 +1,34 @@
-import { useQuery } from '@tanstack/react-query';
 import ProjectsTemplate from './ProjectsTemplate';
+import { useQuery } from "@tanstack/react-query"
 
-export default function ProjectsContainer() : JSX.Element {
-    const { data, isLoading, error } = useQuery({
-        queryKey: ["git"], queryFn: async () => {
-            const res = await fetch(`https://api.github.com/repos/dnrgus1127/colorProject/readme`);
-            const data = await res.json();
-            return data;
-        }
-    })
-    if (isLoading) return <div></div> ;
+
+const projectQuery = (repo : string) => ({
+    queryKey: ['project', repo],
+    queryFn: async () => {
+        const res = await fetch(`https://raw.githubusercontent.com/dnrgus1127/${repo}/main/README.md`);
+        const data = await res.text();
+        return {readme : data};
+    }
+})
+
+export const loader = (queryClient :any) => async () => {
+    const query = projectQuery("colorProject");
     return (
-    //   TODO 마크다운 적용하기
-      <ProjectsTemplate>{data.name}</ProjectsTemplate>
-  )
+        queryClient.getQueryData(query.queryKey) ?? (await queryClient.fetchQuery(query))
+    )
 }
+interface ProjectsQueryData  {
+    readme: string;
+   
+  };
+  
+  export default function ProjectsContainer(): JSX.Element {
+    const { data : project } = useQuery<ProjectsQueryData,Error>(
+      projectQuery("colorProject")
+      );
+      
+      
+    return (
+        <ProjectsTemplate readme={project!.readme} />
+    );
+  }
