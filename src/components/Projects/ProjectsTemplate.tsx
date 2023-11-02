@@ -1,15 +1,21 @@
+import CustomMarkdown from "components/Markdown/CustomMarkdown";
 import styled from "styled-components"
+
+
 
 const Template = styled.div`
     background-color: rgb(255, 255, 255);
-    height: 100vh;
-    padding: 0 var(--side-padding);
+    padding: 5rem var(--side-padding);
+    padding-top : 8rem;
     background-color: ${({theme})=> theme.bgColor2};
-
 `
-
-export default function ProjectsTemplate({children} : any) {
+interface TemplateProps {
+  readme: string;
+}
+export default function ProjectsTemplate({readme} : TemplateProps) {
   return (
-    <Template>{children}</Template>
+    <Template>
+      <CustomMarkdown markdown={readme}/>
+    </Template>
   )
 }
