@@ -3,13 +3,13 @@ import { createGlobalStyle } from "styled-components";
 
 export const GlobalStyles = createGlobalStyle`
   * {
-        color: ${({ theme }) => theme.color};
+        
+        box-sizing: border-box;
     }
     
     body {
-        
-        padding-top: 100vh;
-        background-color: ${({theme})=> theme.bgColor};
+      color: ${({ theme }) => theme.color};
     }
+
 `
 
