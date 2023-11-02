@@ -1,23 +1,12 @@
-import Header from 'components/Header/Header';
 import './App.css';
-import { GlobalStyles } from 'styles/GlobalStyles';
-import { ThemeProvider } from 'styled-components';
-import { dailyTheme, darkTheme, ligthTheme } from 'styles/theme';
-import ProjectsContainer from 'components/Projects/ProjectsContainer';
-import { QueryClient,QueryClientProvider  } from '@tanstack/react-query';
+import Cover from 'components/Cover/Cover';
+import {Outlet} from "react-router-dom"
 
 function App() {
-  const queryClient = new QueryClient();
   return (
     <div className="App">
-      <QueryClientProvider client={queryClient} >
-        <ThemeProvider theme={dailyTheme}>
-          <GlobalStyles/>
-          <Header />
-          <ProjectsContainer/>
-          
-        </ThemeProvider>
-    </QueryClientProvider>
+          <Cover />
+          <Outlet/>
     </div>
   );
 }
