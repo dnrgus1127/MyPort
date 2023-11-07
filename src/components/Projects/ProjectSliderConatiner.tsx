@@ -1,24 +1,16 @@
-import React, { useEffect, useRef, useState } from 'react'
-import styled, { css, keyframes } from 'styled-components'
-import PhotoFrameList from './PhotoFrameList'
+import React, {  useState } from 'react'
+import styled, {  keyframes } from 'styled-components'
 import {ReactComponent as ArrowRight} from "../../assets/arrow_right.svg"
 import {ReactComponent as ArrowLeft} from "../../assets/arrow_left.svg"
+import { RepositoryData } from 'types/Project'
+import ProjectSlider from './ProjectSlider'
+import ProjectSlideDescription from './ProjectSlideDescription'
 
-const PhotoFrameContainer = styled.div`
+const ProjectSliderBox = styled.div`
     width: 100%;
     height: 100%;
     padding : 5% 0;
     position: relative;
-`
-
-const PhotoFrameInfo = styled.div`
-    width: 100%;
-    height: 40%;
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    z-index: 3;
-    background-color: #34343477;
 `
 
 const ButtonAnimation = (direction : "left" | "right") => keyframes`
@@ -34,37 +26,38 @@ const ButtonAnimation = (direction : "left" | "right") => keyframes`
    
 `
 
-const FrameButton = styled.button`
+const SlideButton = styled.button`
     position: absolute;
-    top: calc(50% - 1.2rem);
+    top: calc(50% - 2.4rem);
     svg {
-        width : 2.4rem;
-        height: 2.4rem;
+        fill: white;
+        filter: drop-shadow(0px 0px 5px #121212);
+        width : 4.8rem;
+        height: 4.8rem;
     }
+    
 `
-const PrevFrame = styled(FrameButton)`
+const PrevSlideBtn = styled(SlideButton)`
     transform: translateX(-100%);
     left: 0;
     animation: ${() => ButtonAnimation("left")} 2s ease  infinite;
 
 `
-const NextFrame = styled(FrameButton)`
+const NextSlideBtn = styled(SlideButton)`
     transform: translateX(100%);
     right: 0;
     animation: ${() => ButtonAnimation("right")} 2s ease  infinite;
 `
-const items = [1, 1, 1, 1, 1,];
+
+interface PhotoFrameProps {
+    data: Array<RepositoryData>;
+}
 
 
-export default function PhotoFrame({initFrameNumber = Math.floor(items.length /2)}) {
-    const [frameNumber, setFraemNumber] = useState<number>(initFrameNumber);
+export default function ProjectSliderConatiner({data} : PhotoFrameProps) {
+    const [frameNumber, setFraemNumber] = useState<number>(Math.floor(data.length));
     const [isButtonDelay, setButtonDelay] = useState(false);
-   
 
-    useEffect(() => {
-        console.log(frameNumber);
-         
-    },[frameNumber])
     const handlerButtons = (type: "increase" | "decrease") => {
         if (isButtonDelay) return;
         if (type === "increase") {
@@ -76,18 +69,18 @@ export default function PhotoFrame({initFrameNumber = Math.floor(items.length /2
         setButtonDelay(true);
         setTimeout(() => {
             setButtonDelay(false);
-        },500)
+        },600)
     }
   return (
-      <PhotoFrameContainer>
-          <PhotoFrameList frameNumber={frameNumber} setFrame={setFraemNumber} data={items} />
-          <PrevFrame onClick={() => handlerButtons("decrease")}>
+      <ProjectSliderBox>
+          <ProjectSlider frameNumber={frameNumber} setFrame={setFraemNumber} data={data} />
+          <PrevSlideBtn onClick={() => handlerButtons("decrease")}>
                 <ArrowLeft/>
-              </PrevFrame>
-          <NextFrame onClick={() => handlerButtons("increase")}>
+              </PrevSlideBtn>
+          <NextSlideBtn onClick={() => handlerButtons("increase")}>
               <ArrowRight />
-          </NextFrame>
-        <PhotoFrameInfo></PhotoFrameInfo>
-      </PhotoFrameContainer>
+          </NextSlideBtn>
+          <ProjectSlideDescription slideIdx={frameNumber} data={data[Math.abs(frameNumber) % data.length]} />
+      </ProjectSliderBox>
   )
 }

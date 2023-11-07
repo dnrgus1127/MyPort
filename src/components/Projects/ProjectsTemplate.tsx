@@ -1,5 +1,5 @@
-import CustomMarkdown from "components/Markdown/CustomMarkdown";
 import styled from "styled-components"
+import { ReactNode } from "react";
 
 
 
@@ -7,15 +7,17 @@ const Template = styled.div`
     background-color: rgb(255, 255, 255);
     padding: 5rem var(--side-padding);
     padding-top : 8rem;
-    background-color: ${({theme})=> theme.bgColor2};
+    background-color: ${({ theme }) => theme.bgColor2};
+    height: 100vh;
+    overflow-x: hidden;
 `
-interface TemplateProps {
-  readme: string;
-}
-export default function ProjectsTemplate({readme} : TemplateProps) {
+
+
+
+export default function ProjectsTemplate({children} : {children : ReactNode}) {
   return (
     <Template>
-      <CustomMarkdown markdown={readme}/>
+      {children}
     </Template>
   )
 }
