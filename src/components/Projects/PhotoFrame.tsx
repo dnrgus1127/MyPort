@@ -53,24 +53,18 @@ const NextFrame = styled(FrameButton)`
     right: 0;
     animation: ${() => ButtonAnimation("right")} 2s ease  infinite;
 `
-const items = [0, 0, 2, 2, 2, 1, 1, 1, 1, 1, 2, 2, 2, 0, 0];
+const items = [1, 1, 1, 1, 1,];
 
-const itemCounts = 5;
 
-export default function PhotoFrame({initFrameNumber = 7}) {
+export default function PhotoFrame({initFrameNumber = Math.floor(items.length /2)}) {
     const [frameNumber, setFraemNumber] = useState<number>(initFrameNumber);
     const [isButtonDelay, setButtonDelay] = useState(false);
+   
+
     useEffect(() => {
-        let distance = initFrameNumber - frameNumber;
-        if (Math.abs(distance) <= itemCounts / 2) {
-            return;
-        }
-
-        setTimeout(() => {
-            setFraemNumber(distance > 0 ? frameNumber + itemCounts : frameNumber - itemCounts);
-        },500)
-    },[frameNumber,initFrameNumber])
-
+        console.log(frameNumber);
+         
+    },[frameNumber])
     const handlerButtons = (type: "increase" | "decrease") => {
         if (isButtonDelay) return;
         if (type === "increase") {
@@ -86,11 +80,11 @@ export default function PhotoFrame({initFrameNumber = 7}) {
     }
   return (
       <PhotoFrameContainer>
-          <PhotoFrameList frameNumber={frameNumber} data={items} />
-          <PrevFrame onClick={() => handlerButtons("increase")}>
+          <PhotoFrameList frameNumber={frameNumber} setFrame={setFraemNumber} data={items} />
+          <PrevFrame onClick={() => handlerButtons("decrease")}>
                 <ArrowLeft/>
               </PrevFrame>
-          <NextFrame onClick={() => handlerButtons("decrease")}>
+          <NextFrame onClick={() => handlerButtons("increase")}>
               <ArrowRight />
           </NextFrame>
         <PhotoFrameInfo></PhotoFrameInfo>
