@@ -80,7 +80,7 @@ export default function ProjectSliderConatiner({data} : PhotoFrameProps) {
           <NextSlideBtn onClick={() => handlerButtons("increase")}>
               <ArrowRight />
           </NextSlideBtn>
-          <ProjectSlideDescription slideIdx={frameNumber} data={data[Math.abs(frameNumber) % data.length]} />
+          <ProjectSlideDescription key={frameNumber} slideIdx={frameNumber} data={data[Math.abs(frameNumber) % data.length]} />
       </ProjectSliderBox>
   )
 }

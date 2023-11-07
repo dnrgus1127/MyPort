@@ -1,4 +1,4 @@
-import { FadeInFromBottm } from 'css/keyFrame/Fade';
+import { FadeIn, FadeInFromBottm } from 'css/keyFrame/Fade';
 import React from 'react'
 import styled from 'styled-components'
 import { RepositoryData } from 'types/Project';
@@ -26,17 +26,30 @@ const Section = styled.div`
         border-bottom: 1px solid white;
         text-transform: uppercase;        
         font-weight: 600;
-        opacity: 0;
-        transform: translateY(100%);
+ 
     }
+    
     h1 {
         font-size : 3em;
-        animation : ${FadeInFromBottm} 1s 1s ease-out forwards;
+        animation : ${FadeInFromBottm} .5s 1s ease-out forwards;
     }
     h2 {
         font-size : 2em;
-        animation : ${FadeInFromBottm} 1s 2s ease-out forwards;
+        animation : ${FadeInFromBottm} .5s 1.25s ease-out forwards;
 
+    }
+    p {
+        animation : ${FadeInFromBottm} .5s 1.75s ease-out forwards;
+    }
+
+    h1,h2,p {
+        opacity: 0;
+        transform: translateY(100%);
+    }
+
+    button, img {
+        opacity: 0;
+        animation : ${FadeIn} .5s 2s ease-out forwards;
     }
 `
 
@@ -105,7 +118,7 @@ export default function ProjectSlideDescription({data,slideIdx} : DescriptionPro
           <RightSection>
               <h1>Stack</h1>
               <h2><img src="https://img.shields.io/badge/javscript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=white" /></h2>
-              - 바닐라 자바스크립트 기반 사이트
+              <p>- 바닐라 자바스크립트 기반 사이트</p>
               <br/>
               <h2>Readme.md</h2>
               <div className="readmeWrapper">
