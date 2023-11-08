@@ -2,7 +2,7 @@ import React, {  useState } from 'react'
 import styled, {  keyframes } from 'styled-components'
 import {ReactComponent as ArrowRight} from "../../assets/arrow_right.svg"
 import {ReactComponent as ArrowLeft} from "../../assets/arrow_left.svg"
-import { RepositoryData } from 'types/Project'
+import { Repository } from 'types/Project'
 import ProjectSlider from './ProjectSlider'
 import ProjectSlideDescription from './ProjectSlideDescription'
 
@@ -50,7 +50,7 @@ const NextSlideBtn = styled(SlideButton)`
 `
 
 interface PhotoFrameProps {
-    data: Array<RepositoryData>;
+    data: Array<Repository>;
 }
 
 
@@ -80,7 +80,7 @@ export default function ProjectSliderConatiner({data} : PhotoFrameProps) {
           <NextSlideBtn onClick={() => handlerButtons("increase")}>
               <ArrowRight />
           </NextSlideBtn>
-          <ProjectSlideDescription key={frameNumber} slideIdx={frameNumber} data={data[Math.abs(frameNumber) % data.length]} />
+          <ProjectSlideDescription key={frameNumber} data={data[Math.abs(frameNumber) % data.length]} />
       </ProjectSliderBox>
   )
 }

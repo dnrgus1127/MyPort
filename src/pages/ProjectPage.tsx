@@ -4,7 +4,8 @@ import ProjectsTemplate from 'components/Projects/ProjectsTemplate';
 import { REPOSITORYS } from 'constans/Config';
 import React from 'react'
 import { useLoaderData } from 'react-router-dom';
-import { RepositoryData } from 'types/Project';
+import { Repository, RepositoryData } from 'types/Project';
+import { PROJECT_INFOMATION } from "../constans/ProjectData";
 
 const projectQuery = (repo : string) => ({
     queryKey: ['git', repo],
@@ -12,7 +13,7 @@ const projectQuery = (repo : string) => ({
        // const res = await fetch(`https://raw.githubusercontent.com/dnrgus1127/${repo}/main/README.md`);
         const res = await fetch(`https://api.github.com/users/dnrgus1127/repos`)
         const data = await res.json();
-        return data;
+        return data ;
     }
 })
 
@@ -35,11 +36,18 @@ export default function ProjectPage(): JSX.Element {
   
     // loader에 의해서 이 코드가 실행될 때에는 데이터가 항상 존재하므로 타입 단언 사용
     const repoList = repositoryList!.filter((repo :RepositoryData)  => REPOSITORYS.includes(repo.name));
-         
+    
+    const CompletelyRepository: Array<Repository> = repoList.map((item) => {
+        let idx = PROJECT_INFOMATION.findIndex(repo => repo.name === item.name);
+        return {...item, ...PROJECT_INFOMATION[idx]}
+    })
+
+    
+
       
        return (
         <ProjectsTemplate>
-            <ProjectSliderConatiner data={repoList} />
+            <ProjectSliderConatiner data={CompletelyRepository} />
         </ProjectsTemplate>
       );
     }

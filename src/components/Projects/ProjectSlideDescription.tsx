@@ -1,7 +1,8 @@
 import { FadeIn, FadeInFromBottm } from 'css/keyFrame/Fade';
 import React from 'react'
 import styled from 'styled-components'
-import { RepositoryData } from 'types/Project';
+import { Repository, RepositoryData } from 'types/Project';
+
 const DescriptionBox = styled.div`
     width: 100%;
     height: 100%;
@@ -10,7 +11,6 @@ const DescriptionBox = styled.div`
     left: 0;
     display: flex;
     gap: 30%;
-
     align-items: center;
 `
 
@@ -18,7 +18,7 @@ const Section = styled.div`
     width : 35%;
     color : white;
     font-family: "Roboto KR", sans-serif;
-    text-shadow: 0px 0px 10px #121212;
+    text-shadow: 0px 0px 15px ${({theme})=> theme.pointColor};
     min-height: 80%;
     h1,h2 {
         margin-bottom: 2rem;
@@ -40,6 +40,9 @@ const Section = styled.div`
     }
     p {
         animation : ${FadeInFromBottm} .5s 1.75s ease-out forwards;
+        font-family: "Noto Sans KR","Roboto KR",sans-serif;
+        line-height: 2rem;
+        
     }
 
     h1,h2,p {
@@ -51,21 +54,21 @@ const Section = styled.div`
         opacity: 0;
         animation : ${FadeIn} .5s 2s ease-out forwards;
     }
-`
-
-
-const LeftSection = styled(Section)`
-    padding-right: 2rem;
-`
-const RightSection = styled(Section)`
-    padding-left : 2rem;
 
     .readmeWrapper {
         display: flex;
         justify-content: space-between;
         gap: 1rem
     }
+
+    &.left {
+        padding-right : 2rem;
+    }
+    &.right {
+        padding-left : 2rem;
+    }
 `
+
 
 
 
@@ -102,31 +105,36 @@ const Readme = styled.button`
 
 
 interface DescriptionProps {
-    slideIdx: number;
-    data: RepositoryData;
+    data: Repository;
 }
-export default function ProjectSlideDescription({data,slideIdx} : DescriptionProps) {
+export default function ProjectSlideDescription({data} : DescriptionProps) {
   return (
       <DescriptionBox>
-          <LeftSection>
+          <Section className='left'>
               <Title>{data.name}</Title>
               <h2>프로젝트 설명</h2>
-              <ProjectDescription>개발 혹은 디자인 작업 시에 필요한 색상 코드를 찾기 쉽게 도와주는 프로젝트.</ProjectDescription>
+              <ProjectDescription>{data.description}</ProjectDescription>
               <h2>프로젝트 개발 목적</h2>
-              <WhyDeveloped>모던 JavaScript 학습과 함께 바닐라 자바스크립트에 대한 학습 목적 프로젝트</WhyDeveloped>
-          </LeftSection>
-          <RightSection>
-              <h1>Stack</h1>
-              <h2><img src="https://img.shields.io/badge/javscript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=white" /></h2>
-              <p>- 바닐라 자바스크립트 기반 사이트</p>
-              <br/>
+              <WhyDeveloped>{data.whyDeveloped}</WhyDeveloped>
+              {data.functions && <>
+                  <h2>기능</h2>
+                  <div>{data.functions.map(func => <p key={func}>{func}</p>)}</div>
+              </>}
+          </Section>
+          <Section className='right'>
+              <h2>Stack</h2>
+                <div>{data.stacks.map((stack) => <p key={stack}>{stack}</p>)}</div>
+                {data.library && <>
+                    <h2>library</h2>
+                    <div>{data.library.map(lib => <p key={lib}>{lib}</p>)}</div>
+                </>}
               <h2>Readme.md</h2>
               <div className="readmeWrapper">
                   <Readme>Project README</Readme>
                   <Readme>개발 과정</Readme>
                   <Readme>회고</Readme>
               </div>
-          </RightSection>
+          </Section>
     </DescriptionBox>
   )
 }
