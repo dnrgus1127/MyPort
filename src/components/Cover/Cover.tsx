@@ -13,14 +13,14 @@ export default function Cover() {
    
 
   useEffect(() => {
-    let currentLocation = location.pathname.substring(1);
-    if (currentLocation.length === 0) {
+    
+    if (location.pathname === "/") {
       setCoverState(CoverTarnslate.center);
     } 
-    if (currentLocation === 'gitRepo') {
+    if (location.pathname.startsWith('/project')) {
       setCoverState(CoverTarnslate.down);
     }
-    if (currentLocation === 'test') {
+    if (location.pathname.startsWith('/test')) {
       setCoverState(CoverTarnslate.up);
     }
   }, [location])
@@ -36,7 +36,7 @@ export default function Cover() {
 
     if (Number(currentValue) === CoverTarnslate.down) {
       setCoverState(CoverTarnslate.down);
-      navigate("/gitRepo")
+      navigate("/project/main")
     }
     else if (Number(currentValue) === CoverTarnslate.up) {
       setCoverState(CoverTarnslate.up);
