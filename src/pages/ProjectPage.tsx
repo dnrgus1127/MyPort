@@ -1,11 +1,11 @@
 import { QueryClient, useQuery } from '@tanstack/react-query';
-import ProjectSliderConatiner from 'components/Projects/ProjectSliderConatiner';
-import ProjectsTemplate from 'components/Projects/ProjectsTemplate';
+
 import { REPOSITORYS } from 'constans/Config';
-import React from 'react'
-import { useLoaderData } from 'react-router-dom';
+import React, { useEffect } from 'react'
+import { Outlet, useLoaderData, useLocation, useOutletContext } from 'react-router-dom';
 import { Repository, RepositoryData } from 'types/Project';
 import { PROJECT_INFOMATION } from "../constans/ProjectData";
+import ProjectLayout from 'components/Projects/PrjojectLayout';
 
 const projectQuery = (repo : string) => ({
     queryKey: ['git', repo],
@@ -28,7 +28,13 @@ export const loader = (queryClient: QueryClient) => async () => {
 
 
 
+type ContextType = {
+    data: Array<Repository>;
+}
+
 export default function ProjectPage(): JSX.Element {
+
+    const location = useLocation();
     // https://tkdodo.eu/blog/react-query-meets-react-router#a-typescript-tip  참고하여 아래 내용을 적용해봤으나 해결이 안되어서 타입 단언으로 작성하였음.
     const initialData = useLoaderData() as Awaited<ReturnType<ReturnType<typeof loader>>>
   
@@ -42,12 +48,17 @@ export default function ProjectPage(): JSX.Element {
         return {...item, ...PROJECT_INFOMATION[idx]}
     })
 
-    
+    useEffect(() => {
+        
+    },[location])
 
-      
-       return (
-        <ProjectsTemplate>
-            <ProjectSliderConatiner data={CompletelyRepository} />
-        </ProjectsTemplate>
-      );
-    }
+    return (
+        <ProjectLayout>
+            <Outlet context={ {data :CompletelyRepository} satisfies ContextType}/>
+        </ProjectLayout>
+    );
+}
+    
+export function useProjectData() {
+    return useOutletContext<ContextType>();
+}

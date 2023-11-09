@@ -5,6 +5,8 @@ import {ReactComponent as ArrowLeft} from "../../assets/arrow_left.svg"
 import { Repository } from 'types/Project'
 import ProjectSlider from './ProjectSlider'
 import ProjectSlideDescription from './ProjectSlideDescription'
+import { useOutletContext } from 'react-router-dom'
+import { useProjectData } from 'pages/ProjectPage'
 
 const ProjectSliderBox = styled.div`
     width: 100%;
@@ -49,12 +51,10 @@ const NextSlideBtn = styled(SlideButton)`
     animation: ${() => ButtonAnimation("right")} 2s ease  infinite;
 `
 
-interface PhotoFrameProps {
-    data: Array<Repository>;
-}
 
 
-export default function ProjectSliderConatiner({data} : PhotoFrameProps) {
+export default function ProjectSliderConatiner() {
+    const {data} = useProjectData();
     const [frameNumber, setFraemNumber] = useState<number>(Math.floor(data.length));
     const [isButtonDelay, setButtonDelay] = useState(false);
 
