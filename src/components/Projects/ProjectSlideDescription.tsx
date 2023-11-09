@@ -1,7 +1,8 @@
 import { FadeIn, FadeInFromBottm } from 'css/keyFrame/Fade';
 import React from 'react'
-import styled from 'styled-components'
-import { Repository, RepositoryData } from 'types/Project';
+import { useNavigate } from 'react-router-dom';
+import styled, { keyframes } from 'styled-components'
+import { Repository } from 'types/Project';
 
 const DescriptionBox = styled.div`
     width: 100%;
@@ -14,38 +15,70 @@ const DescriptionBox = styled.div`
     align-items: center;
 `
 
+const DrawLine = keyframes`
+    from
+    {
+        width: 0;
+    }
+    to {
+        width: 110%;
+    }
+`
+
+
 const Section = styled.div`
     width : 35%;
     color : white;
     font-family: "Roboto KR", sans-serif;
-    text-shadow: 0px 0px 15px ${({theme})=> theme.pointColor};
+    text-shadow: 0px 0px 15px ${({ theme }) => theme.pointColor};
     min-height: 80%;
     h1,h2 {
         margin-bottom: 2rem;
-        padding : 1rem 0 ;
-        border-bottom: 1px solid white;
+        padding-top: 2rem;
+        padding-bottom: .5rem;
         text-transform: uppercase;        
         font-weight: 600;
- 
-    }
-    
-    h1 {
-        font-size : 3em;
-        animation : ${FadeInFromBottm} .5s 1s ease-out forwards;
-    }
-    h2 {
-        font-size : 2em;
-        animation : ${FadeInFromBottm} .5s 1.25s ease-out forwards;
-
-    }
-    p {
-        animation : ${FadeInFromBottm} .5s 1.75s ease-out forwards;
-        font-family: "Noto Sans KR","Roboto KR",sans-serif;
-        line-height: 2rem;
+        position: relative;
+        display: inline-block;
         
     }
 
-    h1,h2,p {
+    h1::after, h2::after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 0;
+        height: 2px;
+        background-color: white;
+        animation : ${DrawLine} .5s 1.5s ease-out forwards;
+    }
+ 
+    
+    h1 {
+        font-size : 2.2em;
+        animation : ${FadeInFromBottm} .5s 1s ease-out forwards;
+    }
+    h2 {
+        font-size : 1.8em;
+        animation : ${FadeInFromBottm} .5s 1.25s ease-out forwards;
+
+    }
+    p,li {
+        animation : ${FadeInFromBottm} .5s 1.75s ease-out forwards;
+        font-family: "Noto Sans KR","Roboto KR",sans-serif;
+        line-height: 2rem;
+    }
+    ul {
+        padding-left: 2rem;;
+        list-style-position: outside;
+    }
+    li {
+        list-style-type   : disc;
+    }
+    
+
+    h1,h2,p,li {
         opacity: 0;
         transform: translateY(100%);
     }
@@ -53,12 +86,15 @@ const Section = styled.div`
     button, img {
         opacity: 0;
         animation : ${FadeIn} .5s 2s ease-out forwards;
+        font-family: "SUIT-Regular";
+
     }
 
     .readmeWrapper {
         display: flex;
         justify-content: space-between;
-        gap: 1rem
+        gap: 1rem;
+
     }
 
     &.left {
@@ -67,9 +103,28 @@ const Section = styled.div`
     &.right {
         padding-left : 2rem;
     }
+
+
+    
 `
 
+const ReadmeSection = styled.div`
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
 
+    button {
+        height : 4rem;
+        flex: 1;
+        border-radius: 4px;
+        font-family: 'Noto Sans KR', sans-serif;
+        font-size: 1.6rem;
+        background-color: white;
+        font-weight: 600;
+        cursor: pointer;
+        position: relative;
+    }
+`
 
 
 const Title = styled.h1`
@@ -79,27 +134,7 @@ const Title = styled.h1`
     text-transform: uppercase;
     color : white;
     text-shadow: 0px 0px 10px #121212;
-`
-const ProjectDescription = styled.p`
-    
-`
-const WhyDeveloped = styled.p`
-    
-`
-
-const Readme = styled.button`   
-    height : 4rem;
-    flex: 1;
-    border-radius: 4px;
-    font-family: 'Noto Sans KR', sans-serif;
-    font-size: 1.6rem;
-    background-color: white;
-    font-weight: 600;
-    cursor: pointer;
-    &:hover {
-        background-color: #121212;
-        color :white;
-    }
+ 
 `
 
 
@@ -107,33 +142,37 @@ const Readme = styled.button`
 interface DescriptionProps {
     data: Repository;
 }
-export default function ProjectSlideDescription({data} : DescriptionProps) {
-  return (
+export default function ProjectSlideDescription({ data }: DescriptionProps) {
+    const navigate = useNavigate();
+    return (
       <DescriptionBox>
           <Section className='left'>
               <Title>{data.name}</Title>
+              <br/>
               <h2>프로젝트 설명</h2>
-              <ProjectDescription>{data.description}</ProjectDescription>
+              <p>{data.description}</p>
               <h2>프로젝트 개발 목적</h2>
-              <WhyDeveloped>{data.whyDeveloped}</WhyDeveloped>
+              <p>{data.whyDeveloped}</p>
               {data.functions && <>
                   <h2>기능</h2>
-                  <div>{data.functions.map(func => <p key={func}>{func}</p>)}</div>
+                  <div>{data.functions.map(func => <li key={func}>{func}</li>)}</div>
               </>}
           </Section>
           <Section className='right'>
               <h2>Stack</h2>
-                <div>{data.stacks.map((stack) => <p key={stack}>{stack}</p>)}</div>
+                <ul>{data.stacks.map((stack) => <li key={stack}>{stack}</li>)}</ul>
                 {data.library && <>
                     <h2>library</h2>
-                    <div>{data.library.map(lib => <p key={lib}>{lib}</p>)}</div>
+                    <ul>{data.library.map(lib => <li key={lib}>{lib}</li>)}</ul>
                 </>}
               <h2>Readme.md</h2>
-              <div className="readmeWrapper">
-                  <Readme>Project README</Readme>
-                  <Readme>개발 과정</Readme>
-                  <Readme>회고</Readme>
-              </div>
+              <ReadmeSection >
+                    <button onClick={() => {
+                        navigate("/project/readme");
+                  }}>ReadMe</button>
+                  <button>ReadMe</button>
+                  <button>ReadMe</button>
+              </ReadmeSection>
           </Section>
     </DescriptionBox>
   )
