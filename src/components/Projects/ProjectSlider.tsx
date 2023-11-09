@@ -36,7 +36,7 @@ const PhotoFrameItem = styled.div<ItemProps>`
     position: absolute;
     top: 0;
     right: ${(props) => props.$distance * 100}%;
-    background-image: ${(props) => `url("assets/img/${props.name}.jpg")`};
+    background-image: ${(props) => `url("/assets/img/${props.name}.jpg")`};
     background-size: cover;
     transform: ${(props) => props.$trans};
     filter : ${(props)=> props.$distance !== 0 && "grayScale(100%) blur(1px) brightness(60%)"};
