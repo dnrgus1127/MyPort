@@ -1,10 +1,10 @@
-import React, { useCallback, useEffect, useState } from 'react'
+import React, {  useEffect, useState } from 'react'
 import { useLocation,useNavigate } from "react-router-dom"
 import CoverTemplate from './CoverTemplate';
 import { CoverTarnslate } from 'constans/enum/CoverTranslate';
 
 
-const title = "Daily Portfolio"
+const title = "FrontEnd Portfolio"
 
 export default function Cover() {
   const navigate = useNavigate();
@@ -14,16 +14,23 @@ export default function Cover() {
 
   useEffect(() => {
     let currentLocation = location.pathname.substring(1);
+    if (currentLocation.length === 0) {
+      setCoverState(CoverTarnslate.center);
+    } 
     if (currentLocation === 'gitRepo') {
       setCoverState(CoverTarnslate.down);
     }
-  }, [])
+    if (currentLocation === 'test') {
+      setCoverState(CoverTarnslate.up);
+    }
+  }, [location])
   
 
   const arrowButtonHandler = (e:React.MouseEvent<HTMLButtonElement>) => {
     let currentValue = e.currentTarget.value;
     if (coverState !== CoverTarnslate.center) {
       setCoverState(CoverTarnslate.center);
+    
       return;
     }
 
