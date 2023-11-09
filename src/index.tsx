@@ -6,11 +6,13 @@ import reportWebVitals from './reportWebVitals';
 import { createBrowserRouter,RouterProvider } from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ThemeProvider } from 'styled-components';
-import { dailyTheme, darkTheme, ligthTheme } from 'styles/theme';
+import { darkTheme } from 'styles/theme';
 import { GlobalStyles } from 'styles/GlobalStyles';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import StacksPage from 'components/Stacks/StacksPage';
 import ProjectPage, {loader as projectLoader} from 'pages/ProjectPage';
+import ProjectSliderConatiner from 'components/Projects/ProjectSliderConatiner';
+import Readme from 'components/Projects/Readme';
 
 
 const root = ReactDOM.createRoot(
@@ -23,10 +25,19 @@ const router = createBrowserRouter([
     element: <App />,
     children : [
       {
-        path: "/gitRepo",
+        path: "project",
         element: <ProjectPage />,
         loader: projectLoader(queryClient),
-        
+        children: [
+          {
+            path: "main",
+            element: <ProjectSliderConatiner/>
+          },
+          {
+            path: "readme",
+            element: <Readme/>
+          }
+        ]
       },
       {
         path: "/test",
@@ -39,7 +50,7 @@ const router = createBrowserRouter([
 root.render(
   <React.StrictMode>
     <QueryClientProvider client={queryClient}>
-      <ThemeProvider theme={dailyTheme}>
+      <ThemeProvider theme={darkTheme}>
         <GlobalStyles/>
         <RouterProvider router={router}/>
       </ThemeProvider>
