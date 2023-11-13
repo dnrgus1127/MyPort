@@ -1,6 +1,7 @@
-import styled, { keyframes } from "styled-components"
-import { ReactNode, useEffect, useMemo, useRef, useState } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import styled from "styled-components"
+import { ReactNode } from "react";
+import { changePath } from "redux/reducer/navigaterReducer";
+import { useAppDispatch } from "redux/hooks";
 import PageAnimation from "components/Common/PageAnimation";
 
 
@@ -19,8 +20,7 @@ const Template = styled.div`
 
 export default function ProjectLayout({ children }: { children: ReactNode }) {
   return (
-    <Template  >
-      <PageAnimation/>
+    <Template>      
       {children}
     </Template>
   )

@@ -1,12 +1,13 @@
 import React from 'react'
-import { useLocation, useNavigate } from 'react-router-dom'
+import { useAppDispatch } from 'redux/hooks';
+import { DirectionType, changePath } from 'redux/reducer/navigaterReducer';
 
 export default function Readme() {
-    const navigate = useNavigate();
+  const dispatch = useAppDispatch();
   return (
       <div>
-          <button onClick={() => {
-              navigate(-1);
+      <button onClick={() => {  
+          dispatch(changePath({path : "-1", direction :DirectionType.WEST}));
           }}>뒤로가기</button>
     </div>
   )

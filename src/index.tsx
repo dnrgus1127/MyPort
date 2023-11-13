@@ -13,6 +13,9 @@ import StacksPage from 'components/Stacks/StacksPage';
 import ProjectPage, {loader as projectLoader} from 'pages/ProjectPage';
 import ProjectSliderConatiner from 'components/Projects/ProjectSliderConatiner';
 import Readme from 'components/Projects/Readme';
+import { Provider } from "react-redux";
+import { store } from 'redux/store';
+import PageAnimation from 'components/Common/PageAnimation';
 
 
 const root = ReactDOM.createRoot(
@@ -23,8 +26,8 @@ const router = createBrowserRouter([
   {
     path: "/",
     element: <App />,
-    children : [
-      {
+    children: [
+       {
         path: "project",
         element: <ProjectPage />,
         loader: projectLoader(queryClient),
@@ -45,14 +48,20 @@ const router = createBrowserRouter([
       }
     ]
   }
+  
 ])
+
+
+
 
 root.render(
   <React.StrictMode>
     <QueryClientProvider client={queryClient}>
       <ThemeProvider theme={darkTheme}>
         <GlobalStyles/>
-        <RouterProvider router={router}/>
+        <Provider store={store} >
+          <RouterProvider router={router}/>
+        </Provider>
       </ThemeProvider>
       <ReactQueryDevtools initialIsOpen={false} />
     </QueryClientProvider>

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import styled from 'styled-components'
 
 const LoadingConatainer = styled.div`
@@ -13,7 +13,8 @@ const LoadingConatainer = styled.div`
 `
 
 export default function Loading() {
+
   return (
-    <LoadingConatainer>Loading</LoadingConatainer>
+    <LoadingConatainer></LoadingConatainer>
   )
 }

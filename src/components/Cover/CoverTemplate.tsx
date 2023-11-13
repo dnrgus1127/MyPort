@@ -5,9 +5,9 @@ import CoverTitle from './CoverTitle'
 
 
 
-const Template = styled.div<{ $location: CoverTarnslate }>`
+const Template = styled.div`
    position: fixed;
-    background-color: ${({ theme }) => theme.bgColor};
+    background-color: ${({ theme }) => theme.bgColor2};
     width: 100%;
     height: 100vh;
     text-transform: uppercase;
@@ -21,12 +21,7 @@ const Template = styled.div<{ $location: CoverTarnslate }>`
     transition: all .5s ease-out;
  
     z-index: 10;
-    ${(props) => props.$location === CoverTarnslate.down && css`
-      transform: translateY(calc(-100% + 4.4rem));
-    `}
-    ${(props) => props.$location === CoverTarnslate.up && css`
-      transform: translateY(calc(100% - 4.4rem));
-    `}
+  
     
 `
 
@@ -84,16 +79,15 @@ const ArrowRight = styled(Arrow)`
 
 interface HomeTemplateProps {
   title: string;
-  location: CoverTarnslate;
   arrowButtonHandler : React.MouseEventHandler<HTMLButtonElement>;
 }
 
 const texts = ["FrontEnd","Programmer","WookHyun"];
-export default function CoverTemplate({ title, location ,arrowButtonHandler}: HomeTemplateProps) {
+export default function CoverTemplate({ title, arrowButtonHandler}: HomeTemplateProps) {
 
   return (
-    <Template $location={location}>
-        {location === CoverTarnslate.center && <CoverTitle title={texts} />}
+    <Template >
+         <CoverTitle title={texts} />
       
         <ArrowUp onClick={arrowButtonHandler} value={CoverTarnslate.up}><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M0 16.67l2.829 2.83 9.175-9.339 9.167 9.339 2.829-2.83-11.996-12.17z"/></svg></ArrowUp>
         <ArrowDown onClick={arrowButtonHandler} value={CoverTarnslate.down}><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M0 7.33l2.829-2.83 9.175 9.339 9.167-9.339 2.829 2.83-11.996 12.17z" /></svg></ArrowDown>

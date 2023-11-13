@@ -1,6 +1,8 @@
 import { FadeIn, FadeInFromBottm } from 'css/keyFrame/Fade';
 import React from 'react'
 import { useNavigate } from 'react-router-dom';
+import { useAppDispatch } from 'redux/hooks';
+import { DirectionType, changePath } from 'redux/reducer/navigaterReducer';
 import styled, { keyframes } from 'styled-components'
 import { Repository } from 'types/Project';
 
@@ -143,7 +145,7 @@ interface DescriptionProps {
     data: Repository;
 }
 export default function ProjectSlideDescription({ data }: DescriptionProps) {
-    const navigate = useNavigate();
+    const dispatch = useAppDispatch();
     return (
       <DescriptionBox>
           <Section className='left'>
@@ -168,7 +170,7 @@ export default function ProjectSlideDescription({ data }: DescriptionProps) {
               <h2>Readme.md</h2>
               <ReadmeSection >
                     <button onClick={() => {
-                        navigate("/project/readme");
+                        dispatch(changePath({path :"/project/readme",direction : DirectionType.EAST}));
                   }}>ReadMe</button>
                   <button>ReadMe</button>
                   <button>ReadMe</button>
