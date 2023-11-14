@@ -1,3 +1,4 @@
+import { DrawLine } from 'css/keyFrame/DrwaLine';
 import { FadeIn, FadeInFromBottm } from 'css/keyFrame/Fade';
 import useCustomNavigate from 'hooks/useCustomNavigate';
 import React from 'react'
@@ -18,15 +19,6 @@ const DescriptionBox = styled.div`
     align-items: center;
 `
 
-const DrawLine = keyframes`
-    from
-    {
-        width: 0;
-    }
-    to {
-        width: 110%;
-    }
-`
 
 
 const Section = styled.div`
@@ -54,7 +46,7 @@ const Section = styled.div`
         width: 0;
         height: 2px;
         background-color: white;
-        animation : ${DrawLine} .5s 1.5s ease-out forwards;
+        animation : ${()=> DrawLine(110)} .5s 1.5s ease-out forwards;
     }
  
     
