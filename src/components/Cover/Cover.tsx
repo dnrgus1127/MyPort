@@ -4,6 +4,7 @@ import CoverTemplate from './CoverTemplate';
 import { CoverTarnslate } from 'constans/enum/CoverTranslate';
 import { useAppDispatch } from 'redux/hooks';
 import { DirectionType, changePath } from 'redux/reducer/navigaterReducer';
+import useCustomNavigate from 'hooks/useCustomNavigate';
 
 
 const title = "FrontEnd Portfolio"
@@ -11,6 +12,7 @@ const title = "FrontEnd Portfolio"
 export default function Cover() {
   const location = useLocation();
   const dispatch = useAppDispatch();
+  const [gotoPage] = useCustomNavigate();
 
   
 
@@ -18,10 +20,10 @@ export default function Cover() {
     let currentValue = e.currentTarget.value;
     
     if (Number(currentValue) === CoverTarnslate.down) {
-      dispatch(changePath({path :"/project/main" , direction : DirectionType.SOUTH}));
+      gotoPage("/project/main" , DirectionType.SOUTH);
     }
     else if (Number(currentValue) === CoverTarnslate.up) {
-      dispatch(changePath({path :"/test" , direction : DirectionType.NORTH}));
+      gotoPage("/test" , DirectionType.NORTH);
   }
   } 
   

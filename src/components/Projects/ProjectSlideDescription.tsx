@@ -1,4 +1,5 @@
 import { FadeIn, FadeInFromBottm } from 'css/keyFrame/Fade';
+import useCustomNavigate from 'hooks/useCustomNavigate';
 import React from 'react'
 import { useNavigate } from 'react-router-dom';
 import { useAppDispatch } from 'redux/hooks';
@@ -146,6 +147,7 @@ interface DescriptionProps {
 }
 export default function ProjectSlideDescription({ data }: DescriptionProps) {
     const dispatch = useAppDispatch();
+    const [gotoPage] = useCustomNavigate();
     return (
       <DescriptionBox>
           <Section className='left'>
@@ -170,7 +172,7 @@ export default function ProjectSlideDescription({ data }: DescriptionProps) {
               <h2>Readme.md</h2>
               <ReadmeSection >
                     <button onClick={() => {
-                        dispatch(changePath({path :"/project/readme",direction : DirectionType.EAST}));
+                        gotoPage(`/project/readme?projectName=${data.name}`,DirectionType.EAST );
                   }}>ReadMe</button>
                   <button>ReadMe</button>
                   <button>ReadMe</button>
