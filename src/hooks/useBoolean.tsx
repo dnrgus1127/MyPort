@@ -1,12 +1,14 @@
-import { useState } from "react";
+import { Dispatch, SetStateAction, useState } from "react";
 
 
-export default function useBoolean(initState : boolean) {
+
+export default function useBoolean(initState : boolean)  :[boolean, ()=>void, Dispatch<SetStateAction<boolean>>]{
     const [isBool, setBool] = useState<boolean>(initState);
 
-    function onToggle() {
+    const onToggle = () => {
         setBool(prev => !prev);
     }
+    
 
-    return [isBool,onToggle,setBool]
+    return [isBool,onToggle,setBool];
 }
