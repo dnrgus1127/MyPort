@@ -18,7 +18,7 @@ const projectQuery = (repo : string) => ({
 })
 
 export const loader = (queryClient: QueryClient) => async () => {   
-  const query = projectQuery("colorProject");
+  const query = projectQuery("repositoryList");
     
   // getQueryData() = 캐시된 데이터가 존재하면 해당 데이터가 stale하더라도 반환함 
     return (
@@ -33,8 +33,6 @@ type ContextType = {
 }
 
 export default function ProjectPage(): JSX.Element {
-
-    const location = useLocation();
     // https://tkdodo.eu/blog/react-query-meets-react-router#a-typescript-tip  참고하여 아래 내용을 적용해봤으나 해결이 안되어서 타입 단언으로 작성하였음.
     const initialData = useLoaderData() as Awaited<ReturnType<ReturnType<typeof loader>>>
   
@@ -48,9 +46,6 @@ export default function ProjectPage(): JSX.Element {
         return {...item, ...PROJECT_INFOMATION[idx]}
     })
 
-    useEffect(() => {
-        
-    },[location])
 
     return (
         <ProjectLayout>
