@@ -1,5 +1,5 @@
 import useBoolean from 'hooks/useBoolean'
-import React, { useEffect, useMemo, useRef, useState } from 'react'
+import React, { useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { useAppDispatch, useAppSelector } from 'redux/hooks'
@@ -76,6 +76,7 @@ const PageInCover = styled.div<{$direction : DirectionType}>`
   }
 
 `
+
 /**
  * 페이지 이동이 일어났을 때 최초로
  * location의 pathname이 바뀌는 경우에만 작동
@@ -97,13 +98,14 @@ export function PageIn() {
     return "이동 중"
   }, [location.pathname])
 
-  useEffect(() => {    
+  useLayoutEffect(() => {    
     setVisible(true);
   }, [location.pathname]);
+
   
-  if(location.pathname === "/" || !visible ) return <></>
+  if (location.pathname === "/" || !visible) return <></>;
   return (
-    <PageInCover ref={coverRef} key={location.pathname} $direction={direction} onAnimationEnd={(e) => {
+    <PageInCover ref={coverRef} $direction={direction} onAnimationEnd={(e) => {
       if(e.target === coverRef.current) setVisible(false);
     }}>
       <div className="textBox">
@@ -112,6 +114,7 @@ export function PageIn() {
     </PageInCover>
   )
 }
+
 
 const OutFrame = (x: number, y: number) => keyframes`
   from {
@@ -163,7 +166,8 @@ export function PageOut() {
   
   useEffect(() => {
     path !== "init" && setVisible(true);
-  },[path])
+  }, [path])
+
 
   if (!visible) return <></>
   else {
@@ -171,6 +175,9 @@ export function PageOut() {
       if (path === '-1')
       {
         navigate(-1);  
+      }
+      else if (path === "init") {
+        
       }
       else if (path !== location.pathname) {
         navigate(path);
@@ -182,8 +189,9 @@ export function PageOut() {
 }
 
 export default function PageAnimation() {
+  const location = useLocation();
   return <>
-    <PageIn />
+    <PageIn key={location.pathname}/>
     <PageOut/>
   </>
 }
