@@ -5,6 +5,7 @@ import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { dark } from 'react-syntax-highlighter/dist/esm/styles/prism';
 import styled from 'styled-components';
 import { DrawLine } from 'css/keyFrame/DrwaLine';
+import CustomIMG from './CustomIMG';
 
 const MarkdownCss = styled.div`
   display: flex;
@@ -110,6 +111,11 @@ const MarkdownCss = styled.div`
     list-style: circle;
   }
 
+  img {
+    box-shadow: 0px 0px 10px #121212;
+    margin-right: 1rem;
+  }
+
 
 `
 
@@ -126,7 +132,6 @@ function replacer(match: string) {
 }
 
 export default function CustomMarkdown({ markdown }: { markdown: string; }) {
-console.log("🚀 ~ file: CustomMarkdown.tsx:47 ~ CustomMarkdown ~ markdown:", markdown)
 
   const renderedMarkdown = markdown.replaceAll( /<img\b[^>]*>/ig, replacer);
   const rendere = renderedMarkdown.replaceAll(/<br\/>/g, "\n");
@@ -149,6 +154,9 @@ console.log("🚀 ~ file: CustomMarkdown.tsx:47 ~ CustomMarkdown ~ markdown:", m
                     {children}
                   </code>
                 );
+              },
+              img({ node, src,alt }) {
+                return <CustomIMG src={src} alt={alt} />
               }
             }}
           >{rendere}</Markdown>
