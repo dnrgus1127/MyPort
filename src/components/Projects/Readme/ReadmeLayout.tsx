@@ -1,40 +1,38 @@
 import CustomMarkdown from 'components/Markdown/CustomMarkdown';
 import useCustomNavigate from 'hooks/useCustomNavigate';
-import React, { ReactNode } from 'react'
-import styled from 'styled-components';
-
-
+import React, { ReactNode, useEffect, useMemo, useState } from 'react'
+import styled, { keyframes } from 'styled-components';
+import ReadmeTitle from './ReadmeTitle';
 
 
 const ReadmeHeader = styled.div`
     display: flex;
     align-items: center;
-    justify-content: center;
-
-    h1 {
-        // 텍스트 타이핑이 어울릴듯
-        font-size: 8rem;
-        font-family: 'Times Newer Roman';
-
-        padding : 3rem 0;
-        margin: 3rem;
-        letter-spacing: .5rem;
-        text-shadow: 5px 5px 0 #aaaaaa88;
-    }
+    justify-content: center; 
+    box-shadow : 0px 5px 15px #12121288;
 `
 
 const MarkdwonWrapper = styled.div`
-    width: 85%;
-    padding : 3% 5%;
-    border-radius: 1rem;
-    background-color: #2c2c2c;
-    box-shadow: 0px 0px 15px #000000;
+    padding : 8% 5%;
 ` 
 
 const Layout = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
+  
+    padding : 0 var(--side-padding);
+    padding-bottom : 5rem;
+    margin-bottom: var(--side-padding);
+    
+    .layoutWapper {
+        background-color: ${({ theme }) => theme.bgColor3};
+        box-shadow: 0px 0px 15px #000000;
+        border-bottom-left-radius: 1rem;
+        border-bottom-right-radius: 1rem;
+        width: 100%;
+    }
+
 `
 
 
@@ -43,16 +41,19 @@ interface ReadmeLayoutProps {
     title: string;
 }
 
+
 export default function ReadmeLayout({ data,title }: ReadmeLayoutProps) {
-    const [,gotoPrevPage] = useCustomNavigate();
-  return (
-      <Layout>
-          <ReadmeHeader>
-              <h1>README.md</h1>
-          </ReadmeHeader>
-          <MarkdwonWrapper>
-              <CustomMarkdown markdown={data} />
-          </MarkdwonWrapper>
-      </Layout>
-  )
+   
+    return (
+        <Layout>
+            <div className="layoutWapper">
+                <ReadmeHeader>
+                   <ReadmeTitle/>
+                </ReadmeHeader>
+                <MarkdwonWrapper>
+                    <CustomMarkdown markdown={data} />
+                </MarkdwonWrapper>
+            </div>
+        </Layout>
+)
 }
