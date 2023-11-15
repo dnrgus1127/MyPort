@@ -6,13 +6,14 @@ import { Outlet, useLoaderData, useLocation, useOutletContext } from 'react-rout
 import { Repository, RepositoryData } from 'types/Project';
 import { PROJECT_INFOMATION } from "../constans/ProjectData";
 import ProjectLayout from 'components/Projects/PrjojectLayout';
+import { GITHUBAPIKEY } from 'apiKey';
 
 const projectQuery = (repo : string) => ({
     queryKey: ['git', repo],
     queryFn: async () => {
         const res = await fetch(`https://api.github.com/users/dnrgus1127/repos`, {
             headers: {
-                Authorization : "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"
+                Authorization : GITHUBAPIKEY
             }
         })
         const data = await res.json();
@@ -42,7 +43,7 @@ export default function ProjectPage(): JSX.Element {
     const { data: repositoryList } = useQuery<Array<RepositoryData>>({ ...projectQuery("repositoryList"),initialData : [] });
   
     // loader에 의해서 이 코드가 실행될 때에는 데이터가 항상 존재하므로 타입 단언 사용
-    
+    // TODO 에러 처리 필요
     if (!("filter" in repositoryList)) return <div>403</div>
     
     const repoList = repositoryList.filter((repo :RepositoryData)  => REPOSITORYS.includes(repo.name));
