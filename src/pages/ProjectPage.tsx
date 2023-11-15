@@ -10,8 +10,11 @@ import ProjectLayout from 'components/Projects/PrjojectLayout';
 const projectQuery = (repo : string) => ({
     queryKey: ['git', repo],
     queryFn: async () => {
-       // const res = await fetch(`https://raw.githubusercontent.com/dnrgus1127/${repo}/main/README.md`);
-        const res = await fetch(`https://api.github.com/users/dnrgus1127/repos`)
+        const res = await fetch(`https://api.github.com/users/dnrgus1127/repos`, {
+            headers: {
+                Authorization : "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"
+            }
+        })
         const data = await res.json();
         return data ;
     }
@@ -36,10 +39,13 @@ export default function ProjectPage(): JSX.Element {
     // https://tkdodo.eu/blog/react-query-meets-react-router#a-typescript-tip  참고하여 아래 내용을 적용해봤으나 해결이 안되어서 타입 단언으로 작성하였음.
     const initialData = useLoaderData() as Awaited<ReturnType<ReturnType<typeof loader>>>
   
-    const { data: repositoryList } = useQuery<Array<RepositoryData>>({ ...projectQuery("repositoryList"),initialData });
+    const { data: repositoryList } = useQuery<Array<RepositoryData>>({ ...projectQuery("repositoryList"),initialData : [] });
   
     // loader에 의해서 이 코드가 실행될 때에는 데이터가 항상 존재하므로 타입 단언 사용
-    const repoList = repositoryList!.filter((repo :RepositoryData)  => REPOSITORYS.includes(repo.name));
+    
+    if (!("filter" in repositoryList)) return <div>403</div>
+    
+    const repoList = repositoryList.filter((repo :RepositoryData)  => REPOSITORYS.includes(repo.name));
     
     const CompletelyRepository: Array<Repository> = repoList.map((item) => {
         let idx = PROJECT_INFOMATION.findIndex(repo => repo.name === item.name);
