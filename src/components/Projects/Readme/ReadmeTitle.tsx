@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import styled, { keyframes } from 'styled-components';
+import { convertCamelToSpace } from 'utils/convertString';
 
 const TypingAnimation = keyframes`
     from {
@@ -29,11 +30,11 @@ const Title = styled.h1`
     }
 `
 
-const TITLE = ["README.md","COLOR PROJECT"];
 
 
-export default function ReadmeTitle() {
+export default function ReadmeTitle({ title } :{title:string}) {
     const [text, setText] = useState<string>("");
+    const TITLE = ["README.md",convertCamelToSpace(title).toUpperCase()];
 
     useEffect(() => {
         const initDelay = 2000; // 초기 딜레이 시간 (페이지 이동 애니메이션 2s)
