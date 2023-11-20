@@ -3,6 +3,7 @@ import { ReactNode } from "react";
 import { changePath } from "redux/reducer/navigaterReducer";
 import { useAppDispatch } from "redux/hooks";
 import PageAnimation from "components/Common/PageAnimation";
+import media from "styles/media";
 
 
 const Template = styled.div`

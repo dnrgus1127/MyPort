@@ -7,6 +7,7 @@ import styled from 'styled-components';
 import { DrawLine } from 'css/keyFrame/DrwaLine';
 import CustomIMG from './CustomIMG';
 import CustomTree from './CustomTree';
+import media from 'styles/media';
 
 const MarkdownCss = styled.div`
   display: flex;
@@ -14,6 +15,8 @@ const MarkdownCss = styled.div`
   font-family: 'SUIT-Regular';
    img {
     max-width: 33%;
+    box-shadow: 3px 3px 0 #121212;
+    margin-right: 1rem;
    }
 
    h1 {
@@ -45,8 +48,8 @@ const MarkdownCss = styled.div`
     align-self: self-start;
     text-shadow: 4px 4px  #080808;
   }
-  h1::after,h2::after,h3::after{
 
+  & > h1::after, & > h2::after, & > h3::after{
     position: absolute;
     content: " ";
     bottom: 0;
@@ -55,16 +58,15 @@ const MarkdownCss = styled.div`
     animation: ${() => DrawLine(100)} 1s 2s ease-in forwards;
     box-shadow: 3px 3px 0 #121212;
     
-  }
+}
   & > h1::after {
-    background-color: #9ACD32
+      background-color: #9ACD32;
   }
   & > h2::after {
-    background-color: #ff9400
+      background-color: #ff9400;
   }
   & > h3::after {
-    background-color: #b49eff
-    
+      background-color: #b49eff;    
   }
 
   h1:not(:nth-child(1)),h2{
@@ -119,10 +121,54 @@ const MarkdownCss = styled.div`
     text-shadow: 2px 2px  #080808;
   }
 
-  img {
-    box-shadow: 3px 3px 0 #121212;
-    margin-right: 1rem;
-  }
+
+
+  ${media.small} {
+    h1 {
+      font-size : 2rem;
+    }
+    h2 {
+      font-size: 1.7rem;
+    }
+    h3{
+      font-size: 1.6rem;
+    }
+    h1,h2 {
+      font-weight: 400;
+      letter-spacing: normal;
+      padding-bottom: .5rem;
+    }
+    h1,h2,h3{
+      text-shadow: 2px 2px  #080808;
+    }
+    li,p {
+      font-size:1.4rem;
+      text-shadow: 1px 1px #080808;
+    }
+
+    h1,h2,blockquote,pre {
+      margin-bottom: 1.6rem;
+    }
+
+    hr {
+      margin : 1.6rem 0;
+    }
+    img {
+      max-width: 48%;
+      margin-right : .5%;
+      box-shadow: 1px 1px 0 #121212;
+    }
+
+    ul {
+      padding-left: 1rem;
+    }
+    & > h1::after, & > h2::after, & > h3::after{
+      height: 2px;
+      box-shadow: 2px 2px 0 #121212;
+    
+}
+
+}
 
 
 `

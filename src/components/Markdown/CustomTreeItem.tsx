@@ -18,7 +18,7 @@ export default function CustomTreeItem({ tree,projectName }: { tree: Tree,projec
         }}>{tree.path}
             <Annotation projectName={projectName} path={tree.path}/>
         </li>
-        {open && tree.children && <ul className='recusive-tree'>{tree.children.sort((a,b)=> a.type === "tree" ? -1 : 1).map((item) => <CustomTreeItem tree={item} projectName={projectName || ""} />)}</ul>}
+        {open && tree.children && <ul className='recusive-tree'>{tree.children.sort((a,b)=> a.type === "tree" ? -1 : 1).map((item) => <CustomTreeItem key={item.path} tree={item} projectName={projectName || ""} />)}</ul>}
       </>
   )
 }

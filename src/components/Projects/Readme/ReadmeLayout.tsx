@@ -1,17 +1,16 @@
+import React from 'react'
 import CustomMarkdown from 'components/Markdown/CustomMarkdown';
 import useCustomNavigate from 'hooks/useCustomNavigate';
-import React, { ReactNode, useEffect, useMemo, useState } from 'react'
-import styled, { keyframes } from 'styled-components';
+import styled from 'styled-components';
 import ReadmeTitle from './ReadmeTitle';
 import { DirectionType } from 'redux/reducer/navigaterReducer';
-
+import media from 'styles/media';
 
 const ReadmeHeader = styled.div`
     display: flex;
     align-items: center;
     justify-content: center; 
     box-shadow : 0px 5px 15px #12121288;
-
     position: relative;
 
     .exitButton {
@@ -27,19 +26,24 @@ const ReadmeHeader = styled.div`
         svg:hover {
             transform: scale(1.2);
         }
+
+        ${media.medium}{
+            svg {
+                width: 1.6rem;
+                height: 1.6rem;
+            }
+        }
     }
 `
 
 const MarkdwonWrapper = styled.div`
-    padding : 8% 5%;
+    padding : 8% 5%;  
 ` 
 
 const Layout = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
-  
-    padding : 0 var(--side-padding);
     padding-bottom : 5rem;
     margin-bottom: var(--side-padding);
     
@@ -50,17 +54,17 @@ const Layout = styled.div`
         border-bottom-right-radius: 1rem;
         width: 100%;
     }
-
+    ${media.large} {
+        padding: 0;
+    }
 `
-
 
 interface ReadmeLayoutProps {
     data: string;
     title: string;
 }
 
-
-export default function ReadmeLayout({ data, title }: ReadmeLayoutProps) {
+export default function ReadmeLayout({ data, title } : ReadmeLayoutProps) {
     const [gotoPage] = useCustomNavigate();
     return (
         <Layout>

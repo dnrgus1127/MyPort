@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import styled, { keyframes } from 'styled-components';
+import media from 'styles/media';
 import { convertCamelToSpace } from 'utils/convertString';
 
 const TypingAnimation = keyframes`
@@ -27,6 +28,32 @@ const Title = styled.h1`
         height: 4rem;
         width: 1rem;
         animation: ${TypingAnimation} 1.2s infinite steps(2);
+    }
+    ${media.large}{
+        padding : 1rem 0;
+        margin : 1.6rem 0;
+        font-size : 4rem;
+        text-shadow: 5px 5px 0 #080808;
+        &::after {
+            height: 3.6rem;
+            letter-spacing: .5rem;
+        }
+    }
+    ${media.medium}{
+        font-size: 3rem;
+        &::after {
+            height: 2.4rem;
+            letter-spacing: .5rem;
+        }
+    }
+    ${media.small} {
+        font-size : 2rem;
+        text-shadow: 3px 3px 0 #080808;
+
+        &::after {
+            height: 1.6rem;
+            letter-spacing: .5rem;
+        }
     }
 `
 

@@ -1,7 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import { useQueryString } from 'hooks/useQueryString';
-import React, { useEffect, useMemo } from 'react'
-import { useParams } from 'react-router-dom'
+import React, { useMemo } from 'react'
 import styled from 'styled-components';
 import CustomTreeItem from './CustomTreeItem';
 
@@ -16,7 +15,6 @@ const DirectoryStructure = styled.ul`
     padding : 2rem 3rem;
     border-radius: 8px;
 
-
     h3 {
         margin :0;
         padding-left : 1rem;
@@ -27,9 +25,7 @@ const DirectoryStructure = styled.ul`
     ul {
         background-color: #12121288;
         border-radius: 8px;
- 
     }
-
   
     li:not(.tree){
         list-style: none;
@@ -127,12 +123,12 @@ export default function CustomTree() {
     
   return (
       <DirectoryStructure>
-          <h3>// 📁{ querys.get("projectName")} Project</h3>
-          <ul>
-              {processedData.map((tree, idx) => {
-                  return <CustomTreeItem tree={tree } projectName={querys.get("projectName") || ""} />
-              })}
-          </ul>
+            <h3>// 📁{ querys.get("projectName")} Project</h3>
+            <ul>
+                {processedData.map((tree, idx) => {
+                    return <CustomTreeItem key={tree.path} tree={tree } projectName={querys.get("projectName") || ""} />
+                })}
+            </ul>
       </DirectoryStructure>
   )
 }

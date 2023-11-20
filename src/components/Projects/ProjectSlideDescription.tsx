@@ -2,10 +2,9 @@ import { DrawLine } from 'css/keyFrame/DrwaLine';
 import { FadeIn, FadeInFromBottm } from 'css/keyFrame/Fade';
 import useCustomNavigate from 'hooks/useCustomNavigate';
 import React from 'react'
-import { useNavigate } from 'react-router-dom';
 import { useAppDispatch } from 'redux/hooks';
-import { DirectionType, changePath } from 'redux/reducer/navigaterReducer';
-import styled, { keyframes } from 'styled-components'
+import { DirectionType } from 'redux/reducer/navigaterReducer';
+import styled  from 'styled-components'
 import { Repository } from 'types/Project';
 
 const DescriptionBox = styled.div`
