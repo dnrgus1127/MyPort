@@ -164,7 +164,7 @@ export default function ProjectSlideDescription({ data }: DescriptionProps) {
               <h2>Readme.md</h2>
               <ReadmeSection >
                     <button onClick={() => {
-                        gotoPage(`/project/readme?projectName=${data.name}`,DirectionType.EAST );
+                        gotoPage(`/project/readme?projectName=${data.name}`,DirectionType.SOUTH );
                   }}>ReadMe</button>
                   <button>ReadMe</button>
                   <button>ReadMe</button>

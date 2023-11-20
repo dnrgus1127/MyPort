@@ -2,10 +2,8 @@ import React, {  useState } from 'react'
 import styled, {  keyframes } from 'styled-components'
 import {ReactComponent as ArrowRight} from "../../assets/arrow_right.svg"
 import {ReactComponent as ArrowLeft} from "../../assets/arrow_left.svg"
-import { Repository } from 'types/Project'
 import ProjectSlider from './ProjectSlider'
 import ProjectSlideDescription from './ProjectSlideDescription'
-import { useOutletContext } from 'react-router-dom'
 import { useProjectData } from 'pages/ProjectPage'
 
 const ProjectSliderBox = styled.div`
@@ -55,7 +53,7 @@ const NextSlideBtn = styled(SlideButton)`
 
 export default function ProjectSliderConatiner() {
     const {data} = useProjectData();
-    const [frameNumber, setFraemNumber] = useState<number>(Math.floor(data.length));
+    const [frameNumber, setFraemNumber] = useState<number>(data.length -1);
     const [isButtonDelay, setButtonDelay] = useState(false);
 
     const handlerButtons = (type: "increase" | "decrease") => {
