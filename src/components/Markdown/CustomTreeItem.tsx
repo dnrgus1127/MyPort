@@ -2,7 +2,6 @@ import React from 'react'
 import { Tree } from './CustomTree'
 import useBoolean from 'hooks/useBoolean'
 import { PROJECT_DIRECTORY_DESCRIPTION } from 'constans/ProjectData';
-import styled from 'styled-components';
 
 
 

@@ -16,6 +16,7 @@ const DirectoryStructure = styled.ul`
     padding : 2rem 3rem;
     border-radius: 8px;
 
+
     h3 {
         margin :0;
         padding-left : 1rem;
@@ -25,6 +26,8 @@ const DirectoryStructure = styled.ul`
 
     ul {
         background-color: #12121288;
+        border-radius: 8px;
+ 
     }
 
   
@@ -50,6 +53,10 @@ const DirectoryStructure = styled.ul`
     ul.recusive-tree {
         padding-left : 2rem;
         
+    }
+    ul:not(.recusive-tree) {
+        padding-top: 1rem;
+        padding-bottom: 1rem;
     }
 
     .annotation {
