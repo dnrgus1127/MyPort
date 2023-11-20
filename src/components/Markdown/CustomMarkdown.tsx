@@ -53,6 +53,7 @@ const MarkdownCss = styled.div`
     left: 0;
     height: 3px;
     animation: ${() => DrawLine(100)} 1s 2s ease-in forwards;
+    box-shadow: 3px 3px 0 #121212;
     
   }
   & > h1::after {
