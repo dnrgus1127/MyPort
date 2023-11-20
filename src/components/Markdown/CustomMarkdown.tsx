@@ -6,6 +6,7 @@ import { dark } from 'react-syntax-highlighter/dist/esm/styles/prism';
 import styled from 'styled-components';
 import { DrawLine } from 'css/keyFrame/DrwaLine';
 import CustomIMG from './CustomIMG';
+import CustomTree from './CustomTree';
 
 const MarkdownCss = styled.div`
   display: flex;
@@ -17,6 +18,7 @@ const MarkdownCss = styled.div`
 
    h1 {
       font-size: 2em;
+      
       
   }
    h2 {
@@ -41,6 +43,7 @@ const MarkdownCss = styled.div`
   h1,h2,h3{
     position: relative;
     align-self: self-start;
+    text-shadow: 4px 4px  #080808;
   }
   h1::after,h2::after,h3::after{
 
@@ -52,13 +55,13 @@ const MarkdownCss = styled.div`
     animation: ${() => DrawLine(100)} 1s 2s ease-in forwards;
     
   }
-  h1::after {
+  & > h1::after {
     background-color: #9ACD32
   }
-  h2::after {
+  & > h2::after {
     background-color: #ff9400
   }
-  h3::after {
+  & > h3::after {
     background-color: #b49eff
     
   }
@@ -109,10 +112,14 @@ const MarkdownCss = styled.div`
   }
   li {
     list-style: circle;
+    
+  }
+  p,li{
+    text-shadow: 2px 2px  #080808;
   }
 
   img {
-    box-shadow: 0px 0px 10px #121212;
+    box-shadow: 3px 3px 0 #121212;
     margin-right: 1rem;
   }
 
@@ -140,7 +147,8 @@ export default function CustomMarkdown({ markdown }: { markdown: string; }) {
       
         <Markdown  remarkPlugins={[remarkGfm]}
             components={{
-              code({ node, inline, className, children, ...props } : any) {
+              code({ node, inline, className, children, ...props }: any) {
+                if(className === "language-dir") return <CustomTree/>
                 const match = /language-(\w+)/.exec(className || "");
                 return !inline && match ? (
                   <SyntaxHighlighter language={match[1]} style={dark} PreTag="div"
