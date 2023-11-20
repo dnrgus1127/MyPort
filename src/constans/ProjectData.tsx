@@ -42,3 +42,45 @@ export const PROJECT_INFOMATION: Array<RepositoryConstant> = [
     
     
 ]
+
+const common = {
+    utils: "유틸 함수",
+    "README.md": "프로젝트 설명",
+    "readme.md": "프로젝트 설명",
+    constans: "상수",
+    fonts: "프로젝트 폰트 관련",
+}
+
+const reactCommon = {
+    hooks: "React hooks",
+    page: "Router 경로 페이지",
+    redux: "리덕스 상태 관리",
+    store: "리덕스 상태 관리 저장소",
+    assets: "이미지, svg 아이콘 등",
+    components: "재사용 컴포넌트",
+
+}
+
+const typescriptCommon = {
+    types : "타입 정의",
+}
+
+
+export const PROJECT_DIRECTORY_DESCRIPTION : any = {
+    "colorProject": {
+        ...common,
+        handler: "이벤트 핸들러 함수들",
+        core: "주요 기반 JS 클래스 및 상수",
+        component: "컴포넌트들",
+        browser: "safari, Edge 및 브라우저 호환성",
+        store: "옵저버 패턴 상태 저장소",
+        "script.js" : "프로젝트 진입점"
+    },
+    "MyPort": {
+        ...common,
+        ...reactCommon,
+        ...typescriptCommon,
+        components: "재사용 컴포넌트",
+        
+    }
+}
