@@ -9,7 +9,7 @@ const Template = styled.div`
    position: fixed;
     background-color: ${({ theme }) => theme.bgColor2};
     width: 100%;
-    height: 100vh;
+    height: 100%;
     text-transform: uppercase;
     font-size: 4em;
     font-family: "Times Newer Roman";

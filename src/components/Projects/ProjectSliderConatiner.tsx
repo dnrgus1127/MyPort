@@ -5,12 +5,14 @@ import {ReactComponent as ArrowLeft} from "../../assets/arrow_left.svg"
 import ProjectSlider from './ProjectSlider'
 import ProjectSlideDescription from './ProjectSlideDescription'
 import { useProjectData } from 'pages/ProjectPage'
+import media from 'styles/media'
 
 const ProjectSliderBox = styled.div`
     width: 100%;
     height: 100%;
     padding : 5% 0;
     position: relative;
+    
 `
 
 const ButtonAnimation = (direction : "left" | "right") => keyframes`
@@ -23,7 +25,18 @@ const ButtonAnimation = (direction : "left" | "right") => keyframes`
     100% {
         transform: translateX(${direction === "left" ? '-100' :"100"}%);
     }
-   
+
+`
+const MobileButtonAnimation = (direction : "left" | "right") => keyframes`
+    0% {
+        transform: translateX(${direction === "left" ? '-40' :"40"}%);
+    }
+    50% {
+        transform: translateX(${direction === "left" ? '-50' :"50"}%);
+    }
+    100% {
+        transform: translateX(${direction === "left" ? '-40' :"40"}%);
+    }
 `
 
 const SlideButton = styled.button`
@@ -35,18 +48,25 @@ const SlideButton = styled.button`
         width : 4.8rem;
         height: 4.8rem;
     }
+
+  
     
 `
 const PrevSlideBtn = styled(SlideButton)`
-    transform: translateX(-100%);
     left: 0;
     animation: ${() => ButtonAnimation("left")} 2s ease  infinite;
+    ${media.small}{
+        animation : ${()=> MobileButtonAnimation("left")} 2s ease infinite;
+    }
 
 `
 const NextSlideBtn = styled(SlideButton)`
-    transform: translateX(100%);
+
     right: 0;
     animation: ${() => ButtonAnimation("right")} 2s ease  infinite;
+    ${media.small}{
+        animation : ${()=> MobileButtonAnimation("right")} 2s ease infinite;
+    }
 `
 
 

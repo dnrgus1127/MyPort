@@ -1,5 +1,6 @@
 import { useEffect, useRef } from 'react';
 import styled, { css } from 'styled-components'
+import media from 'styles/media';
 import { RepositoryData } from 'types/Project';
 
 const PhotoFrameListContainer = styled.div`
@@ -8,6 +9,13 @@ const PhotoFrameListContainer = styled.div`
     display: flex;
     justify-content: center;
     gap: 2rem;
+
+    ${media.large}{
+        height: 50%;
+    }
+    ${media.small}{
+        height: 50%;
+    }
 `
 
 const PhotoFrameWarpper = styled.div`
@@ -17,6 +25,13 @@ const PhotoFrameWarpper = styled.div`
     transform-style: preserve-3d;
     perspective: 1200px;
     border-radius: 8px;
+
+    ${media.large}{
+        width: 60%;
+    }
+    ${media.small}{
+        width: 80%;
+    }
 `
 
 interface ItemProps {

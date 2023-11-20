@@ -5,6 +5,7 @@ import React from 'react'
 import { useAppDispatch } from 'redux/hooks';
 import { DirectionType } from 'redux/reducer/navigaterReducer';
 import styled  from 'styled-components'
+import media from 'styles/media';
 import { Repository } from 'types/Project';
 
 const DescriptionBox = styled.div`
@@ -16,6 +17,16 @@ const DescriptionBox = styled.div`
     display: flex;
     gap: 30%;
     align-items: center;
+
+    ${media.large}{
+        gap: 10%;
+        top: 10%;
+        display: block;
+        height: auto;
+        min-height: 80%;
+        padding : 2rem;
+        
+    }
 `
 
 
@@ -45,7 +56,8 @@ const Section = styled.div`
         width: 0;
         height: 2px;
         background-color: white;
-        animation : ${()=> DrawLine(110)} .5s 1.5s ease-out forwards;
+        animation : ${() => DrawLine(110)} .5s 1.5s ease-out forwards;
+        box-shadow: 2px 2px #080808;
     }
  
     
@@ -76,6 +88,13 @@ const Section = styled.div`
         opacity: 0;
         transform: translateY(100%);
     }
+    h1,h2,h3 {
+        text-shadow: 3px 3px #080808aa;
+    }
+    li,p {
+        
+        text-shadow: 2px 2px #080808aa;
+    }
 
     button, img {
         opacity: 0;
@@ -96,6 +115,30 @@ const Section = styled.div`
     }
     &.right {
         padding-left : 2rem;
+    }
+
+    ${media.large}{
+        width: 100%;
+        min-height: none;        
+        &.left,&.right {
+        padding : 0;
+        }
+    }
+
+    ${media.small}{
+        h1 {
+            font-size: 2.2rem;
+        }
+        h2 {
+            font-size: 2rem;
+        }
+        h3 {
+            font-size : 1.6rem;
+        }
+        p,li {
+            font-size: 1.5rem;
+        }
+     
     }
 
 
@@ -127,8 +170,7 @@ const Title = styled.h1`
     font-family: "Roboto KR", sans-serif;
     text-transform: uppercase;
     color : white;
-    text-shadow: 0px 0px 10px #121212;
- 
+    text-shadow: 3px 3px black;
 `
 
 

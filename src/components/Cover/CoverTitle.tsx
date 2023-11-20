@@ -1,10 +1,21 @@
 import useMorphing from 'hooks/text/useMorphing';
 import React from 'react'
 import styled from 'styled-components';
+import media from 'styles/media';
 
 
 const MorphTitle = styled.div`
-    filter : url(#threshold) blur(0.6px);
+    filter : url(#threshold) blur(.6px);
+    
+
+    // Safari 에만
+    @media not all and (min-resolution:.001dpcm) { 
+      @supports (-webkit-appearance:none) {
+         filter : url(#threshold);
+      }
+    }
+
+ 
     width: 100%;
     height : 20%;
     display: flex;
@@ -21,6 +32,9 @@ const MorphTitle = styled.div`
     }
     svg {
       position: absolute;
+    }
+    ${media.medium}{
+      font-size: 4rem;
     }
 `
 

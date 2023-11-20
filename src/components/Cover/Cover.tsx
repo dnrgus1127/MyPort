@@ -10,11 +10,7 @@ import useCustomNavigate from 'hooks/useCustomNavigate';
 const title = "FrontEnd Portfolio"
 
 export default function Cover() {
-  const location = useLocation();
-  const dispatch = useAppDispatch();
-  const [gotoPage] = useCustomNavigate();
-
-  
+  const [gotoPage] = useCustomNavigate();  
 
   const arrowButtonHandler = (e:React.MouseEvent<HTMLButtonElement>) => {
     let currentValue = e.currentTarget.value;
