@@ -2,6 +2,8 @@ export const mediaQuery = (maxWidth : number) => `
   @media (max-width: ${maxWidth}px)
 `;
 
+
+
 const media = {
   xlarge : mediaQuery(1479),
   large: mediaQuery(1023), // 태블릿
@@ -11,3 +13,5 @@ const media = {
 };
 
 export default media;
+
+
