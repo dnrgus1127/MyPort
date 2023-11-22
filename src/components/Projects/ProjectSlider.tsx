@@ -54,10 +54,6 @@ const PhotoFrameItem = styled.div<ItemProps>`
     position: absolute;
     top: 0;
     right: ${(props) => props.$distance * 100}%;
-    background-image: ${(props) => `url("/assets/img/${props.name}.jpg")`};
-    background-size: cover;
-    background-repeat : no-repeat;
-    background-position:center;
     transform: ${(props) => props.$trans};
     filter : ${(props)=> props.$distance !== 0 && "grayScale(100%) blur(1px) brightness(50%)"};
     .trans > & {
@@ -66,9 +62,13 @@ const PhotoFrameItem = styled.div<ItemProps>`
     
     ${(props) => props.$distance === 0 && css`
         box-shadow : 0px 0px 12px ${({ theme }) => theme.shadowColor2}44;
-        z-index: 3;
     `}
-
+    overflow :hidden;
+    img {
+        object-fit :cover;
+        width:100%;
+        height:100%;
+    }
 `
 
 interface ProjectSliderProps {
@@ -99,6 +99,7 @@ export default function ProjectSlider({ frameNumber, data, setFrame }: ProjectSl
     const calculateTranslate = (distance: number) => {
         let translate = "";
         if (distance === 0) {
+            translate += " scale(1.01)";
             return translate;
         }
         if (Math.abs(distance) === 1) {
@@ -116,14 +117,20 @@ export default function ProjectSlider({ frameNumber, data, setFrame }: ProjectSl
           <PhotoFrameWarpper className="trans" ref={sliderRef}>
               {data.map((item, idx) => {
                   if(idx <data.length / 2) return <></>
-                  return <PhotoFrameItem name={item.name} key={item.id -idx} $distance={frameNumber - idx + data.length} $trans={calculateTranslate(frameNumber - idx + data.length)}/>
+                  return <PhotoFrameItem name={item.name} key={item.id -idx} $distance={frameNumber - idx + data.length} $trans={calculateTranslate(frameNumber - idx + data.length)}>
+                    <img src={`/assets/img/${item.name}.jpg`}/>
+                  </PhotoFrameItem>
               })}
               {data.map((item, idx) => {
-                  return <PhotoFrameItem name={item.name} key={item.id } $distance={frameNumber - idx} $trans={calculateTranslate(frameNumber-idx)} />
+                  return <PhotoFrameItem name={item.name} key={item.id } $distance={frameNumber - idx} $trans={calculateTranslate(frameNumber-idx)} >
+                    <img src={`/assets/img/${item.name}.jpg`} loading='lazy'/>
+                  </PhotoFrameItem>
               })}
               {data.map((item, idx) => {
                   if(idx >data.length /2) return <></>
-                  return <PhotoFrameItem name={item.name} key={item.id +idx} $distance={frameNumber - idx - data.length} $trans={calculateTranslate(frameNumber - idx - data.length)}/>
+                  return <PhotoFrameItem name={item.name} key={item.id + idx} $distance={frameNumber - idx - data.length} $trans={calculateTranslate(frameNumber - idx - data.length)}>
+                    <img src={`/assets/img/${item.name}.jpg`} loading='lazy'/>
+                  </PhotoFrameItem>
               })}
           </PhotoFrameWarpper>
     </PhotoFrameListContainer>

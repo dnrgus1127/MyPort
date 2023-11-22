@@ -1,9 +1,6 @@
 import styled from "styled-components"
 import { ReactNode } from "react";
 import { DirectionType, changePath } from "redux/reducer/navigaterReducer";
-import { useAppDispatch } from "redux/hooks";
-import PageAnimation from "components/Common/PageAnimation";
-import media from "styles/media";
 import useCustomNavigate from "hooks/useCustomNavigate";
 
 
@@ -17,6 +14,7 @@ const Template = styled.div`
       top:0;
       left:0;
       padding : 2rem;
+      z-index: 999;
       svg {
         fill : ${({ theme }) => theme.color};
         filter: blur(.4px);
