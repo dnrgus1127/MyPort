@@ -20,7 +20,7 @@ const Title = styled.h1`
         padding : 3rem 0;
         margin: 3rem;
         letter-spacing: 1rem;
-        text-shadow: 8px 8px  #080808;
+        text-shadow: 8px 8px  ${({ theme }) => theme.shadowColor};
 
     &::after {
         display: inline-block;
@@ -33,7 +33,7 @@ const Title = styled.h1`
         padding : 1rem 0;
         margin : 1.6rem 0;
         font-size : 4rem;
-        text-shadow: 5px 5px 0 #080808;
+        text-shadow: 5px 5px 0 ${({ theme }) => theme.shadowColor};
         &::after {
             height: 3.6rem;
             letter-spacing: .5rem;
@@ -48,7 +48,7 @@ const Title = styled.h1`
     }
     ${media.small} {
         font-size : 2rem;
-        text-shadow: 3px 3px 0 #080808;
+        text-shadow: 3px 3px 0 ${({ theme }) => theme.shadowColor};
 
         &::after {
             height: 1.6rem;

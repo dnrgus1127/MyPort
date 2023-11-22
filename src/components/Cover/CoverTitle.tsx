@@ -5,7 +5,7 @@ import media from 'styles/media';
 
 
 const MorphTitle = styled.div`
-    filter : url(#threshold) blur(.6px);
+    filter : url(#threshold) blur(.5px);
     
 
     // Safari 에만
@@ -34,12 +34,21 @@ const MorphTitle = styled.div`
       position: absolute;
     }
     ${media.medium}{
-      font-size: 4rem;
+      span{
+        font-size: 6rem;
+      }
+    }
+    ${media.small}{
+      span{
+        font-size: 4rem;
+      }
     }
 `
 
-export default function CoverTitle({ title } : { title : Array<string>}) {
-    const { textRef1, textRef2,filter } = useMorphing({texts : title});
+const texts = ["FrontEnd","Programmer","WookHyun"];
+
+export default function CoverTitle() {
+    const { textRef1, textRef2,filter } = useMorphing({texts});
 
 
   return (

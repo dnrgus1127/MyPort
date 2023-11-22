@@ -2,35 +2,38 @@ const commonTheme = {
     
 }
 
-
 export const ligthTheme = {
     mainColor: "#787eb6",
-    bgColor: "#787eb6",
-    color : "#121212",
-    color2 : "#1c225a",
+    bgColor: "#ffffff",
+    bgColor2: "#eeeeee",
+    bgColor3: "#f8f8f8",
+    bgColor4: "#f6fbff",
+    color : "#000000",
+    color2: "#333333",
+    shadowColor: "#f8f8f800",
+    shadowColor2 : "#080808",
     ...commonTheme
 }
 export const darkTheme = {
-    mainColor : "#220e4f",
-    bgColor: "#220e4f",
+    mainColor: "#121212",
+    pointColor: "#2c2c2c",
+    bgColor: "#1c1c1c",
+    bgColor2: "#333333",
+    bgColor3: "#2c2c2c",
+    bgColor4: "#121212",
     color: "#FFFFFF",
-    color2 : "#7460a1",
-    ...commonTheme
-}
-export const dailyTheme = {
-    mainColor: "#a3a095",
-    bgColor: "#a3a095",
-    bgColor2 :"#706d62",
-    color: "#121212",
-    color2: "#474439",
-    ...commonTheme
+    color2: "#dedede",
+    green: "#97f4ad",
+    shadowColor: "#080808",
+    shadowColor2: "#444444",
 
+    ...commonTheme
 }
+
 
 export const theme = {
     ligthTheme,
     darkTheme,
-    dailyTheme,
 }
 
 export default theme;

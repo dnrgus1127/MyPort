@@ -9,7 +9,7 @@ const LoadingConatainer = styled.div`
     top: 0;
     left: 0;
     z-index: 33;
-    background-color: #121212;
+    background-color: ${({theme})=> theme.bgColor};
 `
 
 export default function Loading() {

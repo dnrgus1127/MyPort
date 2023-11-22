@@ -1,11 +1,12 @@
 import { configureStore } from "@reduxjs/toolkit";
-import  mainReducer  from "./reducer/main";
 import navigateReducer from "./reducer/navigaterReducer";
+import themeReducer from "./reducer/themeReducer";
 
 
 export const store = configureStore({
   reducer: {
       navigation : navigateReducer,
+      theme : themeReducer,
     },
   })
 

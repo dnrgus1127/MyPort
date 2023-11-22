@@ -46,7 +46,7 @@ const MarkdownCss = styled.div`
   h1,h2,h3{
     position: relative;
     align-self: self-start;
-    text-shadow: 4px 4px  #080808;
+    text-shadow: 4px 4px  ${({ theme }) => theme.shadowColor};
   }
 
   & > h1::after, & > h2::after, & > h3::after{
@@ -56,7 +56,7 @@ const MarkdownCss = styled.div`
     left: 0;
     height: 3px;
     animation: ${() => DrawLine(100)} 1s 2s ease-in forwards;
-    box-shadow: 3px 3px 0 #121212;
+    box-shadow: 3px 3px 0 ${({ theme }) => theme.shadowColor};
     
 }
   & > h1::after {
@@ -118,7 +118,7 @@ const MarkdownCss = styled.div`
     
   }
   p,li{
-    text-shadow: 2px 2px  #080808;
+    text-shadow: 2px 2px  ${({ theme }) => theme.shadowColor};
   }
 
 
@@ -139,11 +139,11 @@ const MarkdownCss = styled.div`
       padding-bottom: .5rem;
     }
     h1,h2,h3{
-      text-shadow: 2px 2px  #080808;
+      text-shadow: 2px 2px  ${({ theme }) => theme.shadowColor};
     }
     li,p {
       font-size:1.4rem;
-      text-shadow: 1px 1px #080808;
+      text-shadow: 1px 1px ${({ theme }) => theme.shadowColor};
     }
 
     h1,h2,blockquote,pre {
