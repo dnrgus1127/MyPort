@@ -8,7 +8,6 @@ import { useProjectData } from 'pages/ProjectPage'
 import media from 'styles/media'
 
 const ProjectSliderBox = styled.div`
-    width: 100%;
     height: 100%;
     padding : 5% 0;
     position: relative;
@@ -40,11 +39,11 @@ const MobileButtonAnimation = (direction : "left" | "right") => keyframes`
 `
 
 const SlideButton = styled.button`
-    position: absolute;
+    position: fixed;
     top: calc(50% - 2.4rem);
     svg {
         fill: white;
-        filter: drop-shadow(0px 0px 5px #121212);
+        filter: drop-shadow(0px 0px 5px ${({theme})=> theme.shadowColor});
         width : 4.8rem;
         height: 4.8rem;
     }
@@ -53,7 +52,7 @@ const SlideButton = styled.button`
     
 `
 const PrevSlideBtn = styled(SlideButton)`
-    left: 0;
+    right: 91%;
     animation: ${() => ButtonAnimation("left")} 2s ease  infinite;
     ${media.small}{
         animation : ${()=> MobileButtonAnimation("left")} 2s ease infinite;
@@ -62,7 +61,7 @@ const PrevSlideBtn = styled(SlideButton)`
 `
 const NextSlideBtn = styled(SlideButton)`
 
-    right: 0;
+    left :41%;
     animation: ${() => ButtonAnimation("right")} 2s ease  infinite;
     ${media.small}{
         animation : ${()=> MobileButtonAnimation("right")} 2s ease infinite;
@@ -73,7 +72,7 @@ const NextSlideBtn = styled(SlideButton)`
 
 export default function ProjectSliderConatiner() {
     const {data} = useProjectData();
-    const [frameNumber, setFraemNumber] = useState<number>(data.length -1);
+    const [frameNumber, setFraemNumber] = useState<number>(0);
     const [isButtonDelay, setButtonDelay] = useState(false);
 
     const handlerButtons = (type: "increase" | "decrease") => {
@@ -87,7 +86,7 @@ export default function ProjectSliderConatiner() {
         setButtonDelay(true);
         setTimeout(() => {
             setButtonDelay(false);
-        },600)
+        },550)
     }
   return (
       <ProjectSliderBox>
@@ -98,7 +97,7 @@ export default function ProjectSliderConatiner() {
           <NextSlideBtn onClick={() => handlerButtons("increase")}>
               <ArrowRight />
           </NextSlideBtn>
-          <ProjectSlideDescription key={frameNumber} data={data[Math.abs(frameNumber) % data.length]} />
+          <ProjectSlideDescription key={frameNumber % data.length} data={data[Math.abs(frameNumber) % data.length]} />
       </ProjectSliderBox>
   )
 }

@@ -1,1 +1,1 @@
-export const REPOSITORYS = ["colorProject", "TIL", "ringblog", "DES","MyPort"];
+export const REPOSITORYS = ["colorProject", "ringblog","MyPort"];

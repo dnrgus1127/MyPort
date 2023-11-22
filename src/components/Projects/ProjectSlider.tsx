@@ -4,7 +4,7 @@ import media from 'styles/media';
 import { RepositoryData } from 'types/Project';
 
 const PhotoFrameListContainer = styled.div`
-    width: 100%;
+    width: 50%;
     height: 100%;
     display: flex;
     justify-content: center;
@@ -16,14 +16,16 @@ const PhotoFrameListContainer = styled.div`
     ${media.small}{
         height: 50%;
     }
+
+    
 `
 
 const PhotoFrameWarpper = styled.div`
     position: relative;
-    width: 30%;
+    width: 70%;
     height: 100%;
     transform-style: preserve-3d;
-    perspective: 1200px;
+    perspective: 1500px;
     border-radius: 8px;
 
     ${media.large}{
@@ -32,6 +34,8 @@ const PhotoFrameWarpper = styled.div`
     ${media.small}{
         width: 80%;
     }
+
+  
 `
 
 interface ItemProps {
@@ -44,7 +48,6 @@ const PhotoFrameItem = styled.div<ItemProps>`
     display: flex;
     align-items: center;
     justify-content: center;
-    box-shadow : 0px 0px 10px ${({ theme }) => theme.color}66;
     border-radius: 8px;
     width: 100%;
     height: 100%;
@@ -53,14 +56,17 @@ const PhotoFrameItem = styled.div<ItemProps>`
     right: ${(props) => props.$distance * 100}%;
     background-image: ${(props) => `url("/assets/img/${props.name}.jpg")`};
     background-size: cover;
+    background-repeat : no-repeat;
+    background-position:center;
     transform: ${(props) => props.$trans};
-    filter : ${(props)=> props.$distance !== 0 && "grayScale(100%) blur(1px) brightness(60%)"};
+    filter : ${(props)=> props.$distance !== 0 && "grayScale(100%) blur(1px) brightness(50%)"};
     .trans > & {
         transition : .5s all ease-out;
     }
     
     ${(props) => props.$distance === 0 && css`
-        box-shadow : 0px 0px 15px ${({theme})=> theme.pointColor};
+        box-shadow : 0px 0px 12px ${({ theme }) => theme.shadowColor2}44;
+        z-index: 3;
     `}
 
 `
@@ -97,29 +103,29 @@ export default function ProjectSlider({ frameNumber, data, setFrame }: ProjectSl
         }
         if (Math.abs(distance) === 1) {
             translate += " scale(0.9)";
-            translate += ` rotateY(${distance <0 ? '-' :"+"}30deg)`
+            translate += ` rotateY(${distance <0 ? '-' :"+"}20deg)`
         }
         else if (Math.abs(distance) === 2) {
             translate += " scale(0.8)"
-            translate += ` rotateY(${distance <0 ? '-' : "+"}45deg)`
+            translate += ` rotateY(${distance <0 ? '-' : "+"}35deg)`
         }
         return translate;
     }
   return (
-      <PhotoFrameListContainer>
+      <PhotoFrameListContainer>          
           <PhotoFrameWarpper className="trans" ref={sliderRef}>
               {data.map((item, idx) => {
+                  if(idx <data.length / 2) return <></>
                   return <PhotoFrameItem name={item.name} key={item.id -idx} $distance={frameNumber - idx + data.length} $trans={calculateTranslate(frameNumber - idx + data.length)}/>
               })}
               {data.map((item, idx) => {
                   return <PhotoFrameItem name={item.name} key={item.id } $distance={frameNumber - idx} $trans={calculateTranslate(frameNumber-idx)} />
               })}
               {data.map((item, idx) => {
+                  if(idx >data.length /2) return <></>
                   return <PhotoFrameItem name={item.name} key={item.id +idx} $distance={frameNumber - idx - data.length} $trans={calculateTranslate(frameNumber - idx - data.length)}/>
               })}
           </PhotoFrameWarpper>
-    
-          
     </PhotoFrameListContainer>
   )
 }
