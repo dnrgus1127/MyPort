@@ -1,11 +1,8 @@
-import { BarButton } from 'components/Common/Buttons/BarButton';
 import { BoxButton } from 'components/Common/Buttons/StyledButtons';
 import TypingText from 'components/Common/EffectElement/TypingText';
-import { DrawLine } from 'css/keyFrame/DrwaLine';
 import { FadeIn, FadeInFromBottom } from 'css/keyFrame/Fade';
 import useCustomNavigate from 'hooks/useCustomNavigate';
 import React from 'react'
-import { useAppDispatch } from 'redux/hooks';
 import { DirectionType } from 'redux/reducer/navigaterReducer';
 import styled  from 'styled-components'
 import media from 'styles/media';
