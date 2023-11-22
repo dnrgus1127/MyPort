@@ -1,5 +1,5 @@
 import { CoverTarnslate } from 'constans/enum/CoverTranslate'
-import React from 'react'
+import React, { ReactNode } from 'react'
 import styled, { css, keyframes } from 'styled-components'
 import CoverTitle from './CoverTitle'
 
@@ -19,7 +19,6 @@ const Template = styled.div`
     align-items: center;
     justify-content: center;
     transition: all .5s ease-out;
- 
     z-index: 10;
   
     
@@ -78,17 +77,15 @@ const ArrowRight = styled(Arrow)`
 `
 
 interface HomeTemplateProps {
-  title: string;
-  arrowButtonHandler : React.MouseEventHandler<HTMLButtonElement>;
+  arrowButtonHandler: React.MouseEventHandler<HTMLButtonElement>;
+  children: ReactNode;
 }
 
-const texts = ["FrontEnd","Programmer","WookHyun"];
-export default function CoverTemplate({ title, arrowButtonHandler}: HomeTemplateProps) {
+export default function CoverTemplate({ arrowButtonHandler,children}: HomeTemplateProps) {
 
   return (
     <Template >
-         <CoverTitle title={texts} />
-      
+        {children}
         <ArrowUp onClick={arrowButtonHandler} value={CoverTarnslate.up}><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M0 16.67l2.829 2.83 9.175-9.339 9.167 9.339 2.829-2.83-11.996-12.17z"/></svg></ArrowUp>
         <ArrowDown onClick={arrowButtonHandler} value={CoverTarnslate.down}><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M0 7.33l2.829-2.83 9.175 9.339 9.167-9.339 2.829 2.83-11.996 12.17z" /></svg></ArrowDown>
         <ArrowLeft onClick={arrowButtonHandler} value={CoverTarnslate.left}><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M16.67 0l2.83 2.829-9.339 9.175 9.339 9.167-2.83 2.829-12.17-11.996z"/></svg></ArrowLeft>

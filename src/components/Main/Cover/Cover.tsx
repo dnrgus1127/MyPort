@@ -1,13 +1,11 @@
-import React, {  useEffect, useState } from 'react'
-import { useLocation,useNavigate } from "react-router-dom"
+import React from 'react'
 import CoverTemplate from './CoverTemplate';
 import { CoverTarnslate } from 'constans/enum/CoverTranslate';
-import { useAppDispatch } from 'redux/hooks';
-import { DirectionType, changePath } from 'redux/reducer/navigaterReducer';
+import { DirectionType } from 'redux/reducer/navigaterReducer';
 import useCustomNavigate from 'hooks/useCustomNavigate';
+import CoverTitle from './CoverTitle';
 
 
-const title = "FrontEnd Portfolio"
 
 export default function Cover() {
   const [gotoPage] = useCustomNavigate();  
@@ -19,11 +17,17 @@ export default function Cover() {
       gotoPage("/project/main" , DirectionType.SOUTH);
     }
     else if (Number(currentValue) === CoverTarnslate.up) {
-      gotoPage("/test" , DirectionType.NORTH);
-  }
+      gotoPage("/test", DirectionType.NORTH);
+      
+    }
+    else if (Number(currentValue) === CoverTarnslate.right) {
+      gotoPage("/til", DirectionType.EAST);
+    }
   } 
   
   return (
-    <CoverTemplate title={title} arrowButtonHandler={arrowButtonHandler}  />
+    <CoverTemplate arrowButtonHandler={arrowButtonHandler}  >
+      <CoverTitle/>
+    </CoverTemplate>
   )
 }
