@@ -7,11 +7,13 @@ export enum DirectionType { NORTH, SOUTH, WEST, EAST };
 interface NavigateState {
     path: string;
     direction: DirectionType;
+    prevPath?: string;
 }
 
 const initialState: NavigateState = {
     path: "init",
-    direction: DirectionType.SOUTH,
+    direction: DirectionType.NORTH,
+    prevPath : "init",
  
 }
 
@@ -25,6 +27,7 @@ export const navigationSlice = createSlice({
             state.direction = action.payload.direction;
         },
         clearPath: (state) => {
+            state.prevPath = state.path;
             state.path = "init";
         }
     }
