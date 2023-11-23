@@ -1,7 +1,7 @@
 import { QueryClient, useQuery } from '@tanstack/react-query';
 
 import { REPOSITORYS } from 'constans/Config';
-import React, { useEffect } from 'react'
+import React, { useEffect, useMemo } from 'react'
 import { Outlet, useLoaderData, useLocation, useOutletContext } from 'react-router-dom';
 import { Repository, RepositoryData } from 'types/Project';
 import { PROJECT_INFOMATION } from "../constans/ProjectData";
@@ -42,21 +42,21 @@ export default function ProjectPage(): JSX.Element {
   
     const { data: repositoryList } = useQuery<Array<RepositoryData>>({ ...projectQuery("repositoryList"),initialData : [] });
   
-    // loader에 의해서 이 코드가 실행될 때에는 데이터가 항상 존재하므로 타입 단언 사용
-    // TODO 에러 처리 필요
-    if (!("filter" in repositoryList)) return <div>403</div>
-    
-    const repoList = repositoryList.filter((repo :RepositoryData)  => REPOSITORYS.includes(repo.name));
-    
-    const CompletelyRepository: Array<Repository> = repoList.map((item) => {
-        let idx = PROJECT_INFOMATION.findIndex(repo => repo.name === item.name);
-        return {...item, ...PROJECT_INFOMATION[idx]}
-    })
+    const completelyRepository = useMemo(() => {
+        const repoList = repositoryList.filter((repo : RepositoryData) => REPOSITORYS.includes(repo.name));
+  
+        const CompletelyRepository: Array<Repository> = repoList.map((item) => {
+            let idx = PROJECT_INFOMATION.findIndex(repo => repo.name === item.name);
+            return {...item, ...PROJECT_INFOMATION[idx]}
+        })
 
+        return CompletelyRepository;
+    },[repositoryList])
 
+    
     return (
         <ProjectLayout>
-            <Outlet context={ {data :CompletelyRepository} satisfies ContextType}/>
+            <Outlet context={ {data :completelyRepository} satisfies ContextType}/>
         </ProjectLayout>
     );
 }
