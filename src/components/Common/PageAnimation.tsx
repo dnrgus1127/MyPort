@@ -1,9 +1,8 @@
 import useBoolean from 'hooks/useBoolean'
-import React, { useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import React, {  useEffect, useLayoutEffect, useMemo, useRef } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { useAppDispatch, useAppSelector } from 'redux/hooks'
-import { DirectionType, changePath, clearPath } from 'redux/reducer/navigaterReducer'
+import { DirectionType, clearPath } from 'redux/reducer/navigaterReducer'
 import styled, { keyframes } from 'styled-components'
 
 const PageFrame = (x:number,y:number) => keyframes`
@@ -47,7 +46,6 @@ const PageInCover = styled.div<{$direction : DirectionType}>`
   display: flex ;
   align-items: center;
   justify-content: center;
-
   animation: ${(props) => {
     if (props.$direction === DirectionType.SOUTH) {
       return PageFrame(0,-100);
@@ -85,7 +83,7 @@ const PageInCover = styled.div<{$direction : DirectionType}>`
 export function PageIn() {
   const location = useLocation();
   const [visible, ,setVisible] = useBoolean(false);
-  const {  direction } = useAppSelector(state => state.navigation);
+  const {prevPath, direction } = useAppSelector(state => state.navigation);
   const coverRef = useRef<HTMLDivElement>(null);
   const pageName = useMemo(() => {
     if (location.pathname === "/project/main") {
@@ -95,15 +93,20 @@ export function PageIn() {
     {
       return "READ ME"
     }
+    if (location.pathname === "/til") {
+      return "Today I Learn"
+    }
+    if (location.pathname === "/") {
+      return "Main"
+    }
     return "이동 중"
   }, [location.pathname])
 
   useLayoutEffect(() => {    
-    setVisible(true);
-  }, [location.pathname]);
+      prevPath !== "init" && setVisible(true);
+  }, [location.pathname,setVisible,prevPath]);
 
-  
-  if (location.pathname === "/" || !visible) return <></>;
+  if (!visible) return <></>;
   return (
     <PageInCover ref={coverRef} $direction={direction} onAnimationEnd={(e) => {
       if(e.target === coverRef.current) setVisible(false);
@@ -166,7 +169,7 @@ export function PageOut() {
   
   useEffect(() => {
     path !== "init" && setVisible(true);
-  }, [path])
+  }, [path,setVisible])
 
 
   if (!visible) return <></>
