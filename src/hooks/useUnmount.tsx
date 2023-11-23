@@ -1,5 +1,10 @@
-import React, { useCallback, useEffect, useMemo, useState } from 'react'
+import  { useCallback, useEffect, useMemo, useState } from 'react'
 
+/**
+ * 
+ * @param {boolean} state 
+ * @returns {[boolean,()=>void]} [컴포넌트 상태, Animation(transition)End 핸들러]
+ */
 export default function useUnmount(state : boolean) : [boolean,()=>void] {
   const [isComplete, setComplete] = useState(true);
 
