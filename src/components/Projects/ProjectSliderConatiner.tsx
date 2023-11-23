@@ -3,11 +3,11 @@ import styled, {  keyframes } from 'styled-components'
 import {ReactComponent as ArrowRight} from "../../assets/arrow_right.svg"
 import {ReactComponent as ArrowLeft} from "../../assets/arrow_left.svg"
 import ProjectSlider from './ProjectSlider'
-import ProjectSlideDescription from './ProjectSlideDescription'
 import { useProjectData } from 'pages/ProjectPage'
 import media from 'styles/media'
+import Description from './Description'
 
-const ProjectSliderBox = styled.div`
+const Container = styled.div`
     height: 100%;
     padding : 5% 0;
     position: relative;
@@ -75,6 +75,7 @@ export default function ProjectSliderConatiner() {
     const [frameNumber, setFraemNumber] = useState<number>(data.length -1);
     const [isButtonDelay, setButtonDelay] = useState(false);
 
+
     const handlerButtons = (type: "increase" | "decrease") => {
         if (isButtonDelay) return;
         if (type === "increase") {
@@ -89,6 +90,8 @@ export default function ProjectSliderConatiner() {
         },550)
     }
 
+
+
     useEffect(() => {
         let timer = setTimeout(() => {
             setFraemNumber(0);
@@ -97,17 +100,18 @@ export default function ProjectSliderConatiner() {
         return () => {
             clearTimeout(timer);
         }
-    },[])
+    }, [])
+
   return (
-      <ProjectSliderBox>
+      <Container>
           <ProjectSlider frameNumber={frameNumber} setFrame={setFraemNumber} data={data} />
+          <Description projecIdx={frameNumber}/>
           <PrevSlideBtn onClick={() => handlerButtons("decrease")}>
                 <ArrowLeft/>
               </PrevSlideBtn>
           <NextSlideBtn onClick={() => handlerButtons("increase")}>
               <ArrowRight />
           </NextSlideBtn>
-          <ProjectSlideDescription key={frameNumber % data.length} data={data[Math.abs(frameNumber) % data.length]} />
-      </ProjectSliderBox>
+      </Container>
   )
 }

@@ -55,7 +55,7 @@ const PhotoFrameItem = styled.div<ItemProps>`
     top: 0;
     right: ${(props) => props.$distance * 100}%;
     transform: ${(props) => props.$trans};
-    filter : ${(props)=> props.$distance !== 0 && "grayScale(100%) blur(1px) brightness(50%)"};
+    filter : ${(props)=> props.$distance !== 0 && "grayScale(100%) blur(1px) brightness(80%)"};
     .trans > & {
         transition : .5s all ease-out;
     }
@@ -117,19 +117,19 @@ export default function ProjectSlider({ frameNumber, data, setFrame }: ProjectSl
           <PhotoFrameWarpper className="trans" ref={sliderRef}>
               {data.map((item, idx) => {
                   if(idx <data.length / 2) return <></>
-                  return <PhotoFrameItem name={item.name} key={item.id -idx} $distance={frameNumber - idx + data.length} $trans={calculateTranslate(frameNumber - idx + data.length)}>
-                    <img src={`/assets/img/${item.name}.jpg`}/>
+                  return <PhotoFrameItem name={item.name} key={item.id + "prev"} $distance={frameNumber - idx + data.length} $trans={calculateTranslate(frameNumber - idx + data.length)}>
+                    <img src={`/assets/img/${item.name}.jpg`} alt={item.name + "이미지"}/>
                   </PhotoFrameItem>
               })}
               {data.map((item, idx) => {
                   return <PhotoFrameItem name={item.name} key={item.id } $distance={frameNumber - idx} $trans={calculateTranslate(frameNumber-idx)} >
-                    <img src={`/assets/img/${item.name}.jpg`} loading='lazy'/>
+                    <img src={`/assets/img/${item.name}.jpg`} alt={item.name + "이미지"}/>
                   </PhotoFrameItem>
               })}
               {data.map((item, idx) => {
                   if(idx >data.length /2) return <></>
-                  return <PhotoFrameItem name={item.name} key={item.id + idx} $distance={frameNumber - idx - data.length} $trans={calculateTranslate(frameNumber - idx - data.length)}>
-                    <img src={`/assets/img/${item.name}.jpg`} loading='lazy'/>
+                  return <PhotoFrameItem name={item.name} key={item.id + "next"} $distance={frameNumber - idx - data.length} $trans={calculateTranslate(frameNumber - idx - data.length)}>
+                    <img  src={`/assets/img/${item.name}.jpg`} alt={item.name + "이미지"}/>
                   </PhotoFrameItem>
               })}
           </PhotoFrameWarpper>
