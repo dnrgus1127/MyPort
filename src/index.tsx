@@ -5,18 +5,13 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { createBrowserRouter,RouterProvider } from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { ThemeProvider } from 'styled-components';
-import { darkTheme } from 'styles/theme';
-import { GlobalStyles } from 'styles/GlobalStyles';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import StacksPage from 'components/Stacks/StacksPage';
 import ProjectPage, {loader as projectLoader} from 'pages/ProjectPage';
 import ProjectSliderConatiner from 'components/Projects/ProjectSliderConatiner';
-import Readme from 'components/Projects/Readme';
 import { Provider } from "react-redux";
 import { store } from 'redux/store';
-import PageAnimation from 'components/Common/PageAnimation';
-
+import TodayILearnPage from 'pages/TodayILearnPage';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -34,17 +29,18 @@ const router = createBrowserRouter([
         children: [
           {
             path: "main",
-            element: <ProjectSliderConatiner/>
-          },
-          {
-            path: "readme",
-            element: <Readme/>
+            element: <ProjectSliderConatiner />,
           }
+         
         ]
       },
       {
         path: "/test",
         element: <StacksPage />,
+      },
+      {
+        path: "/til",
+        element: <TodayILearnPage/>
       }
     ]
   }
@@ -57,12 +53,10 @@ const router = createBrowserRouter([
 root.render(
   <React.StrictMode>
     <QueryClientProvider client={queryClient}>
-      <ThemeProvider theme={darkTheme}>
-        <GlobalStyles/>
         <Provider store={store} >
-          <RouterProvider router={router}/>
+         
+              <RouterProvider router={router}/>
         </Provider>
-      </ThemeProvider>
       <ReactQueryDevtools initialIsOpen={false} />
     </QueryClientProvider>
   </React.StrictMode>
