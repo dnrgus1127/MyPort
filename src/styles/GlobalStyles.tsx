@@ -10,10 +10,18 @@ export const GlobalStyles = createGlobalStyle`
     body {
       color: ${({ theme }) => theme.color};
     }
+    
 
     .App {
       background-color: ${({ theme }) => theme.bgColor};
       transition: background-color 1s ease-out;
+    }
+    html {
+      background-color: ${({theme})=> theme.color2};
+    }
+
+    svg {
+      fill : ${({theme})=> theme.color};
     }
 
 `

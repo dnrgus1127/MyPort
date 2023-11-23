@@ -11,7 +11,11 @@ export const ligthTheme = {
     color : "#000000",
     color2: "#333333",
     shadowColor: "#f8f8f800",
-    shadowColor2 : "#080808",
+    green: "#005a00",
+    shadowColor2: "#080808",
+    orange:"#ff9400",
+    current: "light",
+
     ...commonTheme
 }
 export const darkTheme = {
@@ -21,11 +25,13 @@ export const darkTheme = {
     bgColor2: "#333333",
     bgColor3: "#2c2c2c",
     bgColor4: "#121212",
-    color: "#FFFFFF",
+    color: "#f1f1f1",
     color2: "#dedede",
     green: "#97f4ad",
-    shadowColor: "#080808",
+    shadowColor: "#000000",
     shadowColor2: "#444444",
+    orange:"#ff9400",
+    current : "dark",
 
     ...commonTheme
 }
