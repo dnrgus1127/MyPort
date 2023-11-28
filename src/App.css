@@ -1,16 +1,62 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap');
+@import url("https://fonts.googleapis.com/css?family=Raleway:900&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Abril+Fatface&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Fira+Mono&display=swap'); 
+/* 코드 폰트 font-family: 'Fira Mono', monospace; */
 
 @font-face {
   font-family: 'Times Newer Roman';
   src: url("../src/fonts/TimesNewerRoman/TimesNewerRoman-Regular.otf");
 }
 
+@font-face {
+  font-family: 'SUIT-Regular';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_suit@1.0/SUIT-Regular.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+}
+
+
+@font-face {
+  font-family: 'SUIT-BOLD';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_suit@1.0/SUIT-Regular.woff2') format('woff2');
+  font-weight: bold;
+  font-style: normal;
+}
+
+
+
+
 :root {
   font-size: 62.5%;
 
-  --side-padding : 6rem;
+
+  --side-padding : 20rem;
+  --width : 900px;
+  
+}
+
+@media screen and (max-width : 1479px){
+  :root {
+    --side-padding :10rem;
+  }
+}
+@media screen and (max-width : 1023px) {
+  :root {
+    --side-padding : 6rem;
+  }
+}
+@media screen and (max-width : 767px) {
+  :root {
+    --side-padding : 3rem;
+  }
+}
+@media screen and (max-width : 480px) {
+  :root {
+    --side-padding : 2rem;
+  }
 }
 body {
   font-size: 1.6rem;
