@@ -13,7 +13,7 @@ export const GlobalStyles = createGlobalStyle`
     
 
     .App {
-      background-color: ${({ theme }) => theme.bgColor};
+      background-color: ${({ theme }) => theme.bgColor2};
       transition: background-color 1s ease-out;
     }
     html {

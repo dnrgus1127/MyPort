@@ -78,7 +78,7 @@ const DirComponentCss = styled.div`
 
 
 export default function Readme({ visible, className, handleAnimationEnd,projectName }: ReadmeProps): JSX.Element {    
-    const readmeData= useReadme(projectName);
+    const readmeData = useReadme(projectName);
     
     if (readmeData.isLoading) return <LoadingComponent />
     

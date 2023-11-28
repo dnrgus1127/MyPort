@@ -10,7 +10,7 @@ export const ligthTheme = {
     bgColor4: "#f6fbff",
     color : "#000000",
     color2: "#333333",
-    shadowColor: "#f8f8f800",
+    shadowColor: "#00000015",
     green: "#005a00",
     shadowColor2: "#080808",
     orange:"#ff9400",
