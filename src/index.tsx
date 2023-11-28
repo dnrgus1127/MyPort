@@ -11,7 +11,11 @@ import ProjectPage, {loader as projectLoader} from 'pages/ProjectPage';
 import ProjectSliderConatiner from 'components/Projects/ProjectSliderConatiner';
 import { Provider } from "react-redux";
 import { store } from 'redux/store';
-import TodayILearnPage from 'pages/TodayILearnPage';
+import BlogPage from 'pages/BlogPage';
+import BlogMainLayout from 'components/Blog/BlogMain/BlogMainLayout';
+import BlogMainContents from 'components/Blog/BlogMain/BlogMainContents';
+import BlogCategoryContents from 'components/Blog/BlogMain/BlogCategoryContents';
+import PostPage, {loader as postLoader} from 'pages/PostPage';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -31,7 +35,6 @@ const router = createBrowserRouter([
             path: "main",
             element: <ProjectSliderConatiner />,
           }
-         
         ]
       },
       {
@@ -39,8 +42,29 @@ const router = createBrowserRouter([
         element: <StacksPage />,
       },
       {
-        path: "/til",
-        element: <TodayILearnPage/>
+        path: "blog",
+        element: <BlogPage />,
+        children: [
+          {
+            element: <BlogMainLayout />,
+            children: [
+              {
+                path: "main/",
+                element : <BlogMainContents/>
+              },
+              {
+                path: "main/:category",
+                element: <BlogCategoryContents />,
+                errorElement : <div></div>,
+              }
+            ]
+          },
+          {
+            path: "post/*",
+            element: <PostPage />,
+            loader: postLoader(queryClient),
+          }
+        ]
       }
     ]
   }

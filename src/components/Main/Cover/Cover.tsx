@@ -21,7 +21,7 @@ export default function Cover() {
       
     }
     else if (Number(currentValue) === CoverTarnslate.right) {
-      gotoPage("/til", DirectionType.EAST);
+      gotoPage("/blog/main", DirectionType.EAST);
     }
   } 
   
