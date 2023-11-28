@@ -20,9 +20,10 @@ function setTree(path:string,root: Tree) {
         }
         else {
             const newLevel = {
-                path: split,
                 type: "tree",
-                children : [],
+                path: split,
+                children: [],
+                sha: ""
             }
             tree.children.push(newLevel);
             tree = newLevel;
@@ -33,6 +34,7 @@ function setTree(path:string,root: Tree) {
     tree.children.push({
         path: splits[splits.length - 1],
         type: "blob",
+        sha: ""
     })
 }
 
@@ -58,7 +60,7 @@ export default function MarkdownDirTree({projectName} : {projectName : string}) 
     // 가공 처리한 데이터 
     const processedData = useMemo(() => {
         if (!data) return [];
-        let rootNode: Tree = { path: "root", type: "tree", children : [] };
+        let rootNode: Tree = { path: "root", type: "tree", children : [], sha:"" };
 
         let blobs = data.filter(node => node.type === "blob");
 

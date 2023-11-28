@@ -42,22 +42,20 @@ export const MarkdownStyled = styled.div`
         margin-bottom: 1rem;
         line-height: 1.7rem;
     }
-
     blockquote {
         padding : .5rem 0;
         padding-left : 1rem;
         border-left : 2px solid ${({ theme }) => theme.color2};
         background-color : ${({ theme }) => theme.bgColor2};
-        p{
+        p {
             margin: 0;
         }
     }
-
     a {
-        text-decoration:none;
+        text-decoration : none;
         color : inherit;
-        font-weight:600;
-        text-decoration:underline;
+        font-weight : 600;
+        text-decoration : underline;
     }
     a::before {
         content : "[참조] ";

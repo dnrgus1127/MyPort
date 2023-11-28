@@ -5,8 +5,9 @@ import remarkGfm from 'remark-gfm';
 import { dark } from 'react-syntax-highlighter/dist/esm/styles/hljs';
 import CustomIMG from './CustomIMG';
 import MarkdownDirTree from './MarkdownDirTree';
-
-
+import { vscDarkPlus } from 'react-syntax-highlighter/dist/esm/styles/prism';
+import { hybrid } from 'react-syntax-highlighter/dist/esm/styles/hljs';
+import { vs2015 } from 'react-syntax-highlighter/dist/esm/styles/hljs';
 
 // img 태그로 되어있는 경우에 대한 parser
 function replacer(match: string) {
@@ -34,15 +35,17 @@ export default function MarkdownRender({markdown,dirComponent = <MarkdownDirTree
       code({ node, inline, className, children, ...props }: any) {
         if (className === "language-dir") return dirComponent;
         const match = /language-(\w+)/.exec(className || "");
+        
         return !inline && match ? (
-          <SyntaxHighlighter language={match[1]} style={dark} PreTag="div"
-            {...props}
-            >
-              {String(children).replace(/\n$/, "")}
-            </SyntaxHighlighter>
-
+          <SyntaxHighlighter language={match[1]} style={vs2015} PreTag="div"
+            customStyle={{ padding: "2rem 1rem", marginBottom:"2rem", borderRadius: "4px" }}
+            showLineNumbers={true}
+            lineNumberStyle={{color:"#a862ea"}}
+            {...props}>
+            {String(children).replace(/\n$/, "")}
+          </SyntaxHighlighter>
         ) : (
-          <code className={className ? className : ""} {...props}>
+          <code {...props} className={className} >
             {children}
           </code>
         );
