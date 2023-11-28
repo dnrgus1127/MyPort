@@ -27,10 +27,10 @@ const PageFrame = (x:number,y:number) => keyframes`
 
 const TextFrame = keyframes`
   from {
-    transform: translateY(0%);
+    transform: translateY(-120%);
   }
   to {
-    transform: translateY(-120%);
+    transform: translateY(0%);
   }
 `
 
@@ -59,7 +59,7 @@ const PageInCover = styled.div<{$direction : DirectionType}>`
     if (props.$direction === DirectionType.EAST) {
         return PageFrame(-100,0);    
       }
-  }} 2s ease-in-out forwards;
+  }} 1.5s ease-in-out forwards;
   
   .textBox{
     height: 9rem;
@@ -70,7 +70,8 @@ const PageInCover = styled.div<{$direction : DirectionType}>`
 
   .text {
     font-size: 6rem;
-    animation: ${TextFrame} .5s .6s ease-in-out forwards;
+    transform: translateY(-120%);
+    animation: ${TextFrame} .5s ease-in-out forwards;
   }
 
 `
@@ -93,8 +94,8 @@ export function PageIn() {
     {
       return "READ ME"
     }
-    if (location.pathname === "/til") {
-      return "Today I Learn"
+    if (location.pathname === "/blog/main") {
+      return "Tech Blog"
     }
     if (location.pathname === "/") {
       return "Main"
