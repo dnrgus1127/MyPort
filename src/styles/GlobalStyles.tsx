@@ -7,7 +7,7 @@ export const GlobalStyles = createGlobalStyle`
         box-sizing: border-box;
     }
     
-    body {
+    body,button {
       color: ${({ theme }) => theme.color};
     }
     
@@ -23,6 +23,10 @@ export const GlobalStyles = createGlobalStyle`
     svg {
       fill : ${({theme})=> theme.color};
     }
-
+    a {
+      text-decoration: none;
+      color : inherit;
+    }
+    
 `
 
