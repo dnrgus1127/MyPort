@@ -9,7 +9,7 @@ const Container = styled.div`
   width: 100%;
   padding: var(--side-padding) 0;
   text-align: center;
-
+  min-height: var(--header-height);
   h1 {
     font-family: 'Times Newer Roman';
     font-size: 7rem;
