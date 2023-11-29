@@ -9,7 +9,7 @@ const githubMarkdownQuery = (fileName : string) => ({
     queryFn: async () => {
         
         // const res = await fetch(`https://raw.githubusercontent.com/dnrgus1127/TIL/main/${fileName.split("/").map(item => encodeURIComponent(item)).join("/")}`)
-        const res = await fetch(`https://raw.githubusercontent.com/dnrgus1127/TIL/main/${fileName}`)
+        const res = await fetch(`https://raw.githubusercontent.com/dnrgus1127/TIL/main/${encodeURIComponent(fileName)}`)
         
         if (res.status === 404) {
             throw new Response("not post", { status: 404 });
