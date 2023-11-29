@@ -1,7 +1,7 @@
 import Loading from 'components/Common/Loading';
 import './App.css';
 import Cover from 'components/Main/Cover/Cover';
-import {Outlet, useLocation, useNavigation} from "react-router-dom"
+import {Outlet, ScrollRestoration, useLocation, useNavigation} from "react-router-dom"
 import PageAnimation from 'components/Common/PageAnimation';
 import { ThemeProvider } from 'styled-components';
 import { GlobalStyles } from 'styles/GlobalStyles';
@@ -15,8 +15,14 @@ function App() {
   const { theme } = useAppSelector(state => state.theme);
   return (
       <ThemeProvider theme={theme === "dark" ? darkTheme : ligthTheme}>
-        <GlobalStyles/>
+      <GlobalStyles />
+
         <div className="App">
+          <ScrollRestoration  getKey={(location, matches) => {
+          // default behavior
+          
+              return location.key;
+            }}/>
             { location.pathname === "/" && <Cover />}
             {navigation.state === "loading" && <Loading />}
               <Header/>
