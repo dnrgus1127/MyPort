@@ -10,8 +10,7 @@ const MenuContainer = styled.div`
   max-width: var(--width);
   margin: 0 auto;
   padding-top: 4rem;
-  opacity: 0;
-  animation: ${FadeIn} 1s 1s ease-out forwards;
+
 
   h2 {
     font-family: "Roboto KR","Noto Sans KR", sans-serif;

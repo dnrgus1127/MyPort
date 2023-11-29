@@ -1,5 +1,5 @@
 import React, { ReactNode } from 'react'
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
 interface PostSectionTemplateProps {
@@ -51,17 +51,19 @@ export default function PostSectionTemplate({ children, title, count, isMore }: 
         <h2>{title} ({count})</h2>
         <button type='button' onClick={() => {
           if (isMore) {
-            navigate("/blog/main");
+            navigate(-1);
           }
           else {
             navigate(`/blog/main/${title}`)
           }
         }}>{isMore ? "Close" : "See More"}</button>
+
       </SectionHeader>
       <PostList>
         {children}
       </PostList>
-      <hr/>
+        <hr/>
+      
     </Template>
   )
 }
