@@ -57,13 +57,11 @@ export default function PostSectionTemplate({ children, title, count, isMore }: 
             navigate(`/blog/main/${title}`)
           }
         }}>{isMore ? "Close" : "See More"}</button>
-
       </SectionHeader>
       <PostList>
         {children}
       </PostList>
         <hr/>
-      
     </Template>
   )
 }
