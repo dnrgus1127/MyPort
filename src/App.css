@@ -35,17 +35,21 @@
 
   --side-padding : 20rem;
   --width : 900px;
+  --header-height : 586px;
   
 }
 
 @media screen and (max-width : 1479px){
   :root {
     --side-padding :10rem;
+    --header-height : 386px;
   }
 }
 @media screen and (max-width : 1023px) {
   :root {
     --side-padding : 6rem;
+  
+
   }
 }
 @media screen and (max-width : 767px) {
