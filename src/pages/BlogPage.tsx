@@ -6,17 +6,24 @@ import BlogLayout from 'components/Blog/BlogLayout'
 import BlogHeader from 'components/Blog/BlogHeader'
 import useLatestTimePost from 'components/Blog/hooks/useLatestTimePost'
 import { GITHUBAPIKEY } from 'apiKey'
-import { Outlet, useOutletContext } from 'react-router-dom'
+import { Outlet, json, useOutletContext } from 'react-router-dom'
+import { checkStatus } from 'utils/fetch/checkStatus'
+import { GITHUB403 } from 'constans/ErrorMessage'
 
-const tilQuery = () => ({
+const blogQuery = () => ({
   queryKey: ["git", "TIL", "tree"],
   queryFn: async () => {
     const res = await fetch(`https://api.github.com/repos/dnrgus1127/TIL/git/trees/main?recursive=10`, {
       headers: {
         "Authorization" : GITHUBAPIKEY
       }
-      
     });
+    if (res.status === 403) {
+      throw json({sorry:"Github API rate limit exceede", msg: GITHUB403}, { status: 403 });
+    }
+
+    checkStatus(res.status);
+
     const data = await res.json();
     return data.tree;
   },
@@ -25,7 +32,7 @@ const tilQuery = () => ({
 })
 
 export const loader = (queryClient : QueryClient) => async () => {
-  const query = tilQuery();
+  const query = blogQuery();
 
   return (
     queryClient.getQueryData(query.queryKey) ?? (await queryClient.fetchQuery(query))
@@ -34,7 +41,7 @@ export const loader = (queryClient : QueryClient) => async () => {
 
 export default function BlogPage() {
   
-  const { data,isSuccess } = useQuery<Array<Tree>>({ ...tilQuery() });
+  const { data,isSuccess } = useQuery<Array<Tree>>({ ...blogQuery() });
 
   const [topics, posts] = useMemo(() => {
     if (!isSuccess) return [[],[]];

@@ -1,0 +1,1 @@
+export const GITHUB403 = ["GitHub REST API 요청 한도를 초과했습니다. (시간당 5,000건)"," React-Query를 이용하여 요청을 캐싱처리 하여 요청 횟수를 줄였지만 이 페이지가 보여진다면 연락 부탁드립니다. "]
