@@ -4,6 +4,7 @@ const commonTheme = {
 
 export const ligthTheme = {
     mainColor: "#787eb6",
+    pointColor: "#ff4d79",
     bgColor: "#ffffff",
     bgColor2: "#eeeeee",
     bgColor3: "#f8f8f8",
@@ -20,7 +21,7 @@ export const ligthTheme = {
 }
 export const darkTheme = {
     mainColor: "#121212",
-    pointColor: "#2c2c2c",
+    pointColor: "#a08edb",
     bgColor: "#1c1c1c",
     bgColor2: "#333333",
     bgColor3: "#2c2c2c",
@@ -31,7 +32,7 @@ export const darkTheme = {
     shadowColor: "#000000",
     shadowColor2: "#444444",
     orange:"#ff9400",
-    current : "dark",
+    current: "dark",
 
     ...commonTheme
 }
