@@ -1,6 +1,7 @@
 import React from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import styled from 'styled-components'
+import media from 'styles/media';
 
 const PostMenuContainer = styled.div`
     margin-bottom: 10rem;
@@ -12,6 +13,10 @@ const PostMenuContainer = styled.div`
         color : ${({ theme }) => theme.color};
         font-weight: 600;
         text-decoration: underline;
+    }
+
+    ${media.small}{
+        margin-bottom: 3rem;
     }
 
 `

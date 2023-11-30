@@ -2,6 +2,7 @@ import { BoxButton } from 'components/Common/Buttons/StyledButtons'
 import React from 'react'
 import { useNavigate, useParams } from 'react-router-dom';
 import styled, { css } from 'styled-components'
+import media from 'styles/media';
 
 
 const MenuItem = styled(BoxButton)<{$clicked : boolean}>`
@@ -36,6 +37,11 @@ const MenuItem = styled(BoxButton)<{$clicked : boolean}>`
     }
   
   `}
+
+  ${media.small}{
+    padding : .5rem 2rem;
+    font-size: 1.4rem;
+  }
 `
 
 

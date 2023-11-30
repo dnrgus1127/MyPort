@@ -1,4 +1,5 @@
 import styled, { css } from "styled-components";
+import media from "styles/media";
 
 export const MarkdownStyled = styled.div`  
     color : ${({theme})=> theme.color};
@@ -27,7 +28,7 @@ export const MarkdownStyled = styled.div`
         font-size : 1.8rem;
     }
     h2,h3,blockquote {
-        margin-bottom: 2rem;
+        margin-bottom: 2.6rem;
     }
     hr {
         margin : 3rem 0;
@@ -40,7 +41,7 @@ export const MarkdownStyled = styled.div`
     p,li {
         font-size: 1.6rem;
         margin-bottom: 1rem;
-        line-height: 1.7rem;
+        line-height: 1.3em;
     }
     blockquote {
         padding : .5rem 0;
@@ -61,4 +62,28 @@ export const MarkdownStyled = styled.div`
         content : "[참조] ";
         
     } 
+
+
+    ${media.small}{
+        h1 {
+            font-size : 2.2rem;
+        }
+
+        h2 {
+            font-size : 1.8rem;
+        }
+        h3 {
+            font-size : 1.7rem;
+        }
+        h4 {
+            font-size : 1.6rem;
+        }
+
+        p,li {
+            font-size: 1.5rem;
+            line-height: 1.6em;
+
+        }
+
+    }
 `

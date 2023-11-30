@@ -3,12 +3,16 @@ import React, { useEffect, useRef, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components'
 import { Floating } from 'styles/keyFrame/floating';
+import media from 'styles/media';
 
 const NavigationBox = styled.div`
   height: 0;
   .navigtorWrapper{
     height: 100%;
 
+  }
+  ${media.medium}{
+    display: none;
   }
 `
 

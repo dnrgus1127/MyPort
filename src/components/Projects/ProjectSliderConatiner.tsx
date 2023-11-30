@@ -43,28 +43,41 @@ const SlideButton = styled.button`
     top: calc(50% - 2.4rem);
     svg {
         fill: white;
-        filter: drop-shadow(0px 0px 5px ${({theme})=> theme.shadowColor});
+        filter: drop-shadow(0px 0px 5px ${({theme})=>theme.shadowColor2});
         width : 4.8rem;
         height: 4.8rem;
     }
-
-  
+    
     
 `
 const PrevSlideBtn = styled(SlideButton)`
-    right: 91%;
+    left : 5.8rem;
     animation: ${() => ButtonAnimation("left")} 2s ease  infinite;
     ${media.small}{
-        animation : ${()=> MobileButtonAnimation("left")} 2s ease infinite;
+        animation : ${() => MobileButtonAnimation("left")} 2s ease infinite;
+        left : 0;
+        right : none;
+    }
+
+    ${media.small}{
+        left: 2.4rem;
     }
 
 `
 const NextSlideBtn = styled(SlideButton)`
 
-    left :41%;
+    right: calc(50% + 5.8rem);
     animation: ${() => ButtonAnimation("right")} 2s ease  infinite;
     ${media.small}{
         animation : ${()=> MobileButtonAnimation("right")} 2s ease infinite;
+    }
+
+    ${media.large} {
+        right: 5.8rem;
+    }
+
+    ${media.small}{
+        right: 2.4rem;
     }
 `
 
@@ -90,12 +103,10 @@ export default function ProjectSliderConatiner() {
         },550)
     }
 
-
-
     useEffect(() => {
         let timer = setTimeout(() => {
             setFraemNumber(0);
-        }, 2000)
+        }, 1000)
         
         return () => {
             clearTimeout(timer);
@@ -108,7 +119,7 @@ export default function ProjectSliderConatiner() {
           <Description projecIdx={frameNumber}/>
           <PrevSlideBtn onClick={() => handlerButtons("decrease")}>
                 <ArrowLeft/>
-              </PrevSlideBtn>
+          </PrevSlideBtn>
           <NextSlideBtn onClick={() => handlerButtons("increase")}>
               <ArrowRight />
           </NextSlideBtn>

@@ -10,13 +10,27 @@ const PhotoFrameListContainer = styled.div`
     justify-content: center;
     gap: 2rem;
 
-    ${media.large}{
-        height: 50%;
-    }
-    ${media.small}{
-        height: 50%;
+    ${media.xlarge}{
+        padding : 10%;
     }
 
+    ${media.custom(1200)}{
+        padding : 10% 0;
+    }
+  
+    ${media.large}{
+        width: 100%;
+        padding : 20%;
+        position: sticky;
+        top: 200px;
+    }
+
+    ${media.medium} {
+       padding : 20% 0; 
+    }
+    ${media.small}{
+        padding : 25% 0 ;
+    }
     
 `
 
@@ -28,12 +42,21 @@ const PhotoFrameWarpper = styled.div`
     perspective: 1500px;
     border-radius: 8px;
 
+    ${media.xlarge}{
+        width: 80%;
+    }
+
     ${media.large}{
+        width: 50%;
+        
+    }
+    ${media.medium}{
         width: 60%;
     }
     ${media.small}{
         width: 80%;
     }
+
 
   
 `
@@ -55,6 +78,8 @@ const PhotoFrameItem = styled.div<ItemProps>`
     top: 0;
     right: ${(props) => props.$distance * 100}%;
     transform: ${(props) => props.$trans};
+    overflow :hidden;
+
     filter : ${(props)=> props.$distance !== 0 && "grayScale(100%) blur(1px) brightness(80%)"};
     .trans > & {
         transition : .5s all ease-out;
@@ -63,7 +88,6 @@ const PhotoFrameItem = styled.div<ItemProps>`
     ${(props) => props.$distance === 0 && css`
         box-shadow : 0px 0px 12px ${({ theme }) => theme.shadowColor2}44;
     `}
-    overflow :hidden;
     img {
         object-fit :cover;
         width:100%;
@@ -116,7 +140,7 @@ export default function ProjectSlider({ frameNumber, data, setFrame }: ProjectSl
       <PhotoFrameListContainer>          
           <PhotoFrameWarpper className="trans" ref={sliderRef}>
               {data.map((item, idx) => {
-                  if(idx <data.length / 2) return <></>
+                
                   return <PhotoFrameItem name={item.name} key={item.id + "prev"} $distance={frameNumber - idx + data.length} $trans={calculateTranslate(frameNumber - idx + data.length)}>
                     <img src={`/assets/img/${item.name}.jpg`} alt={item.name + "이미지"}/>
                   </PhotoFrameItem>
@@ -127,7 +151,7 @@ export default function ProjectSlider({ frameNumber, data, setFrame }: ProjectSl
                   </PhotoFrameItem>
               })}
               {data.map((item, idx) => {
-                  if(idx >data.length /2) return <></>
+                  
                   return <PhotoFrameItem name={item.name} key={item.id + "next"} $distance={frameNumber - idx - data.length} $trans={calculateTranslate(frameNumber - idx - data.length)}>
                     <img  src={`/assets/img/${item.name}.jpg`} alt={item.name + "이미지"}/>
                   </PhotoFrameItem>

@@ -9,13 +9,12 @@ import BlogMenuItem from './BlogMenuItem'
 const MenuContainer = styled.div`
   max-width: var(--width);
   margin: 0 auto;
-  padding-top: 4rem;
 
 
   h2 {
     font-family: "Roboto KR","Noto Sans KR", sans-serif;
     font-weight: 800;
-    margin-bottom: 4rem;
+    margin-bottom: 1em;
     font-size: 1.5rem;
   }
 `
@@ -24,11 +23,11 @@ const MenuBox = styled.ul`
 
     display: flex;
     flex-wrap: wrap;
-    gap: 1rem;
+    gap: .5rem;
     padding-bottom: 2rem;
     border-bottom: 2px solid ${({theme})=> theme.color};
 
-    margin-bottom: 10rem;
+    margin-bottom:var(--side-padding);
 `
 
 

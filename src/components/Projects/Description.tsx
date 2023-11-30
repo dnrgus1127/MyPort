@@ -15,12 +15,10 @@ const DescriptionLayout = styled.div`
     position: absolute;
     top:0;
     left:50%;
-    background-color: ${({ theme }) => theme.bgColor4};
-    box-shadow: 0px 0px 10px ${({theme})=> theme.shadowColor2}88;
+    background-color : ${({ theme }) => theme.bgColor2};
+    box-shadow: 0px 0px 10px ${({ theme }) => theme.shadowColor2}88;
     transition: background-color 1s ease-out;
     z-index: 3;
-    overflow-y: hidden;
-    overflow-x :hidden;
     background-size: cover;
 
     &::before{
@@ -53,14 +51,7 @@ const DescriptionLayout = styled.div`
     }
 
     
-    ${media.large}{
-        gap: 10%;
-        top: 10%;
-        display: block;
-        height: auto;
-        min-height: 80%;
-        padding : 2rem;
-    }
+  
     & > div {
         padding : 10%;
         position: absolute;
@@ -73,14 +64,43 @@ const DescriptionLayout = styled.div`
     }
 
     .closeSectionBtn{
-        position: absolute;
-        top:10%;
-        right: 10%;
-        transform: translateY(-100%);
+        position : absolute;
+        right :0;
+        top:0;
         width: 3.6rem;
         height: 3.6rem;
         line-height: 0;
+        z-index:5;
 
+    }
+
+    ${media.large}{
+        width: 100%;
+        position: relative;
+        left :0;
+        box-shadow: none;
+        overflow : initial;
+      
+        &::before{
+            background-color : none;
+            display : none;
+        }
+
+        & > div {
+            overflow : visible;
+            position: absolute;
+            height : auto;
+            z-index: 4;
+            background-color : inherit;
+        }
+    
+        
+    }
+    ${media.small}{
+        transform: translateY(-10%);
+        &::after {
+            width : 10%;
+        }
     }
 
 `

@@ -2,6 +2,7 @@ import {  Tree } from 'components/Common/Markdown/types/tree';
 import React, { useMemo } from 'react'
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
+import media from 'styles/media';
 import { formatRelativeDate } from 'utils/time/formatRelativeDate';
 
 
@@ -36,6 +37,19 @@ const PostItemBox = styled.li`
             padding : 0 3px;
         }
     }
+
+    ${media.small}{
+    h3 {
+      font-size: 1.8rem;
+      margin-bottom: 1em;
+    }
+    .descriptionBox{
+        span {
+            font-size: 1.4rem;
+        }
+    }
+   
+  }
 
 `
 

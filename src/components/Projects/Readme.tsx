@@ -8,6 +8,7 @@ import ErrorComponent from 'components/Common/ErrorComponent';
 import MarkdownRender from 'components/Common/Markdown/MarkdownRender';
 import { MarkdownStyled } from 'components/Common/Markdown/MarkdownStyledComponent';
 import MarkdownDirTree from 'components/Common/Markdown/MarkdownDirTree';
+import media from 'styles/media';
 
 interface ReadmeProps extends UnMountProps {
     className: string;
@@ -24,10 +25,16 @@ const Container = styled.div<{$unMount: boolean}>`
 
     .title {
       text-align:center;
-      font-size : 6rem;
+      font-size : 4rem;
       font-weight : 600;
       font-family : "Roboto KR",sans-serif;
       margin-bottom: 4rem;
+    }
+
+    ${media.small}{
+      .title {
+        font-size: 2.4rem;
+      }
     }
 `
 

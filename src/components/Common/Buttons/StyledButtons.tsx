@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import media from "styles/media";
 
 const Button = styled.button`
     
@@ -15,5 +16,10 @@ export const BoxButton = styled(Button)`
     &:hover {
         background-color: ${({theme})=> theme.bgColor};
         color : ${({ theme }) => theme.color};
+    }
+
+    ${media.small} {
+        padding : .6rem 1.6rem;
+        
     }
 `
