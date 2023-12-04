@@ -5,6 +5,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Abril+Fatface&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Fira+Mono&display=swap'); 
 /* 코드 폰트 font-family: 'Fira Mono', monospace; */
+/* font-family: 'Dhurjati', sans-serif; */
 
 @font-face {
   font-family: 'Times Newer Roman';
@@ -26,6 +27,7 @@
   font-style: normal;
 }
 
+@import url('https://fonts.googleapis.com/css2?family=Dhurjati&display=swap');
 
 
 
@@ -34,8 +36,8 @@
 
 
   --side-padding : 20rem;
-  --width : 900px;
-  --header-height : 586px;
+  --width : 1300px;
+  --header-height : 420px;
   
 }
 
@@ -43,23 +45,32 @@
   :root {
     --side-padding :10rem;
     --header-height : 386px;
+    --width : 900px;
+
   }
 }
 @media screen and (max-width : 1023px) {
   :root {
     --side-padding : 6rem;
-  
+    --width : 760px;
+    --header-height : 380px;
 
   }
 }
 @media screen and (max-width : 767px) {
   :root {
     --side-padding : 3rem;
+    --width : 478px;
+    --header-height : 240px;
+
   }
 }
 @media screen and (max-width : 480px) {
   :root {
     --side-padding : 2rem;
+    --width : 340px;
+    --header-height : 160px;
+
   }
 }
 body {

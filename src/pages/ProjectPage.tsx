@@ -1,12 +1,13 @@
 import { QueryClient, useQuery } from '@tanstack/react-query';
 
 import { REPOSITORYS } from 'constans/Config';
-import React, { useEffect, useMemo } from 'react'
-import { Outlet, useLoaderData, useLocation, useOutletContext } from 'react-router-dom';
+import React, { useMemo } from 'react'
+import { Outlet, useLoaderData, useOutletContext } from 'react-router-dom';
 import { Repository, RepositoryData } from 'types/Project';
 import { PROJECT_INFOMATION } from "../constans/ProjectData";
 import ProjectLayout from 'components/Projects/PrjojectLayout';
 import { GITHUBAPIKEY } from 'apiKey';
+import { checkStatus } from 'utils/fetch/checkStatus';
 
 const projectQuery = (repo : string) => ({
     queryKey: ['git', repo],
@@ -16,6 +17,10 @@ const projectQuery = (repo : string) => ({
                 Authorization : GITHUBAPIKEY
             }
         })
+        if (res.status === 403) {
+            throw new Response("Not Found", { status: 403 });
+          }
+
         const data = await res.json();
         return data ;
     }
