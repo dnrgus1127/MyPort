@@ -18,11 +18,11 @@ export const PROJECT_INFOMATION: Array<RepositoryConstant> = [
     },
     {
         name: "ringblog",
-        alternateTitle : "Ring Blog - 나만의 블로그",
+        alternateTitle : "Ring Blog",
         stacks: ["React", "Express.js","MySQL"],
         library: ["redux","react-query","react-router-dom","React-markdown"],
         description: " 벨로그의 구성에 몇가지 기능을 추가해보고 디자인과 기능들을 수정해보며 제작한 사이트.",
-        whyDeveloped: "블로그 사이트를 개발해 보며 프론트엔드와 백엔드가 어떤 식으로 통신하는지, 웹 개발 자체가 어떤 식으로 돌아가는지 체험해보기 위해 풀스택으로 개발해본 사이트, 벨로그의 마크다운 파싱, 소셜 로그인을 구현하는 방법, 서버가 데이터를 받거나 주는 방식 등에 대해서 학습하고 싶었다.",
+        whyDeveloped: "블로그 사이트를 개발해 보며 프론트엔드와 백엔드가 어떤 식으로 통신하는지, 웹 개발 자체가 어떤 식으로 돌아가는지 체험해보기 위해 풀스택으로 개발해본 사이트, 벨로그의 마크다운 파싱, 소셜 로그인을 구현하는 방법, 서버가 데이터를 받거나 주는 방식 등에 대해서 학습하였습니다.",
         review: "React로 진행했던 첫 프로젝트, 포트폴리오 제작 시점에 봤을 때는 JS, React 둘 다에 대한 이해도가 많이 부족했다고 느껴진다. 하지만 프로젝트를 진행하면서 React, Express.js, RestAPI, 소셜 로그인, 마크다운, MySQL, Redux 등 다양한 부분에 대해서 지식을 쌓을 수 있었다.",
         functions : ["로그인 기능(소셜, 일반)","블로그 포스팅","구독, 좋아요, 댓글, 즐겨찾기 기능","무한 스크롤 및 데이터 캐시","마크다운 파싱 및 디자인"],
     },
@@ -35,7 +35,7 @@ export const PROJECT_INFOMATION: Array<RepositoryConstant> = [
     },
     {
         name: "MyPort",
-        alternateTitle : "PortFolio",
+        alternateTitle : "Port Folio",
         stacks: ["React", "Javascript", "typescript"],
         library: ["react-query","react-router-dom","Redux","styled-component"],
         description: "주니어 개발자 정욱현의 포트폴리오 사이트. 현재 보고 있는 사이트 입니다.",
