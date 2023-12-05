@@ -11,3 +11,15 @@ export const Floating = (translateY : number) => keyframes`
         transform: translateY(0);
     }
 `
+
+export const FloationSide = (value: number) => keyframes`
+    0% {
+        transform: translateX(0);;
+    }
+    50% {
+        transform: translateX(${value}%);
+    }
+    100% {
+        transform: translateX(0);
+    }
+`
