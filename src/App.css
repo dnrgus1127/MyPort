@@ -8,6 +8,11 @@
 /* font-family: 'Dhurjati', sans-serif; */
 
 @font-face {
+  font-family: 'Poppins Black';
+  src : url('../src/fonts/Poppins/Poppins-Black.ttf');
+}
+
+@font-face {
   font-family: 'Times Newer Roman';
   src: url("../src/fonts/TimesNewerRoman/TimesNewerRoman-Regular.otf");
 }
