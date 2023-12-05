@@ -7,7 +7,7 @@ interface useMorphProps {
     cooldownTime?: number;
 }
 
-export default function useMorphing({texts, morphTime = 1.5, cooldownTime = 0.5} : useMorphProps) {
+export default function useMorphing({texts, morphTime = 1.5, cooldownTime = 1.5} : useMorphProps) {
     const textRef1 = useRef<HTMLHeadingElement>(null);
     const textRef2 = useRef<HTMLHeadingElement>(null);
     
@@ -94,7 +94,7 @@ export default function useMorphing({texts, morphTime = 1.5, cooldownTime = 0.5}
             <feColorMatrix in="SourceGraphic" type="matrix" values="1 0 0 0 0
                   0 1 0 0 0
                   0 0 1 0 0
-                  0 0 0 255 -140" />
+                  0 0 0 255 -120" />
           </filter>
       </defs>
   </svg>
