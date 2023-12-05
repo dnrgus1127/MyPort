@@ -7,17 +7,20 @@ export const GlobalStyles = createGlobalStyle`
         box-sizing: border-box;
     }
     
-    body,button {
+    body {
+      color: ${({ theme }) => theme.color};
+    }
+
+    button {
       color: ${({ theme }) => theme.color};
     }
     
 
     .App {
-      background-color: ${({ theme }) => theme.bgColor2};
       transition: background-color 1s ease-out;
     }
     html {
-      background-color: ${({theme})=> theme.color2};
+      background-color: ${({theme})=> theme.bgColor2};
     }
 
     svg {

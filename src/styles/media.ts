@@ -5,8 +5,8 @@ export const mediaQuery = (maxWidth : number) => `
 
 
 const media = {
-  xlarge : mediaQuery(1479),
-  large: mediaQuery(1023), // 태블릿
+  xlarge : mediaQuery(1479), // 태블릿
+  large: mediaQuery(1023), // 작은 태블릿
   medium: mediaQuery(767), // 작은 태블릿
   small: mediaQuery(480), // 모바일 세로
   custom: mediaQuery,
