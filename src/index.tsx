@@ -17,6 +17,7 @@ import BlogCategoryContents from 'components/Blog/BlogMain/BlogCategoryContents'
 import PostPage, {loader as postLoader} from 'pages/PostPage';
 import ErrorPage from 'pages/ErrorPage';
 import HomePage, {loader as homeLoader} from 'HomePage';
+import RootLayout from 'pages/RootLayout';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -24,57 +25,61 @@ const root = ReactDOM.createRoot(
 const queryClient = new QueryClient();
 const router = createBrowserRouter([
   {
-    path: "/",
-    element: <HomePage />,
-    loader : homeLoader(queryClient),
-    children: [
-       {
-        path: "project",
-        element: <ProjectPage />,
-        loader: projectLoader(queryClient),
-        children: [
-          {
-            path: "main",
-            element: <ProjectSliderConatiner />,
-          }
-        ]
-      },
-      {
-        path: "/Stack",
-        element: <StacksPage />,
-      },
-      {
-        path: "blog",
-        element: <BlogPage />,
-        errorElement: <ErrorPage/>,
-        loader: blogLoader(queryClient),
-        children: [
-          {
-            element: <BlogMainLayout />,
-            children: [
-              {
-                path: "main/",
-                element : <BlogMainContents/>
-              },
-              {
-                path: "main/:category",
-                element: <BlogCategoryContents />,
-                errorElement : <div></div>,
-              }
-            ]
-          },
-          {
-            path: "post/*",
-            element: <PostPage />,
-            loader: postLoader(queryClient),
-            
-            
-          }
-        ]
-      }
+    element : <RootLayout/>,
+    children :[ {
+      path: "/",
+      element: <HomePage />,
+      loader : homeLoader(queryClient),
+      children: [
+         {
+          path: "project",
+          element: <ProjectPage />,
+          loader: projectLoader(queryClient),
+          children: [
+            {
+              path: "main",
+              element: <ProjectSliderConatiner />,
+            }
+          ]
+        },
+        {
+          path: "/Stack",
+          element: <StacksPage />,
+        },
+        
+      ]
+    },
+    {
+      path: "blog",
+      element: <BlogPage />,
+      errorElement: <ErrorPage/>,
+      loader: blogLoader(queryClient),
+      children: [
+        {
+          element: <BlogMainLayout />,
+          children: [
+            {
+              path: "main/",
+              element : <BlogMainContents/>
+            },
+            {
+              path: "main/:category",
+              element: <BlogCategoryContents />,
+              errorElement : <div></div>,
+            }
+          ]
+        },
+        {
+          path: "post/*",
+          element: <PostPage />,
+          loader: postLoader(queryClient),
+          
+          
+        }
+      ]
+    }
     ]
   }
-  
 ])
 
 

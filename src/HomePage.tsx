@@ -54,23 +54,15 @@ export const loader = (queryClient : QueryClient) =>async () => {
 
 
 function HomePage() {
-  const navigation = useNavigation();
-  const location = useLocation();
-  const { theme } = useAppSelector(state => state.theme);
+  
   return (
-      <ThemeProvider theme={theme === "dark" ? darkTheme : ligthTheme}>
-      <GlobalStyles />
-        <div className='App'>
-          <ScrollRestoration  getKey={(location, matches) => {
-              return location.key;
-          }} />
+      <>
           <Home />
           <Header />
           <PageAnimation/>
-        <Outlet />
-        
-        </div>
-      </ThemeProvider>
+          <Outlet />
+      </>
+
 
   );
 }
