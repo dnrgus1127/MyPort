@@ -15,25 +15,27 @@ interface PostLayoutProps {
 
 const LayoutBox = styled.div`
    .mobileTopBtn {
-    visibility: visible;
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    padding: 1rem;
-    animation: ${()=>Floating(10)} 2s ease-in-out infinite;
-    svg {
-      fill :${({theme})=> theme.pointColor};
-      width: 4.8rem;
-      height: 4.8rem;
-      filter: drop-shadow(0px 2px 0 #12121244);
-    }
+      visibility: hidden;
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      padding: 1rem;
+      animation: ${()=>Floating(10)} 2s ease-in-out infinite;
+      svg {
+        fill :${({theme})=> theme.pointColor};
+        width: 4.8rem;
+        height: 4.8rem;
+        filter: drop-shadow(0px 2px 0 #12121244);
+      }
   }
   
-  .mobileTopBtn {
+  ${media.large}{
+    .mobileTopBtn {
       visibility: visible;
 
     
     }
+  }
 `
 
 const Title = styled.div`
@@ -112,10 +114,11 @@ const PostContents = styled(MarkdownStyled)`
     
   }
   p,li {
-    font-size : 1.8rem;
+    font-size : 1.6rem;
     word-break: keep-all;
     text-indent: 5px;
     word-spacing: 1px;
+    font-family: "Noto Sans KR";
   }
 
   code:not([class^="language-"]){
