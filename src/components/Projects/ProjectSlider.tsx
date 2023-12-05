@@ -3,60 +3,36 @@ import styled, { css } from 'styled-components'
 import media from 'styles/media';
 import { RepositoryData } from 'types/Project';
 
-const PhotoFrameListContainer = styled.div`
-    width: 50%;
+const PhotoFrameLayout = styled.div`
+    width: 100%;
     height: 100%;
     display: flex;
+    align-items: center;
     justify-content: center;
-    gap: 2rem;
-
-    ${media.xlarge}{
-        padding : 10%;
-    }
-
-    ${media.custom(1200)}{
-        padding : 10% 0;
-    }
-  
-    ${media.large}{
-        width: 100%;
-        padding : 20%;
-        position: sticky;
-        top: 200px;
-    }
-
-    ${media.medium} {
-       padding : 20% 0; 
-    }
-    ${media.small}{
-        padding : 25% 0 ;
-    }
-    
+    gap: 2rem;    
 `
 
 const PhotoFrameWarpper = styled.div`
     position: relative;
-    width: 70%;
-    height: 100%;
+    width: calc(var(--width) / 3.5);
+    height: calc(var(--width) / 3.5 * 1.35);
     transform-style: preserve-3d;
     perspective: 1500px;
     border-radius: 8px;
 
-    ${media.xlarge}{
-        width: 80%;
+    ${media.xlarge} {
+        width: calc(var(--width) / 2.5);
+        height: calc(var(--width) / 2.5 * 1.35);
+    }
+    ${media.large} {
+        width: calc(var(--width) / 2);
+        height: calc(var(--width) / 2 * 1.35);
     }
 
-    ${media.large}{
-        width: 50%;
-        
+    ${media.small} {
+        width: calc(var(--width) / 1.2);
+        height: calc(var(--width) / 1.2 * 1.35);
     }
-    ${media.medium}{
-        width: 60%;
-    }
-    ${media.small}{
-        width: 80%;
-    }
-
 
   
 `
@@ -71,7 +47,7 @@ const PhotoFrameItem = styled.div<ItemProps>`
     display: flex;
     align-items: center;
     justify-content: center;
-    border-radius: 8px;
+    border-radius: 0px;
     width: 100%;
     height: 100%;
     position: absolute;
@@ -80,16 +56,18 @@ const PhotoFrameItem = styled.div<ItemProps>`
     transform: ${(props) => props.$trans};
     overflow :hidden;
 
-    filter : ${(props)=> props.$distance !== 0 && "grayScale(100%) blur(1px) brightness(80%)"};
+    filter : ${(props)=> props.$distance !== 0 && "grayScale(50%) blur(1px) brightness(70%)"};
     .trans > & {
         transition : .5s all ease-out;
     }
     
+    box-shadow : 0px 0px 5px ${({ theme }) => theme.current ==="dark" ? theme.shadowColor :theme.shadowColor2};
     ${(props) => props.$distance === 0 && css`
-        box-shadow : 0px 0px 12px ${({ theme }) => theme.shadowColor2}44;
+        box-shadow : 0px 0px 12px ${({ theme }) => theme.current ==="dark" ? theme.shadowColor :theme.shadowColor2};
+
     `}
     img {
-        object-fit :cover;
+        object-fit : cover;
         width:100%;
         height:100%;
     }
@@ -123,21 +101,21 @@ export default function ProjectSlider({ frameNumber, data, setFrame }: ProjectSl
     const calculateTranslate = (distance: number) => {
         let translate = "";
         if (distance === 0) {
-            translate += " scale(1.01)";
+            translate += " scale(1)";
             return translate;
         }
         if (Math.abs(distance) === 1) {
-            translate += " scale(0.9)";
+            translate += " scale(0.8)";
             translate += ` rotateY(${distance <0 ? '-' :"+"}20deg)`
         }
         else if (Math.abs(distance) === 2) {
-            translate += " scale(0.8)"
+            translate += " scale(0.7)"
             translate += ` rotateY(${distance <0 ? '-' : "+"}35deg)`
         }
         return translate;
     }
   return (
-      <PhotoFrameListContainer>          
+      <PhotoFrameLayout>          
           <PhotoFrameWarpper className="trans" ref={sliderRef}>
               {data.map((item, idx) => {
                 
@@ -157,7 +135,7 @@ export default function ProjectSlider({ frameNumber, data, setFrame }: ProjectSl
                   </PhotoFrameItem>
               })}
           </PhotoFrameWarpper>
-    </PhotoFrameListContainer>
+    </PhotoFrameLayout>
   )
 }
 

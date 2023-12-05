@@ -46,15 +46,12 @@ const SlideButton = styled.button`
         filter: drop-shadow(0px 0px 5px ${({theme})=>theme.shadowColor2});
         width : 4.8rem;
         height: 4.8rem;
-    }
-    
-    
+    } 
 `
 const PrevSlideBtn = styled(SlideButton)`
     left : 5.8rem;
     animation: ${() => ButtonAnimation("left")} 2s ease  infinite;
     ${media.small}{
-        animation : ${() => MobileButtonAnimation("left")} 2s ease infinite;
         left : 0;
         right : none;
     }
@@ -68,9 +65,7 @@ const NextSlideBtn = styled(SlideButton)`
 
     right: calc(50% + 5.8rem);
     animation: ${() => ButtonAnimation("right")} 2s ease  infinite;
-    ${media.small}{
-        animation : ${()=> MobileButtonAnimation("right")} 2s ease infinite;
-    }
+
 
     ${media.large} {
         right: 5.8rem;
