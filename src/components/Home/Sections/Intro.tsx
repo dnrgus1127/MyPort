@@ -3,6 +3,7 @@ import styled, { keyframes } from 'styled-components'
 import CoverTitle from '../../Main/Cover/CoverTitle'
 import Gnb from '../Gnb'
 import media from 'styles/media'
+import { noize } from 'styles/keyFrame/noize'
 
 const CoverLayout = styled.div`
     width: 100%;
@@ -10,22 +11,6 @@ const CoverLayout = styled.div`
     background-color: ${({theme})=> theme.cover};
     box-shadow: 0px 5px 25px ${({theme})=>theme.shadowColor};
 `
-
-const noize = keyframes`
-    0% { transform: translate(0,0) }
-    10% { transform: translate(-5%,-5%) }
-    20% { transform: translate(-10%,5%) }
-    30% { transform: translate(5%,-10%) }
-    40% { transform: translate(-5%,15%) }
-    50% { transform: translate(-10%,5%) }
-    60% { transform: translate(15%,0) }
-    70% { transform: translate(0,10%) }
-    80% { transform: translate(-15%,0) }
-    90% { transform: translate(10%,5%) }
-    100% { transform: translate(5%,0) }
-
-`
-
 const CoverBox = styled.div`
         height: 100%;
         margin: 0 auto;
@@ -45,8 +30,6 @@ const CoverBox = styled.div`
         visibility: visible;
       
     }
-
-
 `
 
 
@@ -130,7 +113,7 @@ export default function Intro() {
             <div className="bg"></div>
             <TitleBox>
                 <h1>PORTFOLIO</h1>
-                <CoverTitle />
+                {/* <CoverTitle /> */}
             </TitleBox>
               <ScrollArrow>
                   <span>스크롤</span>
