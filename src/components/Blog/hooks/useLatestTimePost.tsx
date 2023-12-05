@@ -41,5 +41,7 @@ export default function useLatestTimePost({postList} : LatestTimePostHookProps) 
 
     return postList.map((post, idx) => {
         return {...post,timeStamp : querys.data[idx]}
-    });
+    }).sort((a, b) => {
+        return (new Date(b.timeStamp!)).getTime() - (new Date(a.timeStamp!)).getTime()
+      });
 }
