@@ -5,6 +5,8 @@ import styled, { css } from 'styled-components'
 import useBlogPosts from '../BlogSection/hooks/useBlogPosts'
 import CommonSection from 'components/Blog/BlogMain/CommonSection'
 import useLatestTimePost from 'components/Blog/hooks/useLatestTimePost'
+import PreviewPosts from '../BlogSection/PreviewPosts'
+import media from 'styles/media'
 
 const BlogLayout = styled.div`
     width: 100%;
@@ -27,6 +29,15 @@ const BlogLayout = styled.div`
         pointer-events: none;
         z-index: -1;
     }
+    ${media.large} {
+        height : auto;
+        min-height : 100vh;
+    }
+
+    @media screen and (max-height : 580px){
+        min-height: 100vh;
+        
+    }
 `
 
 const BlogContentsBox = styled.div`
@@ -35,11 +46,23 @@ const BlogContentsBox = styled.div`
     margin: 0 auto;
     padding-top : 8.4rem;
     h1 {
-        font-family: 'Poppins';
-        font-size: 5rem;
+        font-family: 'Dhurjati', sans-serif;
+        font-size: 6rem;
+        text-transform: uppercase;
         font-weight: 600;
         text-shadow: 0px 0px 3px ${({ theme }) => theme.shadowColor};
         text-align: center;
+        margin-bottom: .8em;
+    }
+    ${media.medium} {
+        h1{
+            font-size : 3.2rem;
+        }
+    }
+    ${media.small}{
+        h1 {
+            font-size: 2.2rem;
+        }
     }
 `
 
@@ -60,8 +83,8 @@ export default function Blog() {
       <BlogLayout>
         <div className="blur"></div>
         <BlogContentsBox>
-            <TypingText delay={1000} speed={100} text='Jung Wook Hyun Tech Blog' />
-            <CommonSection postList={timeStampPosts} maxVisibleItems={4} title='Latest'/>
+                <TypingText delay={1000} speed={100} text='Jung Wook Hyun Tech Blog' />
+                <PreviewPosts postList={timeStampPosts} />
         </BlogContentsBox>
       </BlogLayout>
     )
