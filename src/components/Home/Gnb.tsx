@@ -1,6 +1,7 @@
 import useBoolean from 'hooks/useBoolean';
-import React, { useCallback, useEffect, useRef, useState } from 'react'
-import styled from 'styled-components'
+import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react'
+import { useLocation, useNavigate } from 'react-router-dom';
+import styled, { css } from 'styled-components'
 import media from 'styles/media';
 
 interface GnbLayoutProps {
@@ -15,6 +16,7 @@ const GnbLayout = styled.div<GnbLayoutProps>`
     top:0;
     left: 0;
     height: 6.4rem;
+    z-index: 9999;
     justify-content: center;
     ul {
         align-items: center;
@@ -31,7 +33,7 @@ const GnbLayout = styled.div<GnbLayoutProps>`
         margin-right: 2rem;
         font-family: 'Poppins';
         font-weight: 400;
-        font-size: 1.6rem;
+        font-size: 1.5rem;
         text-transform: uppercase;
         cursor: pointer;
     }
@@ -40,8 +42,9 @@ const GnbLayout = styled.div<GnbLayoutProps>`
     }
 
     .current {
-        font-size: 2rem;
+        font-size: 1.7rem;
         font-weight: 600;
+        color :${({theme})=>theme.pointColor};
     }
 
     .bar{
@@ -50,8 +53,9 @@ const GnbLayout = styled.div<GnbLayoutProps>`
         left:0;
         width: 3rem;
         height: 2px;
-        background-color: ${({ theme }) => theme.color};
-        transition: all .3s ease-out;
+        background-color: ${({theme})=>theme.pointColor};
+        transition: all .5s cubic-bezier(0.4, 0, 1, 1);
+        border-radius: 4px;
     }
 
     ${media.medium}{
@@ -59,24 +63,33 @@ const GnbLayout = styled.div<GnbLayoutProps>`
             margin-right: 1rem;
         }
     }
-    ${media.small}{
+    ${media.medium}{
         .gnb-wrapper {
             height: 3rem;
             margin-top: 2.4rem;
             overflow: hidden;
-            overflow: ${(props)=> props.$mobileOpen ? "visible" : "hidden"};
+            overflow: ${(props) => props.$mobileOpen ? "visible" : "hidden"};
         }
         ul {
-            display: flex;
             flex-direction : column;
-            gap: 1rem;
+            height: auto;
             position: relative;
-            top:  ${(props) => props.$mobileOpen ? `0px`:`-${props.$index * 3}rem`};
+            border-radius: 4px;
+            top: ${(props) => props.$mobileOpen ? `7.5rem`:`${7.5 - props.$index * 3}rem`};
             transition : all ease-out .6s ;
+            ${(props)=> props.$mobileOpen && css`
+                background-color: ${({theme})=>theme.current ==="dark" ? "#12121288" : "#ffffffaa"};
+                backdrop-filter: blur(4px);
+
+            `}
         }
         li {
             line-height: 2rem;
             margin: 0;
+            padding : .5rem;
+            text-align : center;
+            width: 20rem;
+        
         }
         .bar {
             display: none;
@@ -88,7 +101,13 @@ const sections = ["Intro", "About", "Skills", "PortFolio", "Blog", "Contact"];
 export default function Gnb() {
     const gnbRef = useRef<HTMLUListElement>(null);
     const barRef = useRef<HTMLDivElement>(null);
-    const [index, setIndex] = useState(0);
+    const location = useLocation();
+    const navigate = useNavigate();
+
+    const index = useMemo(() => {
+        return Number(location.hash.substring(1));
+    },[location.hash])
+
     const [mobileIsOpen, onToggleMobileOpen, setMobileOpen] = useBoolean(false);
 
     const resizeBar = useCallback(() => {
@@ -119,7 +138,9 @@ export default function Gnb() {
                     if (index === idx) {
                         onToggleMobileOpen();
                     }
-                    setIndex(idx);
+                    else {
+                        navigate(`#${idx}`);
+                    }
                 }} className={index === idx ? "current" : undefined}>{section}</li>)}
                 <div className='bar' ref={barRef}></div>
             </ul>
