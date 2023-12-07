@@ -8,7 +8,7 @@ const NoizeFilterLayout = styled.div`
     top: -50%;
     left: -50%;
     width: 200%;
-    height: 200vh;
+    height: calc(var(--vh) * 200);
     background: transparent url('http://assets.iceable.com/img/noise-transparent.png') repeat 0 0;
     background-repeat: repeat;
     animation: ${noize} .2s infinite;

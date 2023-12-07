@@ -37,7 +37,7 @@ const TextFrame = keyframes`
 const PageInCover = styled.div<{$direction : DirectionType}>`
   position: fixed;
   width: 100vw;
-  height :100vh;
+  height :calc(var(--vh) * 100);;
   top:0;
   left:0;
   z-index: 898;
@@ -133,7 +133,7 @@ const OutFrame = (x: number, y: number) => keyframes`
 const PageOutCover = styled.div<{$direction : DirectionType}>`
   position: fixed;
   width: 100vw;
-  height :100vh;
+  height :calc(var(--vh) * 100);;
   top:0;
   left:0;
   z-index: 898;

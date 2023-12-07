@@ -10,7 +10,7 @@ import media from 'styles/media'
 
 const BlogLayout = styled.div`
     width: 100%;
-    height: 100vh;
+    height: 100%;
     position: relative;
     .blur {
         position: absolute;
@@ -31,11 +31,11 @@ const BlogLayout = styled.div`
     }
     ${media.large} {
         height : auto;
-        min-height : 100vh;
+        min-height : 100%;
     }
 
     @media screen and (max-height : 580px){
-        min-height: 100vh;
+        min-height: 100%;
         
     }
 `

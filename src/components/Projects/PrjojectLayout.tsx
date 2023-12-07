@@ -5,7 +5,7 @@ import useCustomNavigate from "hooks/useCustomNavigate";
 
 
 const Template = styled.div`
-    height: 100vh;
+    height: 100%;
     overflow-x: hidden;
     position: relative;
 

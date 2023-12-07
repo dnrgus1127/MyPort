@@ -43,12 +43,15 @@ body {
 }
 
 body {
-	min-height: 100vh;
+	min-height: calc(var(--vh) * 100);;
 	min-height: -webkit-fill-available;
-  }
+}
+
+
   
 html {
 	height: -webkit-fill-available;
+	overflow: hidden;
 }
 
 ol, ul {

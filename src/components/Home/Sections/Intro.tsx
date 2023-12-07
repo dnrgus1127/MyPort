@@ -7,7 +7,7 @@ import { noize } from 'styles/keyFrame/noize'
 
 const CoverLayout = styled.div`
     width: 100%;
-    height: 100vh;
+    height: 100%;
     background-color: ${({theme})=> theme.cover};
     box-shadow: 0px 5px 25px ${({theme})=>theme.shadowColor};
 `
@@ -22,7 +22,7 @@ const CoverBox = styled.div`
         top: -50%;
         left: -50%;
         width: 200%;
-        height: 200vh;
+        height: calc(var(--vh) * 200);
         background: transparent url('http://assets.iceable.com/img/noise-transparent.png') repeat 0 0;
         background-repeat: repeat;
         animation: ${noize} .2s infinite;

@@ -5,7 +5,7 @@ import media from 'styles/media'
 const AboutLayout = styled.div`
     width: var(--width);
     margin : 0 auto;
-    height: 100vh;
+    height: 100%;
     display: flex;
     align-items: center;
 `
