@@ -10,21 +10,22 @@ const PortFolioSlideLayout = styled.div`
     width: 100%;
     height: 100%;
     display: flex;
-    align-items: center;
+    align-items: start;
     justify-content: center;
     gap: 2rem;   
     position: relative;
+    padding-top: calc(var(--header) * 2);
 
     .slideBtn {
         position: absolute;
         top: calc(50% - 2.4rem);
+        z-index: 4;
         svg {
-        fill: white;
-        filter: drop-shadow(0px 0px 5px ${({theme})=>theme.shadowColor2});
-        width : 4.8rem;
-        height: 4.8rem;
-        
-    }
+            fill: white;
+            filter: drop-shadow(0px 0px 5px ${({theme})=>theme.shadowColor2});
+            width : 4.8rem;
+            height: 4.8rem;
+        }
     }
     .slideBtn.left {
         left:1.2rem;
@@ -36,6 +37,9 @@ const PortFolioSlideLayout = styled.div`
     }
 
     .blur {
+        ${({ theme }) => theme.current === "light" && css`
+            display: none;
+        `}
         position: absolute;
         bottom:0;
         width: 100%;
@@ -51,9 +55,13 @@ const PortFolioSlideLayout = styled.div`
         pointer-events: none;
         z-index: 1;
     }
+
+    ${media.small}{
+        padding-top : 0;
+        align-items : center;
+    }
 `
 const PortFolioSlideWindow = styled.div`
-
     position: relative;
     width: calc(var(--width) / 3.5);
     height: calc(var(--width) / 3.5 * 1.35);
@@ -62,12 +70,16 @@ const PortFolioSlideWindow = styled.div`
     border-radius: 8px;
 
     ${media.xlarge} {
-        width: calc(var(--width) / 2.5);
-        height: calc(var(--width) / 2.5 * 1.35);
+        width: calc(var(--width) / 3.5);
+        height: calc(var(--width) / 3.5 * 1.35);
     }
     ${media.large} {
-        width: calc(var(--width) / 2);
-        height: calc(var(--width) / 2 * 1.35);
+        width: calc(var(--width) /2.5);
+        height: calc(var(--width) /2.5 * 1.35);
+    }
+    ${media.medium} {
+        width: calc(var(--width) /2);
+        height: calc(var(--width) /2 * 1.35);
     }
 
     ${media.small} {

@@ -2,7 +2,9 @@ import { BoxButton } from 'components/Common/Buttons/StyledButtons';
 import React from 'react'
 import styled from 'styled-components';
 import { FadeInFromBottom } from 'styles/keyFrame/Fade';
-import { Repository, RepositoryData } from 'types/Project'
+import media from 'styles/media';
+import textShadow from 'styles/shadow';
+import { Repository } from 'types/Project'
 
 
 const PortFolioSlideDetailsLayout = styled.div`
@@ -12,16 +14,14 @@ const PortFolioSlideDetailsLayout = styled.div`
   z-index: 3;
   width: 200%;
   text-align: center;
-  margin-bottom: calc(var(--side-padding)/2);
-
+  margin-bottom: calc(var(--vh) * 10);
+  
   h1 {
-      font-size: 6rem;
-      font-family: 'Poppins';
-      
-      font-weight: 600;
+      font-size: 8rem;
+      font-family: 'Dhurjati', sans-serif;
       text-transform: uppercase;
-      text-shadow: 0px 0px 2px ${({ theme }) => theme.shadowColor};
-      letter-spacing: .5rem;
+      ${textShadow(3)}
+      
       opacity: 0;
       transform: translateY(25%);
       animation: ${FadeInFromBottom} 1s .6s ease-out forwards ;    
@@ -39,7 +39,38 @@ const PortFolioSlideDetailsLayout = styled.div`
     animation: ${FadeInFromBottom} 1s 1.5s ease-out forwards ;    
     margin-bottom: 1.6rem;
     line-height: 1.7rem;
+    text-shadow: 0px 0px 2px ${({ theme }) => theme.shadowColor};
+    word-wrap: normal;
+    word-break: keep-all;
   }
+
+  ${media.large} {
+    h1 {
+      font-size: 6rem;
+    }
+    p {
+      width: 40%;
+      font-size: 1.4rem;
+    }
+  }
+  ${media.small} {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding-top : var(--header);
+    padding-bottom: calc(var(--header) / 2);
+    align-items: center;
+    h1 {
+      font-size: 4rem;
+      margin-bottom: 1rem;
+      ${textShadow(1)}
+    }
+    margin-bottom: 1rem;
+    p {
+      display: none;
+    }
+  } 
 
 
 `
@@ -53,6 +84,9 @@ const MoreButton = styled(BoxButton)`
   transform: translateY(25%);
   animation: ${FadeInFromBottom} 1s 2s ease-out forwards ;    
 
+  ${media.small} {
+    padding : 1rem 6.4rem;
+  }
 `
 
 
