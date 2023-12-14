@@ -1,12 +1,15 @@
 import { configureStore } from "@reduxjs/toolkit";
 import navigateReducer from "./reducer/navigaterReducer";
 import themeReducer from "./reducer/themeReducer";
+import animationReducer from "./reducer/animationReducer";
 
 
 export const store = configureStore({
   reducer: {
       navigation : navigateReducer,
-      theme : themeReducer,
+    theme: themeReducer,
+      sectionAnimation : animationReducer
+  
     },
   })
 
