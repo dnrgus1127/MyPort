@@ -28,7 +28,7 @@ export const MarkdownStyled = styled.div`
         font-size : 1.8rem;
     }
     h2,h3,blockquote {
-        margin-bottom: 2.6rem;
+        margin-bottom: .5em;
     }
     hr {
         margin : 3rem 0;
@@ -40,7 +40,7 @@ export const MarkdownStyled = styled.div`
     }
     p,li {
         font-size: 1.6rem;
-        margin-bottom: 1rem;
+        margin-bottom: .5em;
         line-height: 1.3em;
     }
     blockquote {

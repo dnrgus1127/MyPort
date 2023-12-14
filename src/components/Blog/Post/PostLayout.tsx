@@ -114,11 +114,13 @@ const PostContents = styled(MarkdownStyled)`
     
   }
   p,li {
-    font-size : 1.6rem;
+    font-size : 1.5rem;
     word-break: keep-all;
     text-indent: 5px;
     word-spacing: 1px;
     font-family: "Noto Sans KR";
+    
+    /* font-family: "Poppins"; */
   }
 
   code:not([class^="language-"]){

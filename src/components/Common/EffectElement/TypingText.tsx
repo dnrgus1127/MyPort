@@ -6,13 +6,14 @@ interface TypingTextProps {
     tag?: "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "p" | "li";
     delay?: number;
     speed?: number;
+    className?: string;
 }
 
 const TypingTextCss = styled.h1`
     
 `
 
-export default function TypingText({ tag = "h1", text ,delay = 0,speed=100 }: TypingTextProps) {
+export default function TypingText({ tag = "h1", text ,delay = 0,speed=100}: TypingTextProps) {
     const [innerText, setInnerText] = useState<string>("");
 
     useEffect(() => {

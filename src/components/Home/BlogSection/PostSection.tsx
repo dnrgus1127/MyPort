@@ -22,7 +22,7 @@ const PostSectionLayout = styled.div`
     bottom: 0;
     left: 0;
     width: 120%;
-    height: 2px;
+    height: 1px;
     background-color: ${({ theme }) => theme.color};
     content: " ";
   }
