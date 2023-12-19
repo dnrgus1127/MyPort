@@ -1,48 +1,81 @@
-import { BoxButton } from 'components/Common/Buttons/StyledButtons';
-import React from 'react'
-import styled from 'styled-components';
-import { FadeInFromBottom } from 'styles/keyFrame/Fade';
-import media from 'styles/media';
-import textShadow from 'styles/shadow';
-import { Repository } from 'types/Project'
+import { BoxButton } from "components/Common/Buttons/StyledButtons";
+import React from "react";
+import { useAppSelector } from "redux/hooks";
+import styled, { css } from "styled-components";
+import { AnimationComponent } from "styles/animation";
+import { FadeInFromBottom } from "styles/keyFrame/Fade";
+import media from "styles/media";
+import textShadow from "styles/shadow";
+import { Repository } from "types/Project";
+import useSectionAnimation from "../Sections/hooks/useSectionAnimation";
 
-
-const PortFolioSlideDetailsLayout = styled.div`
+const PortFolioSlideDetailsLayout = styled(AnimationComponent)`
   position: absolute;
-  bottom:0;
-  left : -50%;
+  bottom: 0;
+  left: -50%;
   z-index: 3;
   width: 200%;
   text-align: center;
   margin-bottom: calc(var(--vh) * 10);
-  
-  h1 {
-      font-size: 8rem;
-      font-family: 'Dhurjati', sans-serif;
-      text-transform: uppercase;
-      ${textShadow(3)}
-      
-      opacity: 0;
-      transform: translateY(25%);
-      animation: ${FadeInFromBottom} 1s .6s ease-out forwards ;    
-      z-index: 1;
-      margin-bottom: 3rem;
-  }
+  transition: transform 1s ease-out, opacity 1s 0.2s ease;
+  display: flex;
+  flex-direction: column;
 
-  p { 
-    width: 33%;
-    margin: 0 auto;
+  ${(props) =>
+    !props.$visible &&
+    css`
+      transform: translate(0, 200%);
+    `}
+
+  h1 {
+    font-size: 4rem;
+    font-family: "Poppins Black", sans-serif;
+    text-transform: uppercase;
+    ${textShadow(1)}
+
     opacity: 0;
     transform: translateY(25%);
-    font-size : 1.5rem;
-    font-family: 'SUIT-Regular';
-    animation: ${FadeInFromBottom} 1s 1.5s ease-out forwards ;    
+    z-index: 1;
+    margin-bottom: 3rem;
+  }
+
+  p {
+    max-width: 33%;
+    display: inline-block;
+    opacity: 0;
+    transform: translateY(25%);
+    margin: 0 auto;
+    font-size: 1.5rem;
+    font-family: "SUIT-Regular";
     margin-bottom: 1.6rem;
+  }
+  span {
     line-height: 1.7rem;
+    display: inline-block;
+    padding: 4px 6px;
     text-shadow: 0px 0px 2px ${({ theme }) => theme.shadowColor};
     word-wrap: normal;
+    background-color: ${({ theme }) => theme.bgColor4};
+    border-radius: 1px;
+    white-space: pre-wrap;
     word-break: keep-all;
   }
+
+  ${(props) =>
+    props.$enableAnimation &&
+    css`
+      h1,
+      p,
+      button {
+        animation: ${FadeInFromBottom} 1s ease-out forwards;
+      }
+      p {
+        animation-delay: 0.8s;
+      }
+      button {
+        animation-delay: 1.2s;
+      }
+    `}
 
   ${media.large} {
     h1 {
@@ -58,11 +91,11 @@ const PortFolioSlideDetailsLayout = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    padding-top : var(--header);
+    padding-top: var(--header);
     padding-bottom: calc(var(--header) / 2);
     align-items: center;
     h1 {
-      font-size: 4rem;
+      font-size: 3rem;
       margin-bottom: 1rem;
       ${textShadow(1)}
     }
@@ -70,36 +103,50 @@ const PortFolioSlideDetailsLayout = styled.div`
     p {
       display: none;
     }
-  } 
-
-
-`
+  }
+`;
 
 const MoreButton = styled(BoxButton)`
-  padding : 1rem 3.2rem;
+  padding: 1rem 3.2rem;
   font-weight: 600;
-  font-family: 'SUIT-Regular';
+  font-family: "SUIT-Regular";
   font-size: 1.5rem;
   opacity: 0;
   transform: translateY(25%);
-  animation: ${FadeInFromBottom} 1s 2s ease-out forwards ;    
-
+  align-self: center;
   ${media.small} {
-    padding : 1rem 6.4rem;
+    padding: 1rem 6.4rem;
   }
-`
-
+`;
 
 interface PortFolioSlideDetailsProps {
   project: Repository;
+  visible: boolean;
+  onClickButton: React.MouseEventHandler<HTMLButtonElement>;
 }
-export default function PortFolioSlideDetails({project} : PortFolioSlideDetailsProps) {
+export default function PortFolioSlideDetails({ project, onClickButton, visible }: PortFolioSlideDetailsProps) {
+  const animationState = useSectionAnimation(3);
+
   return (
-    <PortFolioSlideDetailsLayout>
+    <PortFolioSlideDetailsLayout $enableAnimation={animationState === "animation-active"} $visible={visible}>
       <h1>{project.alternateTitle}</h1>
-      <p>{project.description}</p>
-      <p>{project.whyDeveloped}</p>
-      <MoreButton>자세히 보기</MoreButton>
+      <p>
+        {project.description.split("\n").map((text, idx) => (
+          <span key={idx}>
+            {text}
+            <br />
+          </span>
+        ))}
+      </p>
+      <p>
+        {project.whyDeveloped.split("\n").map((text, idx) => (
+          <span key={idx}>
+            {text}
+            <br />
+          </span>
+        ))}
+      </p>
+      <MoreButton onClick={onClickButton}>자세히 보기</MoreButton>
     </PortFolioSlideDetailsLayout>
-  )
+  );
 }
