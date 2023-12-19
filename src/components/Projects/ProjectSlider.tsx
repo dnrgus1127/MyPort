@@ -99,18 +99,24 @@ export default function ProjectSlider({ frameNumber, data, setFrame }: ProjectSl
    
 
     const calculateTranslate = (distance: number) => {
+        console.log("🚀 ~ file: ProjectSlider.tsx:102 ~ calculateTranslate ~ distance:", distance)
         let translate = "";
+        const direction = distance < 0 ? '-' : "+";
         if (distance === 0) {
             translate += " scale(1)";
             return translate;
         }
         if (Math.abs(distance) === 1) {
             translate += " scale(0.8)";
-            translate += ` rotateY(${distance <0 ? '-' :"+"}20deg)`
+            translate += ` rotateY(${direction}20deg)`
         }
         else if (Math.abs(distance) === 2) {
             translate += " scale(0.7)"
-            translate += ` rotateY(${distance <0 ? '-' : "+"}35deg)`
+            translate += ` rotateY(${direction}35deg)`
+        }
+        else if (Math.abs(distance) >= 3) {
+            translate += " scale(0.5)";
+            translate += ` rotateY(${direction}45deg)`;
         }
         return translate;
     }
