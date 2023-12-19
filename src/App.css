@@ -1,85 +1,86 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Poppins&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap");
 @import url("https://fonts.googleapis.com/css?family=Raleway:900&display=swap");
-@import url('https://fonts.googleapis.com/css2?family=Abril+Fatface&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Fira+Mono&display=swap'); 
+@import url("https://fonts.googleapis.com/css2?family=Abril+Fatface&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Fira+Mono&display=swap");
 /* 코드 폰트 font-family: 'Fira Mono', monospace; */
 /* font-family: 'Dhurjati', sans-serif; */
 
 @font-face {
-  font-family: 'Poppins Black';
-  src : url('../src/fonts/Poppins/Poppins-Black.ttf');
+  font-family: "Poppins Black";
+  src: url("../src/fonts/Poppins/Poppins-Black.ttf");
 }
 
 @font-face {
-  font-family: 'Times Newer Roman';
+  font-family: "Times Newer Roman";
   src: url("../src/fonts/TimesNewerRoman/TimesNewerRoman-Regular.otf");
 }
 
 @font-face {
-  font-family: 'SUIT-Regular';
-  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_suit@1.0/SUIT-Regular.woff2') format('woff2');
+  font-family: "SUIT-Regular";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_suit@1.0/SUIT-Regular.woff2") format("woff2");
   font-weight: normal;
   font-style: normal;
 }
 
-
 @font-face {
-  font-family: 'SUIT-BOLD';
-  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_suit@1.0/SUIT-Regular.woff2') format('woff2');
+  font-family: "SUIT-BOLD";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_suit@1.0/SUIT-Regular.woff2") format("woff2");
   font-weight: bold;
   font-style: normal;
 }
 
-@import url('https://fonts.googleapis.com/css2?family=Dhurjati&display=swap');
-
-
+@import url("https://fonts.googleapis.com/css2?family=Dhurjati&display=swap");
 
 :root {
   font-size: 62.5%;
 
+  --side-padding: 20rem;
+  --width: 1300px;
+  --header-height: 420px;
+  --header: 6.4rem;
 
-  --side-padding : 20rem;
-  --width : 1300px;
-  --header-height : 420px;
-  
+  --vh: 100vh;
 }
 
-@media screen and (max-width : 1479px){
+@media screen and (max-width: 1479px) {
   :root {
-    --side-padding :10rem;
-    --header-height : 386px;
-    --width : 900px;
-
+    --side-padding: 10rem;
+    --header-height: 386px;
+    --width: 1000px;
   }
 }
-@media screen and (max-width : 1023px) {
+@media screen and (max-width: 1023px) {
   :root {
-    --side-padding : 6rem;
-    --width : 760px;
-    --header-height : 380px;
-
+    --side-padding: 6rem;
+    --width: 760px;
+    --header-height: 380px;
   }
 }
-@media screen and (max-width : 767px) {
+@media screen and (max-width: 768px) {
   :root {
-    --side-padding : 3rem;
-    --width : 478px;
-    --header-height : 240px;
-
+    --side-padding: 3rem;
+    --width: 580px;
+    --header-height: 240px;
   }
 }
-@media screen and (max-width : 480px) {
-  :root {
-    --side-padding : 2rem;
-    --width : 340px;
-    --header-height : 160px;
 
+@media screen and (max-width: 580px) {
+  :root {
+    --width: 340px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  :root {
+    --side-padding: 2rem;
+    --width: 340px;
+    --header-height: 160px;
   }
 }
 body {
   font-size: 1.6rem;
   box-sizing: border-box;
-  font-family: 'Noto Sans KR', sans-serif;
+  font-family: "Noto Sans KR", sans-serif;
 }
