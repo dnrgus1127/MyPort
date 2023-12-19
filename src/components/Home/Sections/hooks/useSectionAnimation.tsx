@@ -12,7 +12,7 @@ export default function useSectionAnimation(sectionIndex : number) {
         if (sectionIndex === Number(location.hash.substring(1))) {
             timerId = setTimeout(() => {
                 dispatch(setAnimationState({ sectionIndex, isActive: true }))
-            },800)
+            },400)
         }
         else {
             timerId = setTimeout(() => {
