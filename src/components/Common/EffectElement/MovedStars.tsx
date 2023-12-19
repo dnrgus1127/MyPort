@@ -1,28 +1,16 @@
-import React, { useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import styled, { keyframes } from "styled-components";
 
-const GliterFrameType1 = keyframes`
+const MovedStartAnimation = keyframes`
   0% {
-    opacity: 0;
+    transform: translateX(400px);
   }
-  /* 20% {
-    opacity: .3;
-  }
-  40% {
-    opacity: .7;
-  } */
-  50% {
-    opacity: 1;
-  }
-  /* 75% {
-    opacity: .3;
-  } */
   100% {
-    opacity: 0;
+    transform: translateX(-400px);
   }
 `;
 
-const GlitterStarsLayout = styled.div`
+const MovedStarsLayout = styled.div`
   position: absolute;
   width: 100%;
   height: 100%;
@@ -32,17 +20,18 @@ const GlitterStarsLayout = styled.div`
   .star {
     width: 4px;
     height: 4px;
-    background-color: #fff;
+    background-color: ${({ theme }) => theme.color};
     border-radius: 50%;
     position: absolute;
+    animation: ${MovedStartAnimation} 2s infinite;
   }
   .star {
-    animation: ${GliterFrameType1} 2s infinite;
   }
 `;
 
 interface GlitterStarsProps {
   count?: number;
+  zIndex?: number;
 }
 
 type location = {
@@ -50,12 +39,11 @@ type location = {
   left: number;
   width: string;
   height: string;
-  boxShadow: string;
   animationDelay: string;
   animationDuration: string;
 };
 
-export default function GlitterStars({ count = 50 }: GlitterStarsProps) {
+export default function MovedStars({ count = 50, zIndex = -1 }: GlitterStarsProps) {
   const background = useRef<HTMLDivElement>(null);
   const [witdh, setWidth] = useState<number>(0);
 
@@ -73,17 +61,15 @@ export default function GlitterStars({ count = 50 }: GlitterStarsProps) {
           animationDuration: "0s",
         };
 
-      const size = 1 + Math.floor(Math.random() * 3);
-      const boxShadow = `0px 0px 7px ${size - 1}px #eeea`;
+      const size = 1 + Math.floor(Math.random() * 4);
       const animationDelay = `${Math.random()}s`;
-      const animationDuration = `${1 + Math.random() * 4}s`;
+      const animationDuration = `${10 + Math.random() * 20}s`;
 
       return {
         left: background.current.clientWidth * Math.random(),
         top: background.current.clientHeight * Math.random(),
         width: `${size}px`,
         height: `${size}px`,
-        boxShadow,
         animationDelay,
         animationDuration,
       };
@@ -107,11 +93,11 @@ export default function GlitterStars({ count = 50 }: GlitterStarsProps) {
   }, []);
 
   return (
-    <GlitterStarsLayout ref={background}>
+    <MovedStarsLayout ref={background} style={{ zIndex }}>
       {starLocations.map((e, idx) => {
         const location = starLocations[idx];
         return <div key={idx} className="star" style={{ ...location }}></div>;
       })}
-    </GlitterStarsLayout>
+    </MovedStarsLayout>
   );
 }
