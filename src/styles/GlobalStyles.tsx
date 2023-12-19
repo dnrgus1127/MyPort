@@ -1,6 +1,5 @@
 import { createGlobalStyle } from "styled-components";
 
-
 export const GlobalStyles = createGlobalStyle`
   * {
         
@@ -20,16 +19,15 @@ export const GlobalStyles = createGlobalStyle`
       transition: background-color 1s ease-out;
     }
     html {
-      background-color: ${({theme})=> theme.bgColor2};
+      background-color: ${({ theme }) => theme.bgColor2};
     }
 
     svg {
-      fill : ${({theme})=> theme.color};
+      fill : ${({ theme }) => theme.color};
     }
     a {
       text-decoration: none;
       color : inherit;
     }
     
-`
-
+`;
