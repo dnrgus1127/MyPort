@@ -1,11 +1,11 @@
 import { QueryClient } from "@tanstack/react-query";
 import { GITHUBAPIKEY } from "apiKey";
 import PageAnimation from "components/Common/PageAnimation";
-import Header from "components/Main/Header";
 import { REPOSITORYS } from "constans/Config";
 import { GITHUB403 } from "constans/ErrorMessage";
 import { PROJECT_INFOMATION } from "constans/ProjectData";
 import Home from "pages/Home";
+import { useEffect } from "react";
 import { Outlet, json } from "react-router-dom";
 import { Repository, RepositoryData } from "types/Project";
 import { ErrorJson } from "types/errorJson";
@@ -49,10 +49,16 @@ export const loader = (queryClient: QueryClient) => async () => {
 };
 
 function HomePage() {
+  useEffect(() => {
+    const html = document.querySelector("html");
+    html!.style.overflow = "hidden";
+    return () => {
+      html!.style.overflow = "initial";
+    };
+  }, []);
   return (
     <>
       <Home />
-      <Header />
       <PageAnimation />
       <Outlet />
     </>
