@@ -65,13 +65,12 @@ export const SKILL_DESCRIPTION: Array<SkillDescription> = [
     name: "Javascript",
     description:
       "ECMAScript 2015(ES6) 자바스크립트에 대해서 이해하고 있으며 자바스크립트를 이용한 DOM 조작, 이벤트 및 비동기 처리, 함수형 프로그래밍을 할 수 있습니다.",
-    part: ["DOM 조작", "이벤트 처리", "비동기 처리", "내장 함수", "프로토 타입 기반 객체 지향"],
+    part: ["DOM 조작", "이벤트 처리", "비동기 처리", "내장 함수"],
     detailDescription: [
       "DOM Api 를 이용하여 DOM을 조작해 웹 콘텐츠를 동적으로 업데이트하고 조작 (스타일 적용, 레이아웃 조정, 애니메이션 등)할 수 있습니다.",
       "웹 페이지에서 발생하는 다양한 이벤트를 감지하여 사용자와의 상호작용을 처리할 수 있습니다.",
       "Promise, async/await를 이용하여 비동기 처리를 할 수 있고, 이를 바탕으로 fetch,Ajax를 이용한 비동기 통신을 처리할 수 있습니다.",
       "배열 고차 함수, 표준 빌트인 객체 등을 사용할 수 있습니다.",
-      "",
     ],
   },
   {
