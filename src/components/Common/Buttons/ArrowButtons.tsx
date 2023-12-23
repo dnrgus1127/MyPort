@@ -25,7 +25,7 @@ export function ArrowButton({ className, direction, onClick }: ArrowButton) {
   }, [direction]);
 
   return (
-    <ArrowButtonCss type="button" className={className} onClick={onClick}>
+    <ArrowButtonCss tabIndex={-1} type="button" className={className} onClick={onClick}>
       {arrow}
     </ArrowButtonCss>
   );
