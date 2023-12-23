@@ -43,6 +43,7 @@ const Title = styled.div`
   padding-bottom: 1.6rem;
   margin-bottom: 1rem;
   text-shadow: 3px 3px 0 ${({ theme }) => theme.shadowColor};
+  word-break: keep-all;
   position: relative;
   &::after {
     content: " ";
@@ -94,10 +95,12 @@ const PostContents = styled(MarkdownStyled)`
   code {
     font-family: "Fira Mono", monospace;
     font-size: 1.4rem;
+    line-height: 1.9rem;
   }
 
   blockquote {
     padding: 1rem;
+    margin-bottom: 2rem;
     background-color: ${({ theme }) => theme.bgColor};
     box-shadow: inset 0px 0px 5px ${({ theme }) => theme.shadowColor};
   }
@@ -114,14 +117,14 @@ const PostContents = styled(MarkdownStyled)`
   }
 
   li::before {
-    content: "-ㅊ ";
+    content: "- ";
   }
   p,
   li {
-    font-size: 1.5rem;
+    font-size: 1.6rem;
     word-break: keep-all;
     text-indent: 5px;
-    word-spacing: 1px;
+    word-spacing: 2px;
     font-family: "Noto Sans KR";
   }
 
@@ -178,8 +181,9 @@ const PostContents = styled(MarkdownStyled)`
   }
 
   strong {
-    font-weight: 800;
+    font-weight: 600;
     color: ${({ theme }) => theme.pointColor};
+    padding: 0 2px;
   }
 
   ${media.small} {
@@ -205,6 +209,9 @@ const PostContents = styled(MarkdownStyled)`
     p,
     ul {
       margin-bottom: 1rem;
+      word-spacing: 1px;
+      line-height: 150%;
+      word-break: normal;
     }
     h1,
     h2,
@@ -227,10 +234,6 @@ export default function PostLayout({ title, post }: PostLayoutProps) {
     const arr = title.split("/");
     return arr[arr.length - 1];
   }, [title]);
-
-  useEffect(() => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  }, []);
 
   const topButtonHandler = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
