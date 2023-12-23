@@ -1,10 +1,10 @@
-import { SKILL_DESCRIPTION, SKILL_LIST, Skill, getSkillColor } from "constans/SkillsData";
+import { SKILL_DESCRIPTION, Skill, getSkillColor } from "constans/SkillsData";
 import styled, { css } from "styled-components";
 import { AnimationComponentProps } from "styles/animation";
+import { FadeInFromBottom, FadeOut } from "styles/keyFrame/Fade";
 import media from "styles/media";
 import { customScrollBar } from "styles/scrollBar";
 import useWheelStopPropagation from "../Sections/hooks/useWheelStopPropagation";
-import { BackToBottom, FadeIn, FadeInFromBottom, FadeOut } from "styles/keyFrame/Fade";
 
 const RestSkillsLayout = styled.div<AnimationComponentProps>`
   position: absolute;
