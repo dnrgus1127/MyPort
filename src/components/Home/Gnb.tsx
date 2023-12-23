@@ -1,15 +1,17 @@
 import useBoolean from "hooks/useBoolean";
+import { SECTIONS } from "index";
 import { useEffect, useMemo, useRef } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import styled, { css } from "styled-components";
 import media from "styles/media";
+import useCurrentSection from "./hooks/useCurrentSection";
 
 interface GnbLayoutProps {
   $index: number;
   $mobileOpen: boolean;
 }
 
-const GnbLayout = styled.div<GnbLayoutProps>`
+const GnbLayout = styled.nav<GnbLayoutProps>`
   display: flex;
   position: fixed;
   width: 100%;
@@ -103,9 +105,7 @@ export default function Gnb() {
   const location = useLocation();
   const navigate = useNavigate();
 
-  const index = useMemo(() => {
-    return Number(location.hash.substring(1));
-  }, [location.hash]);
+  const { index } = useCurrentSection();
 
   const [mobileIsOpen, onToggleMobileOpen, setMobileOpen] = useBoolean(false);
 
@@ -136,7 +136,7 @@ export default function Gnb() {
                 if (index === idx) {
                   onToggleMobileOpen();
                 } else {
-                  navigate(`#${idx}`);
+                  navigate(`/${SECTIONS[idx]}`);
                 }
               }}
               className={index === idx ? "current" : undefined}
