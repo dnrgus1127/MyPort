@@ -1,9 +1,10 @@
 import TypingText from "components/Common/EffectElement/TypingText";
-import { useAppSelector } from "redux/hooks";
 import styled, { keyframes } from "styled-components";
+import { FadeIn } from "styles/keyFrame/Fade";
 import { noize } from "styles/keyFrame/noize";
 import media from "styles/media";
-import CoverTitle from "../../Main/Cover/CoverTitle";
+import CoverTitle from "../IntroSection/CoverTitle";
+import { useAnimationState } from "./hooks/useSectionAnimation";
 
 const CoverLayout = styled.div`
   width: 100%;
@@ -27,6 +28,11 @@ const CoverBox = styled.div`
     animation: ${noize} 0.2s infinite;
     opacity: 0.9;
     visibility: visible;
+  }
+
+  .morph {
+    opacity: 0;
+    animation: ${FadeIn} 1s 0.5s linear forwards;
   }
 `;
 
@@ -103,15 +109,17 @@ const ScrollArrow = styled.div`
 `;
 
 export default function Intro() {
-  const animationState = useAppSelector((state) => state.sectionAnimation.sectionStates[0]);
+  const { isAnimation } = useAnimationState(0);
   return (
     <CoverLayout>
       <CoverBox>
         <div className="bg"></div>
-        <TitleBox>
-          <TypingText text={animationState === "animation-active" ? "PORTFOLIO" : ""} />
-          {animationState === "animation-active" && <CoverTitle />}
-        </TitleBox>
+        {isAnimation && (
+          <TitleBox>
+            <TypingText text={"PORTFOLIO"} />
+            <CoverTitle className="morph" />
+          </TitleBox>
+        )}
         <ScrollArrow>
           <span>스크롤</span>
           <svg width="24" height="24" xmlns="http://www.w3.org/2000/svg" fillRule="evenodd" clipRule="evenodd">
