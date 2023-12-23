@@ -1,10 +1,12 @@
 import Blog from "components/Home/Sections/Blog";
 import Contact from "components/Home/Sections/Contact";
-import useSectionAnimation from "components/Home/Sections/hooks/useSectionAnimation";
+import useSectionAnimation, { useAnimationState } from "components/Home/Sections/hooks/useSectionAnimation";
+import useCurrentSection from "components/Home/hooks/useCurrentSection";
 import useTouchScroll from "components/Home/hooks/useTouchScroll";
+import { SECTIONS } from "index";
 import { throttle } from "lodash";
 import React, { ReactNode, useCallback, useRef } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import Gnb from "../components/Home/Gnb";
 import About from "../components/Home/Sections/About";
@@ -19,33 +21,28 @@ const HomeLayout = styled.div`
   position: relative;
 `;
 
-interface HomeScrollWrapperProps {
-  $sectionIndex: number;
-}
-
-const HomeScrollWrapper = styled.div<HomeScrollWrapperProps>`
+const HomeScrollWrapper = styled.div`
   position: absolute;
   width: 100%;
   height: 100%;
   top: 0;
-  transform: translateY(${(props) => props.$sectionIndex * 100 * -1}%);
   left: 0;
 `;
 
 export default function Home() {
-  const location = useLocation();
   const navigate = useNavigate();
+  const { index: sectionIndex } = useCurrentSection();
   const { scrollWrapper: scrollWrapperRef, transitionEndHandler } = useTouchScroll({
-    index: Number(location.hash.substring(1)),
-    setIndex: (index: number) => navigate(`#${index}`),
+    index: sectionIndex,
+    setIndex: (index: number) => navigate(`/${SECTIONS[index]}`),
   });
 
   return (
     <HomeLayout>
       <HomeScrollWrapper
         ref={scrollWrapperRef}
-        $sectionIndex={Number(location.hash.substring(1))}
         onTransitionEnd={transitionEndHandler}
+        style={{ transform: `translateY(${sectionIndex * 100 * -1}%)` }}
       >
         <ContentsSection contents={<Intro />} flag={0} />
         <ContentsSection contents={<About />} flag={1} />
@@ -94,15 +91,16 @@ const min = 0;
 function ContentsSection({ contents, flag }: ContentsScrtionProps) {
   const sectionRef = useRef<HTMLElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
-  const location = useLocation();
   const navigate = useNavigate();
+  const { index: sectionIndex } = useCurrentSection();
   useSectionAnimation(flag);
+  const { isAnimation } = useAnimationState(flag);
 
   const wheelEventHandler = useCallback(
     throttle((e: React.WheelEvent) => {
-      if (location.hash !== `#${flag}`) return;
+      if (sectionIndex !== flag) return;
       if (Math.abs(e.deltaY) < window.innerHeight * 0.02) return;
-      let nextSection = Number(flag);
+      let nextSection = sectionIndex;
       if (e.deltaY < 0) {
         nextSection -= 1;
       }
@@ -111,15 +109,15 @@ function ContentsSection({ contents, flag }: ContentsScrtionProps) {
         nextSection += 1;
       }
       if (nextSection >= min && nextSection <= max) {
-        navigate(`#${nextSection}`);
+        navigate(`/${SECTIONS[nextSection]}`);
       }
     }, 100),
-    [navigate, flag, location.hash]
+    [navigate, flag]
   );
 
   return (
     <Section ref={sectionRef} onWheel={wheelEventHandler}>
-      <SectionWrapper ref={contentRef}>{contents}</SectionWrapper>
+      <SectionWrapper ref={contentRef}>{isAnimation && contents}</SectionWrapper>
     </Section>
   );
 }
