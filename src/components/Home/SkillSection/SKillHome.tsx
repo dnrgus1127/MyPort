@@ -160,7 +160,7 @@ export default function SKillHome({ visible, onClickLogo, onClickRest }: SkillHo
               key={idx}
               className="skill-item"
             >
-              <SkillImage src={`/assets/img/${skill.name}.png`} alt={skill.name} $color={skill.color} />
+              <SkillImage src={`/assets/img/${skill.name.toLowerCase()}.png`} alt={skill.name} $color={skill.color} />
               {skill.name}
             </li>
           ))}
@@ -168,7 +168,7 @@ export default function SKillHome({ visible, onClickLogo, onClickRest }: SkillHo
         <ul>
           {SKILL_LIST[1].map((skill, idx) => (
             <li onClick={onClickRest} key={idx} className="skill-item">
-              <SkillImage src={`/assets/img/${skill.name}.png`} alt={skill.name} $color={skill.color} />
+              <SkillImage src={`/assets/img/${skill.name.toLowerCase()}.png`} alt={skill.name} $color={skill.color} />
               {skill.name}
             </li>
           ))}

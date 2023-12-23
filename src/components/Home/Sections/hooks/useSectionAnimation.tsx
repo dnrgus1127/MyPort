@@ -1,32 +1,34 @@
-import { useEffect, useMemo, useState } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import useCurrentSection from "components/Home/hooks/useCurrentSection";
+import { useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "redux/hooks";
 import { setAnimationState } from "redux/reducer/animationReducer";
 
-export default function useSectionAnimation(sectionIndex : number) {
-    const location = useLocation();
-    const dispatch = useAppDispatch();
-    const animationState = useAppSelector(state => state.sectionAnimation.sectionStates[sectionIndex]);
-    useEffect(() => {
-        let timerId: NodeJS.Timer;
-        if (sectionIndex === Number(location.hash.substring(1))) {
-            timerId = setTimeout(() => {
-                dispatch(setAnimationState({ sectionIndex, isActive: true }))
-            },400)
-        }
-        else {
-            timerId = setTimeout(() => {
-                dispatch(setAnimationState({ sectionIndex, isActive: false }));
-            },800)
-        }
+export default function useSectionAnimation(sectionIndex: number) {
+  const dispatch = useAppDispatch();
+  const animationState = useAppSelector((state) => state.sectionAnimation.sectionStates[sectionIndex]);
+  const { index } = useCurrentSection();
+  useEffect(() => {
+    let timerId: NodeJS.Timer;
+    if (sectionIndex === index) {
+      timerId = setTimeout(() => {
+        dispatch(setAnimationState({ sectionIndex, isActive: true }));
+      }, 400);
+    } else {
+      timerId = setTimeout(() => {
+        dispatch(setAnimationState({ sectionIndex, isActive: false }));
+      }, 800);
+    }
 
-        return () => {
-            clearTimeout(timerId);
-        }
+    return () => {
+      clearTimeout(timerId);
+    };
+  }, [index]);
 
+  return animationState;
+}
 
-    },[location.hash])
-    
+export function useAnimationState(sectionIndex: number) {
+  const animationState = useAppSelector((state) => state.sectionAnimation.sectionStates[sectionIndex]);
 
-    return animationState;
+  return { isAnimation: animationState === "animation-active", animationState };
 }

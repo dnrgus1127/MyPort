@@ -13,12 +13,10 @@ const SkillDescriptionLayout = styled.div`
   padding: var(--header) 0;
   display: flex;
   transition: transform 1s ease-out;
-  z-index: 1;
   will-change: transform;
-  transform: translateZ(-50px) translateX(100%);
+  transform: translateZ(-50px) translateY(100%);
   &.visible {
     transform: none;
-    z-index: 1;
   }
 
   ${media.medium} {
@@ -124,6 +122,7 @@ const SkillDescriptionWrapper = styled.div`
     backdrop-filter: blur(4px);
     border-radius: 4px;
     h4 {
+      font-size: 1.7rem;
       font-family: "Poppins", "Noto Sans KR", "Roboto KR", "Roboto", sans-serif;
       font-weight: 600;
       align-self: flex-end;

@@ -1,6 +1,5 @@
 import { BoxButton } from "components/Common/Buttons/StyledButtons";
-import React from "react";
-import { useAppSelector } from "redux/hooks";
+import { Link } from "react-router-dom";
 import styled, { css } from "styled-components";
 import { AnimationComponent } from "styles/animation";
 import { FadeInFromBottom } from "styles/keyFrame/Fade";
@@ -67,13 +66,13 @@ const PortFolioSlideDetailsLayout = styled(AnimationComponent)`
       h1,
       p,
       button {
-        animation: ${FadeInFromBottom} 1s ease-out forwards;
+        animation: ${FadeInFromBottom} 1s 1s ease-out forwards;
       }
       p {
-        animation-delay: 0.8s;
+        animation-delay: 1.2s;
       }
       button {
-        animation-delay: 1.2s;
+        animation-delay: 1.6s;
       }
     `}
 
@@ -122,9 +121,8 @@ const MoreButton = styled(BoxButton)`
 interface PortFolioSlideDetailsProps {
   project: Repository;
   visible: boolean;
-  onClickButton: React.MouseEventHandler<HTMLButtonElement>;
 }
-export default function PortFolioSlideDetails({ project, onClickButton, visible }: PortFolioSlideDetailsProps) {
+export default function PortFolioSlideDetails({ project, visible }: PortFolioSlideDetailsProps) {
   const animationState = useSectionAnimation(3);
 
   return (
@@ -146,7 +144,9 @@ export default function PortFolioSlideDetails({ project, onClickButton, visible 
           </span>
         ))}
       </p>
-      <MoreButton onClick={onClickButton}>자세히 보기</MoreButton>
+      <MoreButton tabIndex={-1}>
+        <Link to={`${project.name}`}>자세히 보기</Link>
+      </MoreButton>
     </PortFolioSlideDetailsLayout>
   );
 }

@@ -1,18 +1,17 @@
+import { ArrowButton } from "components/Common/Buttons/ArrowButtons";
 import React, { useCallback, useEffect, useRef, useState } from "react";
+import { useParams } from "react-router-dom";
 import styled, { css, keyframes } from "styled-components";
+import { AnimationComponent } from "styles/animation";
+import { FadeIn } from "styles/keyFrame/Fade";
 import { FloationSide } from "styles/keyFrame/floating";
 import media from "styles/media";
 import { Repository } from "types/Project";
-import PortFolioSlideItem from "./PortFolioSlideItem";
-import PortFolioSlideDetails from "./PortFolioSlideDetails";
-import { FadeIn } from "styles/keyFrame/Fade";
-import useSectionAnimation from "../Sections/hooks/useSectionAnimation";
-import { AnimationComponent } from "styles/animation";
-import { useLocation, useNavigate } from "react-router-dom";
-import { ArrowButton } from "components/Common/Buttons/ArrowButtons";
 import PortFolioReadMe from "./PortFolioReadMe";
+import PortFolioSlideDetails from "./PortFolioSlideDetails";
+import PortFolioSlideItem from "./PortFolioSlideItem";
 
-const PortFolioSlideLayout = styled(AnimationComponent)`
+const PortFolioSlideLayout = styled.div`
   width: 100%;
   height: 100%;
   display: flex;
@@ -34,42 +33,13 @@ const PortFolioSlideLayout = styled(AnimationComponent)`
     }
   }
 
-  ${(props) =>
-    props.$enableAnimation &&
-    props.$visible &&
-    css`
-      .slideBtn.left {
-        left: 1.2rem;
-        animation: ${() => FloationSide(-40)} 2s ease-out infinite, ${FadeIn} 1s 1s forwards;
-      }
-      .slideBtn.right {
-        right: 1.2rem;
-        animation: ${() => FloationSide(40)} 2s ease-out infinite, ${FadeIn} 1s 1s forwards;
-      }
-    `}
-
-  .blur {
-    ${({ theme }) =>
-      theme.current === "light" &&
-      css`
-        display: none;
-      `}
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-    height: 40%;
-    ${({ theme }) =>
-      theme.current === "dark"
-        ? css`
-            background: linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 1));
-            backdrop-filter: blur(1px);
-          `
-        : css`
-            background: linear-gradient(to bottom, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 1));
-            backdrop-filter: blur(3px);
-          `}
-    pointer-events: none;
-    z-index: 1;
+  .slideBtn.left {
+    left: 1.2rem;
+    animation: ${() => FloationSide(-40)} 2s ease-out infinite, ${FadeIn} 1s 1s forwards;
+  }
+  .slideBtn.right {
+    right: 1.2rem;
+    animation: ${() => FloationSide(40)} 2s ease-out infinite, ${FadeIn} 1s 1s forwards;
   }
 
   ${media.small} {
@@ -98,7 +68,9 @@ const PortFolioSlideWindow = styled(AnimationComponent)`
   perspective: 1200px;
   border-radius: 8px;
   transition: transform 1s ease-out;
-  opacity: 1;
+  opacity: 0;
+
+  animation: ${FadeIn} 1s 0.4s linear forwards;
 
   ${(props) =>
     !props.$visible &&
@@ -106,13 +78,7 @@ const PortFolioSlideWindow = styled(AnimationComponent)`
       transform: translateZ(-100px) translateY(-200%);
     `}
 
-  ${(props) =>
-    props.$enableAnimation &&
-    css`
-      /* animation: ${SlideWindowAnimation} 0.5s ease-out forwards; */
-    `}
-
-    ${media.xlarge} {
+  ${media.xlarge} {
     width: calc(var(--width) / 3.5);
     height: calc(var(--width) / 3.5 * 1.35);
   }
@@ -142,24 +108,8 @@ const BUTTON_DELAY = 570;
 export default function PortFolioSlide({ slideIndex, data, setSlide }: ProjectSliderProps) {
   const windowRef = useRef<HTMLDivElement>(null);
   const [isButtonDelay, setButtonDelay] = useState(false);
-  const animationState = useSectionAnimation(3);
-  const [isReadMore, setReadMore] = useState<boolean>(false);
-  const location = useLocation();
-  const navigate = useNavigate();
 
-  useEffect(() => {
-    let timerId: NodeJS.Timer;
-    if (location.hash === "#3") setReadMore(false);
-    else {
-      timerId = setTimeout(() => {
-        setReadMore(false);
-      }, 600);
-    }
-
-    return () => {
-      clearTimeout(timerId);
-    };
-  }, [location.hash]);
+  const { project: projectName } = useParams();
 
   useEffect(() => {
     if (slideIndex < 0 || slideIndex >= data.length) {
@@ -195,10 +145,6 @@ export default function PortFolioSlide({ slideIndex, data, setSlide }: ProjectSl
     return translate;
   }, []);
 
-  const onToggleIsMore = useCallback<React.MouseEventHandler>(() => {
-    setReadMore((prev) => !prev);
-  }, []);
-
   const handlerButtons = useCallback(
     (type: "increase" | "decrease") => {
       if (isButtonDelay) return;
@@ -217,13 +163,8 @@ export default function PortFolioSlide({ slideIndex, data, setSlide }: ProjectSl
   );
 
   return (
-    <PortFolioSlideLayout $enableAnimation={animationState === "animation-active"} $visible={!isReadMore}>
-      <PortFolioSlideWindow
-        className={`trans`}
-        ref={windowRef}
-        $visible={!isReadMore}
-        $enableAnimation={animationState === "animation-active"}
-      >
+    <PortFolioSlideLayout>
+      <PortFolioSlideWindow className={`trans`} ref={windowRef} $visible={!projectName}>
         {data.map((item, idx) => {
           return (
             <PortFolioSlideItem
@@ -256,27 +197,29 @@ export default function PortFolioSlide({ slideIndex, data, setSlide }: ProjectSl
         })}
       </PortFolioSlideWindow>
       <PortFolioSlideDetails
-        visible={!isReadMore}
+        visible={!projectName}
         key={Math.abs(slideIndex)}
         project={data[Math.abs(slideIndex) % data.length]}
-        onClickButton={onToggleIsMore}
       />
-      {/* <div className="blur" /> */}
-      <ArrowButton
-        className="slideBtn left"
-        direction="left"
-        onClick={() => {
-          handlerButtons("decrease");
-        }}
-      />
-      <ArrowButton
-        direction="right"
-        className="slideBtn right"
-        onClick={() => {
-          handlerButtons("increase");
-        }}
-      />
-      {animationState === "animation-active" && <PortFolioReadMe visible={isReadMore} onClose={onToggleIsMore} />}
+      {!projectName && (
+        <>
+          <ArrowButton
+            className="slideBtn left"
+            direction="left"
+            onClick={() => {
+              handlerButtons("decrease");
+            }}
+          />
+          <ArrowButton
+            direction="right"
+            className="slideBtn right"
+            onClick={() => {
+              handlerButtons("increase");
+            }}
+          />
+        </>
+      )}
+      <PortFolioReadMe visible={Boolean(projectName)} data={data[Math.abs(slideIndex) % data.length]} />
     </PortFolioSlideLayout>
   );
 }

@@ -13,13 +13,13 @@ const ContactLayout = styled.div`
   position: relative;
   display: flex;
   flex-direction: column;
-  /* background: radial-gradient(ellipse at bottom, #403d4a 0, #090a0f 100%); */
+  /* background: radial-gradient(ellipse at bottom, #403d4a 0, #090a0f 100%);
   background: radial-gradient(ellipse at bottom, #090a0f 0%, #17151e 100%);
   ${({ theme }) =>
     theme.current === "light" &&
     css`
       background: radial-gradient(ellipse at bottom, #c9c9c9 0, #ffffff 100%);
-    `}
+    `} */
 
   .footer {
     text-align: center;
@@ -78,6 +78,7 @@ const ContactContent = styled(AnimationComponent)`
     padding-bottom: 1.6rem;
     opacity: 0;
     cursor: pointer;
+    font-size: 1.8rem;
     ${textShadow(2)}
   }
   p:hover,
@@ -202,6 +203,18 @@ const ContactContent = styled(AnimationComponent)`
         opacity: 1;
         animation: none;
       }
+    }
+  }
+
+  ${media.small} {
+    h3 {
+      font-size: 2.2rem;
+    }
+    p,
+    a,
+    li,
+    .email {
+      font-size: 1.5rem;
     }
   }
 `;

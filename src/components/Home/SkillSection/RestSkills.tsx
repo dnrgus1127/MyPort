@@ -4,7 +4,7 @@ import { AnimationComponentProps } from "styles/animation";
 import media from "styles/media";
 import { customScrollBar } from "styles/scrollBar";
 import useWheelStopPropagation from "../Sections/hooks/useWheelStopPropagation";
-import { FadeIn, FadeInFromBottom } from "styles/keyFrame/Fade";
+import { BackToBottom, FadeIn, FadeInFromBottom, FadeOut } from "styles/keyFrame/Fade";
 
 const RestSkillsLayout = styled.div<AnimationComponentProps>`
   position: absolute;
@@ -12,12 +12,11 @@ const RestSkillsLayout = styled.div<AnimationComponentProps>`
   left: 0;
   margin-top: var(--header);
   padding: var(--header) 0;
-  transition: transform 1s ease-out, opacity 0.5s 0.5s ease-out;
-  visibility: hidden;
+  transition: transform 0.5s ease-out, opacity 0.5s ease-out;
+  transform: translateZ(-50px);
   opacity: 0;
   overflow-y: scroll;
   overflow-x: hidden;
-  z-index: -80;
   ${customScrollBar}
 
   width: 100%;
@@ -27,9 +26,7 @@ const RestSkillsLayout = styled.div<AnimationComponentProps>`
   ${(props) =>
     props.$visible &&
     css`
-      visibility: visible;
-
-      z-index: 1;
+      transform: none;
       opacity: 1;
     `}
 
@@ -121,7 +118,7 @@ const SkillItemBox = styled.div<{ $shadowColor?: string } & AnimationComponentPr
       color: ${({ theme }) => theme.pointColor};
       font-size: 1.5rem;
     }
-    li span {
+    li details {
       color: ${({ theme }) => theme.color};
       word-break: keep-all;
       font-weight: 400;
@@ -138,13 +135,13 @@ const SkillItemBox = styled.div<{ $shadowColor?: string } & AnimationComponentPr
       transition: opacity 0.3s ease-out;
     }
 
-    li:nth-child(odd) span {
+    li:nth-child(odd) details {
       left: 40%;
     }
-    li:nth-child(even) span {
+    li:nth-child(even) details {
       right: 40%;
     }
-    li:hover span {
+    li:hover details {
       visibility: visible;
       transition-duration: 1s;
       opacity: 1;
@@ -153,7 +150,7 @@ const SkillItemBox = styled.div<{ $shadowColor?: string } & AnimationComponentPr
 
   &:nth-child(n + 5) {
     ul {
-      li span {
+      li details {
         top: 0;
         transform: translateY(-110%);
       }
@@ -163,26 +160,27 @@ const SkillItemBox = styled.div<{ $shadowColor?: string } & AnimationComponentPr
   // 애니메이션
 
   opacity: 0;
-
+  transition: opacity 0.5s 1s ease-out;
   h3,
   p,
   h4,
   ul,
   li,
   img {
+    animation: ${FadeOut} 1s ease-out forwards;
     opacity: 0;
   }
   ${(props) =>
     props.$visible &&
     css`
-      animation: ${FadeIn} 0.5s 1s ease-in forwards;
+      opacity: 1;
       h3,
       p,
       h4,
       ul,
       li,
       img {
-        animation: ${FadeInFromBottom} 1s ease-out forwards;
+        animation: ${FadeInFromBottom} 1s 0.5s ease-out forwards;
       }
 
       h3,
@@ -258,7 +256,10 @@ export default function RestSkills({ visible, skillList }: RestSkillsProps) {
               {skill.part.map((item, idx) => (
                 <li key={idx}>
                   {item}
-                  <span>{skill.detailDescription[idx] && skill.detailDescription[idx]}</span>
+                  <details open={true}>
+                    <summary></summary>
+                    {skill.detailDescription[idx] && skill.detailDescription[idx]}
+                  </details>
                 </li>
               ))}
             </ul>

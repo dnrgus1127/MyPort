@@ -5,7 +5,7 @@ import BlogMainContents from "components/Blog/BlogMain/BlogMainContents";
 import BlogMainLayout from "components/Blog/BlogMain/BlogMainLayout";
 import ProjectSliderConatiner from "components/Projects/ProjectSliderConatiner";
 import StacksPage from "components/Stacks/StacksPage";
-import HomePage from "HomePage";
+import HomePage, { loader } from "HomePage";
 import BlogPage, { loader as blogLoader } from "pages/BlogPage";
 import ErrorPage from "pages/ErrorPage";
 import PostPage, { loader as postLoader } from "pages/PostPage";
@@ -22,6 +22,8 @@ import reportWebVitals from "./reportWebVitals";
 const root = ReactDOM.createRoot(document.getElementById("root") as HTMLElement);
 
 const queryClient = new QueryClient();
+
+export const SECTIONS = ["", "about", "skills", "portfolio", "blog", "contact"];
 const router = createBrowserRouter([
   {
     element: <RootLayout />,
@@ -29,26 +31,47 @@ const router = createBrowserRouter([
       {
         path: "/",
         element: <HomePage />,
-        // loader : homeLoader(queryClient),
-        children: [
-          {
-            path: "project",
-            errorElement: <ErrorPage />,
-            element: <ProjectPage />,
-            loader: projectLoader(queryClient),
-            children: [
-              {
-                path: "main",
-                element: <ProjectSliderConatiner />,
-              },
-            ],
-          },
-          {
-            path: "/Stack",
-            element: <StacksPage />,
-          },
-        ],
       },
+      {
+        path: "/about",
+        element: <HomePage />,
+      },
+      {
+        path: "/skills/:section",
+        element: <HomePage />,
+      },
+      {
+        path: "/skills/*",
+        element: <HomePage />,
+      },
+      {
+        path: "/portfolio/:project",
+        element: <HomePage />,
+      },
+      {
+        path: "/portfolio/*",
+        element: <HomePage />,
+      },
+      {
+        path: "/blog",
+        element: <HomePage />,
+      },
+      {
+        path: "/about",
+        element: <HomePage />,
+      },
+      {
+        path: "/contact",
+        element: <HomePage />,
+      },
+      {
+        path: "*",
+        errorElement: <ErrorPage />,
+        loader: () => {
+          throw new Response("페이지를 찾을 수 없습니다.", { status: 404 });
+        },
+      },
+
       {
         path: "blog",
         errorElement: <ErrorPage />,
@@ -72,6 +95,7 @@ const router = createBrowserRouter([
           {
             path: "post/*",
             element: <PostPage />,
+
             loader: postLoader(queryClient),
           },
         ],

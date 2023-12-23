@@ -12,6 +12,7 @@ import { Repository, RepositoryConstant } from "types/Project";
 import useWheelStopPropagation from "../Sections/hooks/useWheelStopPropagation";
 import MarkdownDirTree from "components/Common/Markdown/MarkdownDirTree";
 import LoadingComponent from "components/Common/LoadingComponent";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const PortFolioReadMeLayout = styled(AnimationComponent)`
   position: absolute;
@@ -70,7 +71,7 @@ const FirstSection = styled(Section)`
   }
   h2 {
     font-size: 1.8rem;
-    margin: 0.7rem 0;
+    margin: 1rem 0;
     margin-top: 3rem;
   }
   h1,
@@ -102,14 +103,19 @@ const FirstSection = styled(Section)`
       width: 50%;
       margin: 1rem 0;
       font-size: 1.6rem;
-      list-style-type: circle;
+      list-style-type: disc;
       padding-left: 0.2rem;
+      font-family: "SUIT-Regular";
     }
   }
   .library {
     margin-left: 1rem;
+    padding-left: 1rem;
     li {
       list-style: "- ";
+      font-size: 1.5rem;
+      font-family: "Poppins";
+      text-transform: uppercase;
       margin: 1rem 0;
     }
   }
@@ -165,27 +171,16 @@ const ReadmeSection = styled(Section)`
   }
 `;
 
-const ReadmeFloatingMenu = styled.div`
-  position: absolute;
-  bottom: 0;
-  right: 50%;
-  border: 2px solid ${({ theme }) => theme.pointColor};
-  border-right: 0px;
-  border-bottom: 0px;
-  padding: 0.8rem 1.6rem;
-  border-top-left-radius: 4px;
-`;
-
 interface PortFolioReadMeProps {
   visible: boolean;
   data?: RepositoryConstant;
-  onClose: React.MouseEventHandler<HTMLButtonElement>;
 }
 
-export default function PortFolioReadMe({ visible, data = PROJECT_INFOMATION[4], onClose }: PortFolioReadMeProps) {
-  const readmeData = useReadme("colorProject", visible);
+export default function PortFolioReadMe({ visible, data = PROJECT_INFOMATION[0] }: PortFolioReadMeProps) {
+  const readmeData = useReadme(data.name, visible);
   const wheelStop = useWheelStopPropagation<HTMLDivElement>();
   const mobileWheel = useWheelStopPropagation<HTMLDivElement>(window.innerWidth < 768);
+  const navigate = useNavigate();
   return (
     <PortFolioReadMeLayout
       $visible={visible}
@@ -252,11 +247,6 @@ export default function PortFolioReadMe({ visible, data = PROJECT_INFOMATION[4],
           <LoadingComponent />
         )}
       </ReadmeSection>
-      <ReadmeFloatingMenu>
-        <button type="button" onClick={onClose}>
-          나가기
-        </button>
-      </ReadmeFloatingMenu>
     </PortFolioReadMeLayout>
   );
 }

@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import { projectQuery } from "HomePage";
-import GlitterStars from "components/Common/EffectElement/GlitterStars";
+import PageLoading from "components/Common/PageLoading";
 import PortFolioSlide from "components/Home/PortFolioSection/PortFolioSlide";
 import { useState } from "react";
 import styled from "styled-components";
@@ -18,7 +18,8 @@ const PortFolioLayout = styled.div`
 export default function PortFolio(): JSX.Element | null {
   const projectData = useQuery<Array<Repository>>({ ...projectQuery() });
   const [slideIndex, setSlide] = useState<number>(0);
-  if (!projectData.isSuccess) return null;
+  if (!projectData.isSuccess) return <PageLoading text="프로젝트 데이터 로딩 중.." />;
+
   return (
     <PortFolioLayout>
       <PortFolioSlide slideIndex={slideIndex} data={projectData.data} setSlide={setSlide} />
