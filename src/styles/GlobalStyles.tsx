@@ -1,12 +1,13 @@
 import { createGlobalStyle } from "styled-components";
 
 export const GlobalStyles = createGlobalStyle`
-  * {
-        
-        box-sizing: border-box;
+    * {
+      transition: background-color .5s ease-out;
+      box-sizing: border-box;
     }
     
     body {
+
       color: ${({ theme }) => theme.color};
     }
 
@@ -19,6 +20,7 @@ export const GlobalStyles = createGlobalStyle`
       transition: background-color 1s ease-out;
     }
     html {
+      
       background-color: ${({ theme }) => theme.bgColor2};
     }
 
@@ -28,6 +30,9 @@ export const GlobalStyles = createGlobalStyle`
     a {
       text-decoration: none;
       color : inherit;
+    }
+    summary {
+      display: none;
     }
     
 `;
