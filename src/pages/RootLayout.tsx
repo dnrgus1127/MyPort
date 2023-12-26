@@ -2,7 +2,8 @@ import PageLoading from "components/Common/PageLoading";
 import Header from "components/Main/Header";
 import { createContext, useEffect } from "react";
 import { Outlet, ScrollRestoration, useLocation, useNavigation } from "react-router-dom";
-import { useAppSelector } from "redux/hooks";
+import { useAppDispatch, useAppSelector } from "redux/hooks";
+import { setTheme } from "redux/reducer/themeReducer";
 import { ThemeProvider } from "styled-components";
 import { GlobalStyles } from "styles/GlobalStyles";
 import { darkTheme, ligthTheme } from "styles/theme";
@@ -12,6 +13,7 @@ export const UserAgentContext = createContext<{ isMobile: boolean; isSafari: boo
 export default function RootLayout() {
   const { theme } = useAppSelector((state) => state.theme);
   const { state } = useNavigation();
+  const dispatch = useAppDispatch();
 
   useEffect(() => {
     const checkMobile = () => {
@@ -26,6 +28,13 @@ export default function RootLayout() {
 
   useEffect(() => {
     document.documentElement.style.setProperty("--vh", `${window.innerHeight * 0.01}px`);
+  }, []);
+
+  useEffect(() => {
+    let theme = localStorage.getItem("theme");
+    if (theme) {
+      dispatch(setTheme(theme));
+    }
   }, []);
 
   return (
