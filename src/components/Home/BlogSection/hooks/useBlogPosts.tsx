@@ -24,14 +24,10 @@ export default function useBlogPosts(): CustomHookResponse<Tree> {
   const { data, isSuccess, isLoading, isError } = useQuery<Array<Tree>, Error, Array<Tree>>({
     queryKey: ["git", "TIL", "tree"],
     queryFn: async () => {
-      const res = await fetch(`https://api.github.com/repos/dnrgus1127/TIL/git/trees/main?recursive=10`, {
-        headers: {
-          Authorization: GITHUBAPIKEY,
-        },
-      });
+      const res = await fetch(`${process.env.REACT_APP_API_SERVER_IP}/postList`);
 
       const data = await res.json();
-      return data.tree;
+      return data;
     },
     staleTime: 60 * 10 * 1000,
     select: (data: Array<Tree>) => {
@@ -40,8 +36,12 @@ export default function useBlogPosts(): CustomHookResponse<Tree> {
       });
     },
   });
+
   if (isSuccess) {
-    return { data, isError, isLoading, isSuccess };
+    const sortData = data.sort((a, b) => {
+      return new Date(b.timeStamp!).getTime() - new Date(a.timeStamp!).getTime();
+    });
+    return { data: sortData, isError, isLoading, isSuccess };
   } else {
     return { data: undefined, isError, isLoading, isSuccess };
   }

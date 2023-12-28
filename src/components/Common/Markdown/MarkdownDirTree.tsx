@@ -1,8 +1,7 @@
-import React, { useMemo } from "react";
-import { Tree } from "./types/tree";
 import { useQuery } from "@tanstack/react-query";
-import { GITHUBAPIKEY } from "apiKey";
+import { useMemo } from "react";
 import DirTreeNode from "./DirTreeNode";
+import { Tree } from "./types/tree";
 
 function setTree(path: string, root: Tree) {
   let splits = path.split("/");
@@ -43,15 +42,12 @@ export default function MarkdownDirTree({ projectName }: { projectName: string }
   const { data } = useQuery<RootTree, Error, Array<Tree>>({
     queryKey: ["tree", projectName],
     queryFn: async () => {
-      const res = await fetch(`https://api.github.com/repos/dnrgus1127/${projectName}/git/trees/main?recursive=1`, {
-        headers: {
-          Authorization: GITHUBAPIKEY,
-        },
-      });
+      const res = await fetch(`${process.env.REACT_APP_API_SERVER_IP}/tree/${projectName}`);
       const data = res.json();
       return data;
     },
     select: (data) => data.tree,
+    staleTime: 60 * 10 * 1000,
   });
 
   // 가공 처리한 데이터
