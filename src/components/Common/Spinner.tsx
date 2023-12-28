@@ -6,11 +6,11 @@ const SpinnerLayout = styled.div`
 
   display: flex;
   flex-direction: column;
-  gap: 2rem;
+  gap: calc(var(--vh) * 5);
   align-items: center;
   .text {
     white-space: nowrap;
-    font-size: 2rem;
+    font-size: 1.8rem;
     font-weight: 600;
     font-family: "Noto Sans KR";
   }
@@ -34,9 +34,9 @@ const SpinnerRotate = keyframes`
 `;
 
 const SpinnerItem = styled.div<SpinnerItemProps>`
-  width: calc(var(--vh) * 8);
-  height: calc(var(--vh) * 8);
-  border: ${(props) => `${props.$thinkness}px solid ${props.$color || props.theme.color}`};
+  width: calc(var(--vh) * 10);
+  height: calc(var(--vh) * 10);
+  border: ${(props) => `${props.$thinkness}px solid ${props.$color || props.theme.pointColor}`};
   border-radius: 50%;
   border-bottom-color: #0000;
   box-sizing: content-box;
@@ -48,7 +48,7 @@ interface SpinnerProps {
   text?: string;
 }
 
-export default function Spinner({ thinkness = 8, text = "로딩 중" }: SpinnerProps) {
+export default function Spinner({ thinkness = 4, text = "로딩 중" }: SpinnerProps) {
   return (
     <SpinnerLayout>
       <SpinnerItem $thinkness={thinkness} />
