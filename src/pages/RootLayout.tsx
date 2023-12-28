@@ -1,7 +1,6 @@
-import PageLoading from "components/Common/PageLoading";
 import Header from "components/Main/Header";
 import { createContext, useEffect } from "react";
-import { Outlet, ScrollRestoration, useLocation, useNavigation } from "react-router-dom";
+import { Outlet, ScrollRestoration } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "redux/hooks";
 import { setTheme } from "redux/reducer/themeReducer";
 import { ThemeProvider } from "styled-components";
@@ -12,7 +11,6 @@ export const UserAgentContext = createContext<{ isMobile: boolean; isSafari: boo
 
 export default function RootLayout() {
   const { theme } = useAppSelector((state) => state.theme);
-  const { state } = useNavigation();
   const dispatch = useAppDispatch();
 
   useEffect(() => {
@@ -46,7 +44,6 @@ export default function RootLayout() {
             return location.key;
           }}
         />
-        {state === "loading" && <PageLoading />}
 
         <Outlet />
         <Header />
