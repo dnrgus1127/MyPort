@@ -1,12 +1,12 @@
 import { QueryClient } from "@tanstack/react-query";
-import { GITHUBAPIKEY } from "apiKey";
 import PageAnimation from "components/Common/PageAnimation";
+import PageLoading from "components/Common/PageLoading";
 import { REPOSITORYS } from "constans/Config";
 import { GITHUB403 } from "constans/ErrorMessage";
 import { PROJECT_INFOMATION } from "constans/ProjectData";
 import Home from "pages/Home";
 import { useEffect } from "react";
-import { Outlet, json } from "react-router-dom";
+import { Outlet, json, useNavigation } from "react-router-dom";
 import { Repository, RepositoryData } from "types/Project";
 import { ErrorJson } from "types/errorJson";
 import "./App.css";
@@ -14,11 +14,7 @@ import "./App.css";
 export const projectQuery = () => ({
   queryKey: ["git", "repositoryList"],
   queryFn: async () => {
-    const res = await fetch(`https://api.github.com/users/dnrgus1127/repos`, {
-      headers: {
-        Authorization: GITHUBAPIKEY,
-      },
-    });
+    const res = await fetch(`${process.env.REACT_APP_API_SERVER_IP}/repository`);
 
     if (res.status === 403) {
       let errorBody: ErrorJson = { msg: GITHUB403, sorry: "GitHUB API limit" };
@@ -49,6 +45,8 @@ export const loader = (queryClient: QueryClient) => async () => {
 };
 
 function HomePage() {
+  const { state } = useNavigation();
+
   useEffect(() => {
     const html = document.querySelector("html");
     html!.style.overflow = "hidden";
@@ -59,6 +57,8 @@ function HomePage() {
   return (
     <>
       <Home />
+      {state === "loading" && <PageLoading />}
+
       <PageAnimation />
       <Outlet />
     </>

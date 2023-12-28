@@ -1,7 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { GITHUBAPIKEY } from "apiKey";
 import { Tree } from "components/Common/Markdown/types/tree";
-import { ErrorResponse } from "react-router-dom";
 
 type SuccessResponse<A> = {
   isSuccess: true;

@@ -13,7 +13,6 @@ import About from "../components/Home/Sections/About";
 import Intro from "../components/Home/Sections/Intro";
 import PortFolio from "../components/Home/Sections/PortFolio";
 import Skills from "../components/Home/Sections/Skills";
-import { GITHUBAPIKEY } from "apiKey";
 
 const HomeLayout = styled.div`
   width: 100%;
