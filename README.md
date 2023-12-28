@@ -71,7 +71,21 @@
 # 디렉터리 구조
 
 ```dir
-
+├── public
+├── src
+|  ├─ assets // 이미지, svg 아이콘 등
+|  ├─ components // 재사용 컴포넌트
+|  ├─ constans //상수
+|  ├─ pages // route page 컴포넌트
+|  ├─ hooks //React hooks
+|  ├─ utils //유틸 함수
+|  ├─ types // 타입 관련 정의, 함수
+|  ├─ stlyes // styled-component 관련 함수, 키프레임, 스타일드 컴포넌트
+|  ─ index.tsx
+|  ─ HomePage.tsx
+|  ─ App.css
+|  ─ index.css
+└── 
 ```
 
 ---
