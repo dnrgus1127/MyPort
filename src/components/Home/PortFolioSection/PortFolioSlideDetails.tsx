@@ -144,9 +144,10 @@ export default function PortFolioSlideDetails({ project, visible }: PortFolioSli
           </span>
         ))}
       </p>
-      <MoreButton tabIndex={-1}>
-        <Link to={`${project.name}`}>자세히 보기</Link>
-      </MoreButton>
+
+      <Link to={`${project.name}`}>
+        <MoreButton tabIndex={-1}>자세히 보기</MoreButton>
+      </Link>
     </PortFolioSlideDetailsLayout>
   );
 }

@@ -219,7 +219,10 @@ export default function PortFolioSlide({ slideIndex, data, setSlide }: ProjectSl
           />
         </>
       )}
-      <PortFolioReadMe visible={Boolean(projectName)} data={data[Math.abs(slideIndex) % data.length]} />
+      <PortFolioReadMe
+        visible={Boolean(projectName)}
+        data={data.find((project) => project.name.toLowerCase() === projectName?.toLowerCase())}
+      />
     </PortFolioSlideLayout>
   );
 }
