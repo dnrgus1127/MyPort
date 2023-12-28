@@ -16,13 +16,20 @@
 
 ---
 # 스택
+## Markup, Style
+<img src="https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=javascript&logoColor=white">
+<img src="https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=javascript&logoColor=white">
+<img src="https://img.shields.io/badge/Markdown-000000?style=for-the-badge&logo=javascript&logoColor=white">
+
+
 ## Languages, Libraries, Frameworks
 <img src="https://img.shields.io/badge/javascript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=white">
 <img src="https://img.shields.io/badge/typescript-3178C6?style=for-the-badge&logo=javascript&logoColor=white">
 <img src="https://img.shields.io/badge/react-61DAFB?style=for-the-badge&logo=javascript&logoColor=white">
 <img src="https://img.shields.io/badge/react router-CA4245?style=for-the-badge&logo=javascript&logoColor=white">
 <img src="https://img.shields.io/badge/react query-FF4154?style=for-the-badge&logo=javascript&logoColor=white">
-<img src="https://img.shields.io/badge/styled-component-DB7093?style=for-the-badge&logo=javascript&logoColor=white">
+<img src="https://img.shields.io/badge/redux-764ABC?style=for-the-badge&logo=javascript&logoColor=white">
+<img src="https://img.shields.io/badge/styled component-DB7093?style=for-the-badge&logo=javascript&logoColor=white">
 
 ## Environment
 <img src="https://img.shields.io/badge/npm-CB3837?style=for-the-badge&logo=npm&logoColor=white">
