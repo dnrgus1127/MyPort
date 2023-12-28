@@ -1,10 +1,10 @@
-import useLatestTimePost from "components/Blog/hooks/useLatestTimePost";
 import { BoxButton } from "components/Common/Buttons/StyledButtons";
 import GlitterStars from "components/Common/EffectElement/GlitterStars";
 import SpinPlanet from "components/Common/EffectElement/SpinPlanet";
 import TypingText from "components/Common/EffectElement/TypingText";
+import PageLoading from "components/Common/PageLoading";
 import { useMemo } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { DrawLine } from "styles/keyFrame/DrwaLine";
 import { FadeInFromBottom } from "styles/keyFrame/Fade";
@@ -13,7 +13,6 @@ import PostSection from "../BlogSection/PostSection";
 import TopPosts from "../BlogSection/TopPosts";
 import useBlogPosts from "../BlogSection/hooks/useBlogPosts";
 import useSectionAnimation from "./hooks/useSectionAnimation";
-import PageLoading from "components/Common/PageLoading";
 
 const BlogLayout = styled.div`
   width: 100%;
@@ -100,7 +99,6 @@ const IntroBanner = styled.div`
   margin: 5%;
 
   padding-top: 0;
-  /* box-shadow: 0px 0px 5px 1px ${({ theme }) => theme.shadowColor2}; */
   text-align: start;
   h1 {
     font-size: 4rem;
@@ -180,18 +178,15 @@ const LatestPosts = styled.div`
 `;
 
 export default function Blog() {
-  const navigate = useNavigate();
   const blogPosts = useBlogPosts();
 
-  const [topics, posts] = useMemo(() => {
+  const [posts] = useMemo(() => {
     if (!blogPosts.isSuccess) return [[], []];
-    const topics = blogPosts.data.filter((item) => item.type === "tree" && !item.path.includes("/"));
 
     const posts = blogPosts.data.filter((item) => item.path.includes(".md"));
-    return [topics.map((topic) => topic.path), posts];
+    return [posts];
   }, [blogPosts.data, blogPosts.isSuccess]);
 
-  const timeStampPosts = useLatestTimePost({ postList: posts });
   const animationState = useSectionAnimation(4);
 
   if (animationState === "animation-deactive") return <></>;
@@ -213,16 +208,17 @@ export default function Blog() {
                 <br /> TIL 포스트를 주 2~3회 이상 꾸준히 작성하는 것을 목표로 하고있고 포스트가 일정량 이상 쌓이면
                 github.io를 이용해서 정적 블로그를 제작하여 꾸준히 기록을 하고 싶습니다.
               </p>
-              <MorePostButton>
-                <Link to={"/blog/main"}>더 많은 포스트 읽기</Link>
-              </MorePostButton>
+
+              <Link to={"/blog/main"}>
+                <MorePostButton>더 많은 포스트 읽기</MorePostButton>
+              </Link>
             </IntroBanner>
             <LatestPosts>
-              <PostSection postList={timeStampPosts} topics="Latest Posts" />
+              <PostSection postList={posts} topics="Latest Posts" />
             </LatestPosts>
           </section>
           <section>
-            <TopPosts postList={timeStampPosts} />
+            <TopPosts postList={posts} />
           </section>
         </Contents>
       </BlogWrapper>
