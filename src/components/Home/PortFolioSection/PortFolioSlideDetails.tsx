@@ -16,7 +16,7 @@ const PortFolioSlideDetailsLayout = styled(AnimationComponent)`
   width: 200%;
   text-align: center;
   margin-bottom: calc(var(--vh) * 10);
-  transition: transform 1s ease-out, opacity 1s 0.2s ease;
+  transition: transform 0.6s ease-out, opacity 0.6s 0.2s ease;
   display: flex;
   flex-direction: column;
 
@@ -30,8 +30,8 @@ const PortFolioSlideDetailsLayout = styled(AnimationComponent)`
     font-size: 4rem;
     font-family: "Poppins Black", sans-serif;
     text-transform: uppercase;
-    ${textShadow(1)}
-
+    ${textShadow(3)}
+    color : white;
     opacity: 0;
     transform: translateY(25%);
     z-index: 1;
@@ -46,6 +46,7 @@ const PortFolioSlideDetailsLayout = styled(AnimationComponent)`
     margin: 0 auto;
     font-size: 1.5rem;
     font-family: "SUIT-Regular";
+
     margin-bottom: 1.6rem;
   }
   span {
@@ -90,13 +91,14 @@ const PortFolioSlideDetailsLayout = styled(AnimationComponent)`
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    padding-top: var(--header);
-    padding-bottom: calc(var(--header) / 2);
+    padding: calc(var(--header) * 1.8) 0;
+    /* padding-bottom: calc(var(--header) / 2); */
     align-items: center;
     h1 {
       font-size: 3rem;
       margin-bottom: 1rem;
-      ${textShadow(1)}
+      color: ${({ theme }) => theme.color};
+      ${textShadow(2)};
     }
     margin-bottom: 1rem;
     p {
@@ -129,15 +131,7 @@ export default function PortFolioSlideDetails({ project, visible }: PortFolioSli
     <PortFolioSlideDetailsLayout $enableAnimation={animationState === "animation-active"} $visible={visible}>
       <h1>{project.alternateTitle}</h1>
       <p>
-        {project.description.split("\n").map((text, idx) => (
-          <span key={idx}>
-            {text}
-            <br />
-          </span>
-        ))}
-      </p>
-      <p>
-        {project.whyDeveloped.split("\n").map((text, idx) => (
+        {project.preview.split("\n").map((text, idx) => (
           <span key={idx}>
             {text}
             <br />

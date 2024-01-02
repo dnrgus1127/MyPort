@@ -30,6 +30,7 @@ const PortFolioSlideLayout = styled.div`
       filter: drop-shadow(0px 0px 5px ${({ theme }) => theme.shadowColor2});
       width: 4.8rem;
       height: 4.8rem;
+      fill: white;
     }
   }
 
@@ -46,18 +47,6 @@ const PortFolioSlideLayout = styled.div`
     padding-top: 0;
     align-items: center;
   }
-`;
-const SlideWindowAnimation = keyframes`
-    0% {
-        
-        filter : blur(20px);
-    }
-    70% {
-        filter : blur(4px);
-    }
-    100% {
-        filter : blur(0px);
-    }
 `;
 
 const PortFolioSlideWindow = styled(AnimationComponent)`

@@ -1,18 +1,17 @@
+import LoadingComponent from "components/Common/LoadingComponent";
+import MarkdownDirTree from "components/Common/Markdown/MarkdownDirTree";
 import MarkdownRender from "components/Common/Markdown/MarkdownRender";
 import { DirComponentCss, MarkdownStyled } from "components/Common/Markdown/MarkdownStyledComponent";
 import useReadme from "components/Projects/hooks/useReadme";
 import { PROJECT_INFOMATION } from "constans/ProjectData";
 import { getSkillColor } from "constans/SkillsData";
-import React, { useState } from "react";
 import styled, { css } from "styled-components";
 import { AnimationComponent } from "styles/animation";
 import media from "styles/media";
 import { customScrollBar } from "styles/scrollBar";
-import { Repository, RepositoryConstant } from "types/Project";
+import { RepositoryConstant } from "types/Project";
 import useWheelStopPropagation from "../Sections/hooks/useWheelStopPropagation";
-import MarkdownDirTree from "components/Common/Markdown/MarkdownDirTree";
-import LoadingComponent from "components/Common/LoadingComponent";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 
 const PortFolioReadMeLayout = styled(AnimationComponent)`
   position: absolute;
@@ -34,7 +33,7 @@ const PortFolioReadMeLayout = styled(AnimationComponent)`
     `}
 
   ${media.medium} {
-    margin: var(--header) 0;
+    padding: var(--header) 0;
     flex-direction: column;
     height: inherit;
     overflow-y: scroll;
@@ -82,6 +81,7 @@ const FirstSection = styled(Section)`
 
   p {
     font-family: "SUIT-Regular";
+
     font-size: 1.5rem;
     line-height: 1.7rem;
 
@@ -100,8 +100,12 @@ const FirstSection = styled(Section)`
     flex-wrap: wrap;
     margin-left: 2rem;
     li {
-      width: 50%;
+      width: 45%;
+      word-wrap: normal;
+      word-break: keep-all;
       margin: 1rem 0;
+      margin-right: 5%;
+      line-height: 120%;
       font-size: 1.6rem;
       list-style-type: disc;
       padding-left: 0.2rem;
@@ -119,6 +123,17 @@ const FirstSection = styled(Section)`
       margin: 1rem 0;
     }
   }
+
+  ${media.medium} {
+    .functions {
+      margin-left: 0;
+      li {
+        width: 100%;
+        margin: 0.5rem 0;
+        padding-left: 0;
+      }
+    }
+  }
 `;
 
 const ReadmeSection = styled(Section)`
@@ -129,6 +144,7 @@ const ReadmeSection = styled(Section)`
 
   transition: transform 1s ease-out;
   transform: translateX(100%);
+
   ${(props) =>
     props.$visible &&
     css`
@@ -156,7 +172,22 @@ const ReadmeSection = styled(Section)`
   ${customScrollBar};
   h1 {
     text-align: center;
+    margin-bottom: 2.4rem;
+    margin-top: 4rem;
   }
+
+  p {
+    font-family: "Noto Sans KR";
+    font-size: 1.5rem;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    line-height: 130%;
+  }
+
   img {
     filter: none;
   }
@@ -164,6 +195,24 @@ const ReadmeSection = styled(Section)`
     background-color: ${({ theme }) => theme.bgColor4};
     padding: 0.5rem 1rem;
     white-space: pre-wrap;
+    margin-bottom: 2.2rem;
+  }
+
+  & > ul {
+    margin-bottom: 3rem;
+    padding-left: 2rem;
+  }
+
+  li {
+    list-style: circle;
+  }
+
+  pre {
+    margin-bottom: 2.2rem;
+  }
+  img {
+    margin-bottom: 3px;
+    margin-right: 3px;
   }
 
   ${media.medium} {
@@ -180,7 +229,11 @@ export default function PortFolioReadMe({ visible, data = PROJECT_INFOMATION[0] 
   const readmeData = useReadme(data.name, visible);
   const wheelStop = useWheelStopPropagation<HTMLDivElement>();
   const mobileWheel = useWheelStopPropagation<HTMLDivElement>(window.innerWidth < 768);
-  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (!wheelStop.ref) return;
+    wheelStop.ref.current?.scrollTo(0, 0);
+  }, [visible]);
   return (
     <PortFolioReadMeLayout
       $visible={visible}
@@ -202,24 +255,6 @@ export default function PortFolioReadMe({ visible, data = PROJECT_INFOMATION[0] 
             <li key={func}>{func}</li>
           ))}
         </ul>
-        <h2>Stacks</h2>
-        <ul className="stack">
-          {data.stacks &&
-            data.stacks.map((skill) => {
-              return (
-                <li key={skill}>
-                  <img
-                    alt={skill}
-                    src={`https://img.shields.io/badge/${skill.toUpperCase()}-${getSkillColor(
-                      skill
-                    )}?&style=for-the-badge&logo=javascript&logoColor=white`}
-                  />
-                </li>
-              );
-            })}
-        </ul>
-        <h2>Used Library</h2>
-        <ul className="library">{data.library && data.library.map((lib) => <li key={lib}>{lib}</li>)}</ul>
       </FirstSection>
       <ReadmeSection
         as={MarkdownStyled}
