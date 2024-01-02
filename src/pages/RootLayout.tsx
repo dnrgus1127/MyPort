@@ -1,6 +1,7 @@
+import PageLoading from "components/Common/PageLoading";
 import Header from "components/Main/Header";
 import { createContext, useEffect } from "react";
-import { Outlet, ScrollRestoration } from "react-router-dom";
+import { Outlet, ScrollRestoration, useNavigation } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "redux/hooks";
 import { setTheme } from "redux/reducer/themeReducer";
 import { ThemeProvider } from "styled-components";
@@ -12,6 +13,7 @@ export const UserAgentContext = createContext<{ isMobile: boolean; isSafari: boo
 export default function RootLayout() {
   const { theme } = useAppSelector((state) => state.theme);
   const dispatch = useAppDispatch();
+  const navigation = useNavigation();
 
   useEffect(() => {
     const checkMobile = () => {
@@ -44,6 +46,11 @@ export default function RootLayout() {
             return location.key;
           }}
         />
+        {navigation.state === "loading" && (
+          <PageLoading
+            text={navigation.location.pathname.startsWith("/blog") ? "블로그 데이터 로딩 중.." : "페이지 로딩 중.."}
+          />
+        )}
 
         <Outlet />
         <Header />
