@@ -17,7 +17,7 @@ const PortFolioLayout = styled.div`
 
 export default function PortFolio(): JSX.Element | null {
   const projectData = useQuery<Array<Repository>>({ ...projectQuery() });
-  const [slideIndex, setSlide] = useState<number>(0);
+  const [slideIndex, setSlide] = useState<number>(1);
   if (!projectData.isSuccess) return <PageLoading text="프로젝트 데이터 로딩 중.." />;
 
   return (
