@@ -68,9 +68,6 @@ export const MarkdownStyled = styled.div`
     font-weight: 600;
     text-decoration: underline;
   }
-  a::before {
-    content: "[참조] ";
-  }
 
   ${media.small} {
     h1 {
@@ -115,7 +112,11 @@ export const DirComponentCss = styled.div`
   }
   ul {
     padding-left: 1.6rem;
+    li {
+      list-style: none;
+    }
   }
+
   .tree::before {
     content: "📁 ";
   }
