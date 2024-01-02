@@ -1,5 +1,4 @@
 import { QueryClient } from "@tanstack/react-query";
-import PageAnimation from "components/Common/PageAnimation";
 import PageLoading from "components/Common/PageLoading";
 import { REPOSITORYS } from "constans/Config";
 import { GITHUB403 } from "constans/ErrorMessage";
@@ -58,8 +57,6 @@ function HomePage() {
     <>
       <Home />
       {state === "loading" && <PageLoading />}
-
-      <PageAnimation />
       <Outlet />
     </>
   );
