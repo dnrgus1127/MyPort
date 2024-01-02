@@ -2,7 +2,7 @@ import React from "react";
 import styled, { keyframes } from "styled-components";
 
 const SpinnerLayout = styled.div`
-  width: calc(var(--vh) * 15);
+  width: 100%;
 
   display: flex;
   flex-direction: column;
@@ -34,8 +34,9 @@ const SpinnerRotate = keyframes`
 `;
 
 const SpinnerItem = styled.div<SpinnerItemProps>`
-  width: calc(var(--vh) * 10);
-  height: calc(var(--vh) * 10);
+  width: 4rem;
+  height: 4rem;
+  margin-top: 3rem;
   border: ${(props) => `${props.$thinkness}px solid ${props.$color || props.theme.pointColor}`};
   border-radius: 50%;
   border-bottom-color: #0000;
