@@ -13,13 +13,6 @@ const ContactLayout = styled.div`
   position: relative;
   display: flex;
   flex-direction: column;
-  /* background: radial-gradient(ellipse at bottom, #403d4a 0, #090a0f 100%);
-  background: radial-gradient(ellipse at bottom, #090a0f 0%, #17151e 100%);
-  ${({ theme }) =>
-    theme.current === "light" &&
-    css`
-      background: radial-gradient(ellipse at bottom, #c9c9c9 0, #ffffff 100%);
-    `} */
 
   .footer {
     text-align: center;
@@ -246,9 +239,7 @@ export default function Contact() {
           </a>
         </ContactContent>
       </ContactContentsBox>
-      {/* <div className="footer">
-        <h2>Contact Me</h2>
-      </div> */}
+      \
     </ContactLayout>
   );
 }
