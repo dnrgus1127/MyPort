@@ -1,20 +1,17 @@
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
+import HomePage, { loader as homeLoader } from "HomePage";
 import BlogCategoryContents from "components/Blog/BlogMain/BlogCategoryContents";
 import BlogMainContents from "components/Blog/BlogMain/BlogMainContents";
 import BlogMainLayout from "components/Blog/BlogMain/BlogMainLayout";
-import ProjectSliderConatiner from "components/Projects/ProjectSliderConatiner";
-import StacksPage from "components/Stacks/StacksPage";
-import HomePage, { loader } from "HomePage";
 import BlogPage, { loader as blogLoader } from "pages/BlogPage";
 import ErrorPage from "pages/ErrorPage";
 import PostPage, { loader as postLoader } from "pages/PostPage";
-import ProjectPage, { loader as projectLoader } from "pages/ProjectPage";
 import RootLayout from "pages/RootLayout";
 import React from "react";
 import ReactDOM from "react-dom/client";
 import { Provider } from "react-redux";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import { store } from "redux/store";
 import "./index.css";
 import reportWebVitals from "./reportWebVitals";
@@ -73,7 +70,7 @@ const router = createBrowserRouter([
       },
 
       {
-        path: "blog",
+        path: "/blog",
         errorElement: <ErrorPage />,
         element: <BlogPage />,
         loader: blogLoader(queryClient),
@@ -88,14 +85,12 @@ const router = createBrowserRouter([
               {
                 path: "main/:category",
                 element: <BlogCategoryContents />,
-                errorElement: <div></div>,
               },
             ],
           },
           {
             path: "post/*",
             element: <PostPage />,
-
             loader: postLoader(queryClient),
           },
         ],
