@@ -19,13 +19,17 @@ const MorphTitle = styled.div`
   align-items: center;
 
   span {
-    font-family: "Raleway", sans-serif;
+    font-family: "Dhurjati", sans-serif;
     font-size: 8rem;
+    font-weight: 800;
+    color: ${({ theme }) => theme.pointColor};
     position: absolute;
     display: inline-block;
     width: 100%;
     text-align: center;
     letter-spacing: 5px;
+    text-transform: uppercase;
+    margin-top: 8rem;
   }
   svg {
     position: absolute;

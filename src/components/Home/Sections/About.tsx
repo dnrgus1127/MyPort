@@ -1,6 +1,6 @@
 import MeteorEffect from "components/Common/EffectElement/MeteorEffect";
 import { SECTIONS } from "index";
-import styled, { keyframes } from "styled-components";
+import styled, { css, keyframes } from "styled-components";
 import { FadeIn } from "styles/keyFrame/Fade";
 import media from "styles/media";
 import { useAnimationState } from "./hooks/useSectionAnimation";
@@ -77,6 +77,23 @@ const IntroduceBox = styled.div`
     color: #66dbfb;
   }
 
+  ${({ theme }) =>
+    theme.current === "light" &&
+    css`
+      p {
+        font-weight: 600;
+      }
+      p strong {
+        color: #4f9fd4;
+      }
+      .js {
+        color: #b6a204;
+      }
+      .react {
+        color: #55b5d0;
+      }
+    `}
+
   ${media.medium} {
     width: 80%;
   }
@@ -149,9 +166,9 @@ export default function About() {
               목표 <span>Goals</span>
             </h2>
             <p>
-              주로 사용하는 언어는 <span className="js">Javascript</span>이며, <span className="react">React</span>
-              라이브러리와,<span className="ts">Typescript</span>를 적용해 재사용가능하고 유지보수가 용이한 코드를
-              작성하는것이 현재 주 관심사 입니다.
+              주로 사용하는 언어는 <span className="js">Javascript</span>이며, <span className="react">React</span>와
+              <span className="ts">Typescript</span>를 적용해 재사용가능하고 유지보수가 용이한 코드를 작성하는것이
+              중요하다고 생각하고 있습니다.
             </p>
             <p>
               항상 열려 있는 자세를 유지하고 있으며, 다양한 협업 경험과 문제 해결 경험을 얻기 위해서 다양한 프로젝트를
