@@ -1,13 +1,11 @@
 # 정욱현 포트폴리오
 
-
 <img src="https://github.com/dnrgus1127/MyPort/assets/65962363/f6381cf7-acf4-4332-bfe0-3a869c688401" width="45%" alt="about"/>
 <img src="https://github.com/dnrgus1127/MyPort/assets/65962363/7fdd67c0-dbfd-4ce7-934c-b66d5e371887" width="45%" alt="slide"/>
 
 ---
 
-
-> 개발자로서의 정욱현을 소개하는 포트폴리오 사이트.<br>
+> 개발자로서의 정욱현을 소개하는 포트폴리오 사이트.<br/>
 > 개발 기간 : 2023.11.18 ~ 2023.12.31
 
 ## 개발 목적
@@ -15,14 +13,17 @@
 프론트엔드 개발자 정욱현에 대해서 소개하기 위해서 개발한 사이트.
 
 ---
-# 스택
-## Markup, Style
+
+## 스택
+
+### Markup, Style
+
 <img src="https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=javascript&logoColor=white">
 <img src="https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=javascript&logoColor=white">
 <img src="https://img.shields.io/badge/Markdown-000000?style=for-the-badge&logo=javascript&logoColor=white">
 
+### Languages, Libraries, Frameworks
 
-## Languages, Libraries, Frameworks
 <img src="https://img.shields.io/badge/javascript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=white">
 <img src="https://img.shields.io/badge/typescript-3178C6?style=for-the-badge&logo=javascript&logoColor=white">
 <img src="https://img.shields.io/badge/react-61DAFB?style=for-the-badge&logo=javascript&logoColor=white">
@@ -31,17 +32,17 @@
 <img src="https://img.shields.io/badge/redux-764ABC?style=for-the-badge&logo=javascript&logoColor=white">
 <img src="https://img.shields.io/badge/styled component-DB7093?style=for-the-badge&logo=javascript&logoColor=white">
 
-## Environment
+### Environment
+
 <img src="https://img.shields.io/badge/npm-CB3837?style=for-the-badge&logo=npm&logoColor=white">
 <img src="https://img.shields.io/badge/visual studio code-007ACC?style=for-the-badge&logo=visualstudiocode&logoColor=white">
 <img src="https://img.shields.io/badge/github-181717?style=for-the-badge&logo=github&logoColor=white">
 
-## Distribution
+### Distribution
+
 <img src="https://img.shields.io/badge/github pages-222222?style=for-the-badge&logo=github&logoColor=white">
 <img src="https://img.shields.io/badge/amazon ec2-FF9900?style=for-the-badge&logo=github&logoColor=white">
 <img src="https://img.shields.io/badge/amazon route53-8C4FFF?style=for-the-badge&logo=github&logoColor=white">
-
-
 
 ---
 
@@ -85,7 +86,7 @@
 |  ─ HomePage.tsx
 |  ─ App.css
 |  ─ index.css
-└── 
+└──
 ```
 
 ---
