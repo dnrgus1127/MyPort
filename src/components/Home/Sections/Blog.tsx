@@ -1,8 +1,8 @@
 import { BoxButton } from "components/Common/Buttons/StyledButtons";
+import ConditionalComponent from "components/Common/ConditionalComponent";
 import GlitterStars from "components/Common/EffectElement/GlitterStars";
 import SpinPlanet from "components/Common/EffectElement/SpinPlanet";
 import TypingText from "components/Common/EffectElement/TypingText";
-import PageLoading from "components/Common/PageLoading";
 import { useMemo } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
@@ -191,7 +191,7 @@ export default function Blog() {
 
   if (animationState === "animation-deactive") return <></>;
 
-  if (blogPosts.isLoading) return <PageLoading text="블로그 데이터를 불러오는 중입니다.." />;
+  // if (blogPosts.isLoading) return <PageLoading text="블로그 데이터 로딩 중.." />;
 
   return (
     <BlogLayout>
@@ -214,11 +214,15 @@ export default function Blog() {
               </Link>
             </IntroBanner>
             <LatestPosts>
-              <PostSection postList={posts} topics="Latest Posts" />
+              <h2>Latest Posts</h2>
+              <ConditionalComponent
+                dataStatus={blogPosts.status}
+                component={<PostSection postList={posts} topics="Latest Posts" />}
+              />
             </LatestPosts>
           </section>
           <section>
-            <TopPosts postList={posts} />
+            <ConditionalComponent dataStatus={blogPosts.status} component={<TopPosts postList={posts} />} />
           </section>
         </Contents>
       </BlogWrapper>
